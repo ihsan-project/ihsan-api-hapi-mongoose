@@ -1,21 +1,30 @@
-const application = require('./dist');
+'use strict';
 
-module.exports = application;
+const Hapi = require('@hapi/hapi');
 
-if (require.main === module) {
-  // Run the application
-  const config = {
-    rest: {
-      port: +(process.env.PORT || 3000),
-      host: process.env.HOST,
-      openApiSpec: {
-        // useful when used with OASGraph to locate your application
-        setServersFromRequest: true,
-      },
-    },
-  };
-  application.main(config).catch(err => {
-    console.error('Cannot start the application.', err);
-    process.exit(1);
+const init = async () => {
+
+  const server = Hapi.server({
+    port: 3000,
+    host: 'localhost'
   });
-}
+
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: (request, h) => {
+      return 'Version 1.0';
+    }
+  });
+
+  await server.start();
+  console.log('Server running on %s', server.info.uri);
+};
+
+process.on('unhandledRejection', (err) => {
+
+  console.log(err);
+  process.exit(1);
+});
+
+init();
