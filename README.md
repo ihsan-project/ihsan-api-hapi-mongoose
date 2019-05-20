@@ -9,8 +9,10 @@
   - `brew link node@10`
   - Follow brew instruction, like having to `--force` and `--overwrite`
 
+## Description
 
-# Description
+From https://github.com/Tallwave/auth-boilerplate:
+
 A shell for a hapi and bell powered auth system using JWT and cookies for session storage. (Boiler plate for log in and authentication).
 The server is composed with Glue while the plugin composition is handled by [haute-courture](https://www.npmjs.com/package/haute-couture). Haute-couture uses a file-based indexing system:
 For example:

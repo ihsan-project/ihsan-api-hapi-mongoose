@@ -31,10 +31,10 @@
   "devDependencies": {
     "@hapi/code": "^5.3.1",
     "@hapi/lab": "^19.0.1",
-    "babel-eslint": "^8.2.2",
-    "confidence": "3.x.x",
-    "dotenv": "5.x.x",
-    "eslint": "4.x.x",
+    "babel-eslint": "^10.0.1",
+    "confidence": "^4.0.2",
+    "dotenv": "^8.0.0",
+    "eslint": "^5.16.0",
     "hpal-debug": "1.x.x",
     "nodemon": "^1.17.5",
     "toys": "2.x.x"
