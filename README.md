@@ -1,4 +1,14 @@
-# auth-boilerplate
+# Khatm API
+
+## Environment
+- Node 10.15.3, Npm 6.4.1 (Used to match AWS Elastic Beanstalk max version as of 5/19/2019)
+
+### Installation Instructions
+- Node and Npm [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
+  - `brew install node@10`
+  - `brew link node@10`
+  - Follow brew instruction, like having to `--force` and `--overwrite`
+
 
 # Description
 A shell for a hapi and bell powered auth system using JWT and cookies for session storage. (Boiler plate for log in and authentication).
@@ -31,7 +41,7 @@ yarn install
 7. Rename the .env-keep to .env and add the environment variables:
 
  - `AUTH_COOKIE_PASSWORD` - This can be anything. When deploying to a production environment, use a strong value. There is a minimum length of 32 characters.
- 
+
 
  Set up an [oauth account](https://github.com/hapijs/bell/blob/master/API.md) and follow the instructions on how to get a cookie password
 To set up additional Google provider keys, see the [Auth0 docs](https://auth0.com/docs/connections/social/devkeys)
@@ -57,7 +67,7 @@ yarn test
 # OAuth
 An application registered with Google is required for Google's OAuth to work. An application can be created by navigating to their [API console](https://console.developers.google.com/apis) and clicking "Create a Project". The project is where the authentication screen can be customized.
 
-Projects can have multiple credentials associated with them. Click on the "Create Credential" button and create an "OAuth client ID". 
+Projects can have multiple credentials associated with them. Click on the "Create Credential" button and create an "OAuth client ID".
 
 Select "Web application" from the Application type list.
 
@@ -89,7 +99,7 @@ This project uses [lab](https://github.com/hapijs/lab) as the testing framework 
 
 Lab and code are only compatible with Node.js v8+.
 
-All test files need to be within the test folder. 
+All test files need to be within the test folder.
 
 If you're new to testing within the Hapi17 ecosystem, there are great tutorials on [futureStudio](https://futurestud.io/tutorials/hapi-getting-started-with-testing-using-lab-and-code) to help get you started.
 

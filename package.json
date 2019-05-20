@@ -1,9 +1,9 @@
 {
-  "name": "auth-boilerplate",
+  "name": "khatm-api",
   "version": "1.0.0",
-  "description": "The shell for a hapi and bell powered auth system",
-  "author": "Scott Williams",
-  "license": "MIT",
+  "description": "Khatm API",
+  "author": "Mohammed Islam",
+  "license": "Apache-2.0",
   "main": "lib/index.js",
   "directories": {
     "lib": "lib",
