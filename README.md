@@ -106,7 +106,3 @@ All test files need to be within the test folder.
 If you're new to testing within the Hapi17 ecosystem, there are great tutorials on [futureStudio](https://futurestud.io/tutorials/hapi-getting-started-with-testing-using-lab-and-code) to help get you started.
 
 The API docs for expectations with code are [here](https://github.com/hapijs/code/blob/HEAD/API.md#equalvalue-options)
-
-# Contributors
-* Scott Williams
-* Tina Heiligers
