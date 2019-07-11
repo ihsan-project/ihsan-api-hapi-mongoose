@@ -11,4 +11,5 @@
 
 ## Description
 
-Use [Hapi Pal](https://hapipal.com/) to bootstrap some boilerplate libraries and architecture.
+- Use [Hapi Pal](https://hapipal.com/) to bootstrap some boilerplate libraries and architecture.
+- Follow the [Server/Plugin Seperation](https://hapipal.com/best-practices/server-plugin-separation) design pattern.
