@@ -11,3 +11,4 @@
 
 ## Description
 
+Use [Hapi Pal](https://hapipal.com/) to bootstrap some boilerplate libraries and architecture.
