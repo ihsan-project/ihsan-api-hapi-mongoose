@@ -41,11 +41,9 @@ module.exports = new Confidence.Store({
                     $base: {
                         migrateOnStart: true,
                         knex: {
-                            client: 'sqlite3',
-                            useNullAsDefault: true,     // Suggested for sqlite3
-                            connection: {
-                                filename: ':memory:'
-                            }
+                            client: 'pg',
+                            connection: process.env.PG_CONNECTION_STRING,
+                            searchPath: ['knex', 'public']
                         }
                     },
                     production: {
