@@ -12,7 +12,9 @@
   "scripts": {
     "start": "node server",
     "test": "lab -a @hapi/code -L",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "pregenerate-docs": "rm -rf swagger-api",
+    "generate-docs": "spectacle swagger.yaml --target-dir swagger-api"
   },
   "dependencies": {
     "@hapi/boom": "7.x.x",
