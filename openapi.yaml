@@ -1,0 +1,190 @@
+openapi: 3.0.0
+info:
+  title: Khatm API
+  description: API for the Khatm platform
+  version: 1.0.0
+servers:
+  - url: 'http://api.khatmapp.com/v1'
+    description: Main production server
+paths:
+  /user:
+    get:
+      summary: Get User
+      description: User
+      responses:
+        '200':
+          description: A JSON of a user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /challenge:
+    summary: Challenge
+    get:
+      summary: Get Challenge
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type : integer
+      responses:
+        '200':
+          description: A JSON of a challenge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Challenge'
+    post:
+      summary: Create Challenge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Challenge'
+      responses:
+        '201':
+          description: Created
+    put:
+      summary: Update Challenge
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type : integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Challenge'
+      responses:
+        '205':
+          description: Updated
+  /challenge/{challengeId}/intent:
+    parameters:
+      - name: challengeId
+        in: path
+        required: true
+        schema:
+          type : integer
+    get:
+      summary: Get Intent
+      parameters:
+        - name: intentId
+          in: path
+          required: true
+          schema:
+            type : integer
+      responses:
+        '200':
+          description: A JSON of an Intent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChallengeIntent'
+    post:
+      summary: Create Intent for Challenge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChallengeIntent'
+      responses:
+        '201':
+          description: Created
+    put:
+      summary: Update Intent
+      parameters:
+        - name: intentId
+          in: path
+          required: true
+          schema:
+            type : integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChallengeIntent'
+      responses:
+        '205':
+          description: Updated
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+    Challenge:
+      type: object
+      properties:
+        id:
+          type: integer
+        moderator:
+          $ref: '#/components/schemas/User'
+        state:
+          type: string
+          description: created, published, finished
+        completeAt:
+          type: string
+          format: date-time
+        totalPages:
+          type: integer
+        totalWords:
+          type: integer
+        totalLetters:
+          type: integer
+    UserStats:
+      description: Track metrics on a user
+      type: object
+      properties:
+        id:
+          type: integer
+        user:
+          $ref: '#/components/schemas/User'
+        intentsCreated:
+          type: integer
+        intentsFinished:
+          type: integer
+        intentsAborted:
+          type: integer
+        challengesContributed:
+          type: integer
+        totalPages:
+          type: integer
+        totalWords:
+          type: integer
+        totalLetters:
+          type: integer
+    ChallengeIntent:
+      type: object
+      properties:
+        id:
+          type: integer
+        challenge:
+          $ref: '#/components/schemas/Challenge'
+        user:
+          $ref: '#/components/schemas/User'
+        createdAt:
+          type: string
+          format: date-time
+        state:
+          type: string
+          description: started, ended, aborted
+        totalPages:
+          type: integer
+        page:
+          type: integer
+        words:
+          type: integer
+        letters:
+          type: integer
