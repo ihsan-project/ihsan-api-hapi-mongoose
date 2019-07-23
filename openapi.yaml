@@ -84,7 +84,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ChallengeIntent'
+                $ref: '#/components/schemas/Intent'
     post:
       summary: Create Intent for Challenge
       requestBody:
@@ -92,7 +92,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChallengeIntent'
+              $ref: '#/components/schemas/Intent'
       responses:
         '201':
           description: Created
@@ -109,7 +109,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChallengeIntent'
+              $ref: '#/components/schemas/Intent'
       responses:
         '205':
           description: Updated
@@ -165,7 +165,7 @@ components:
           type: integer
         totalLetters:
           type: integer
-    ChallengeIntent:
+    Intent:
       type: object
       properties:
         id:
