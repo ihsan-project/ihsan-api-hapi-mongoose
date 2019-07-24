@@ -5,7 +5,6 @@ info:
   version: 1.0.0
 servers:
   - url: 'http://api.khatmapp.com/v1'
-    description: Main production server
 paths:
   /user:
     get:
@@ -124,25 +123,6 @@ components:
           type: string
         lastName:
           type: string
-    Challenge:
-      type: object
-      properties:
-        id:
-          type: integer
-        moderator:
-          $ref: '#/components/schemas/User'
-        state:
-          type: string
-          description: created, published, finished
-        completeAt:
-          type: string
-          format: date-time
-        totalPages:
-          type: integer
-        totalWords:
-          type: integer
-        totalLetters:
-          type: integer
     UserStats:
       description: Track metrics on a user
       type: object
@@ -159,32 +139,117 @@ components:
           type: integer
         challengesContributed:
           type: integer
-        totalPages:
+        challengesModerated:
           type: integer
-        totalWords:
+    UserSession:
+      description: Login session information for a user
+      type: object
+      properties:
+        id:
           type: integer
-        totalLetters:
+        user:
+          $ref: '#/components/schemas/User'
+        token:
+          type: string
+        platform:
+          type: string
+          description: android, ios
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+    UserPushToken:
+      description: Push Notification token information for a user
+      type: object
+      properties:
+        id:
           type: integer
-    Intent:
+        user:
+          $ref: '#/components/schemas/User'
+        token:
+          type: string
+        platform:
+          type: string
+          description: apns, gcm
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+    Challenge:
+      description: Challenge created by a user
+      type: object
+      properties:
+        id:
+          type: integer
+        moderator:
+          $ref: '#/components/schemas/User'
+        book:
+          $ref: '#/components/schemas/Book'
+        currentState:
+          $ref: '#/components/schemas/ChallengeState'
+        completeAt:
+          type: string
+          format: date-time
+    ChallengeState:
+      description: State Machine for Challenges
       type: object
       properties:
         id:
           type: integer
         challenge:
           $ref: '#/components/schemas/Challenge'
-        user:
-          $ref: '#/components/schemas/User'
+        state:
+          type: string
+          description: created, published, finished
         createdAt:
           type: string
           format: date-time
+    Intent:
+      description: Intent created by a user when they commit to a challenge
+      type: object
+      properties:
+        id:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        challenge:
+          $ref: '#/components/schemas/Challenge'
+        user:
+          $ref: '#/components/schemas/User'
+        book:
+          $ref: '#/components/schemas/Book'
+        currentState:
+          $ref: '#/components/schemas/IntentState'
+        part:
+          type: integer
+    IntentState:
+      description: State Machine for Intents
+      type: object
+      properties:
+        id:
+          type: integer
+        intent:
+          $ref: '#/components/schemas/Intent'
         state:
           type: string
           description: started, ended, aborted
-        totalPages:
+        createdAt:
+          type: string
+          format: date-time
+    Book:
+      description: Particulars of the challenge itself
+      type: object
+      properties:
+        id:
           type: integer
-        page:
+        slugId:
+          type: string
+        totalParts:
           type: integer
-        words:
-          type: integer
-        letters:
+        partLabel:
           type: integer
