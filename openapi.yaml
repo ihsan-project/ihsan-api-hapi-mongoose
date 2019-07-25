@@ -281,7 +281,19 @@ components:
           type: integer
         slugId:
           type: string
-        totalParts:
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookPart'
+    BookPart:
+      description: Metadata about each part of a book
+      type: object
+      properties:
+        id:
           type: integer
-        partLabel:
+        index:
           type: integer
+        label:
+          type: string
+        content:
+          type: string
