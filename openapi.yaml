@@ -1,0 +1,299 @@
+openapi: 3.0.0
+info:
+  title: Khatm API
+  description: API for the Khatm platform
+  version: 1.0.0
+servers:
+  - url: 'http://api.khatmapp.com/v1'
+paths:
+  /user:
+    get:
+      description: Get User
+      responses:
+        '200':
+          description: A JSON of a user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /user/{userId}/pushtoken:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type : integer
+    post:
+      description: Add push token for user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPushToken'
+      responses:
+        '201':
+          description: Created
+  /user/{userId}/statistics:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type : integer
+    get:
+      description: Get User Statistics
+      responses:
+        '200':
+          description: A JSON of a user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStatistics'
+  /challenge:
+    get:
+      description: Get Challenge
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type : integer
+      responses:
+        '200':
+          description: A JSON of a challenge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Challenge'
+    post:
+      description: Create Challenge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Challenge'
+      responses:
+        '201':
+          description: Created
+    put:
+      description: Update Challenge
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type : integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Challenge'
+      responses:
+        '205':
+          description: Updated
+  /challenge/{challengeId}/intention:
+    parameters:
+      - name: challengeId
+        in: path
+        required: true
+        schema:
+          type : integer
+    get:
+      description: Get Intention
+      parameters:
+        - name: intentionId
+          in: path
+          required: true
+          schema:
+            type : integer
+      responses:
+        '200':
+          description: A JSON of an Intention
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Intention'
+    post:
+      description: Create Intention for Challenge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Intention'
+      responses:
+        '201':
+          description: Created
+    put:
+      description: Update Intention
+      parameters:
+        - name: intentionId
+          in: path
+          required: true
+          schema:
+            type : integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Intention'
+      responses:
+        '205':
+          description: Updated
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+    UserStatistics:
+      description: Track metrics on a user
+      type: object
+      properties:
+        id:
+          type: integer
+        user:
+          $ref: '#/components/schemas/User'
+        intentionsCreated:
+          type: integer
+        intentionsFinished:
+          type: integer
+        intentionsAborted:
+          type: integer
+        challengesContributed:
+          type: integer
+        challengesModerated:
+          type: integer
+    UserSession:
+      description: Login session information for a user
+      type: object
+      properties:
+        id:
+          type: integer
+        user:
+          $ref: '#/components/schemas/User'
+        token:
+          type: string
+        platform:
+          type: string
+          description: android, ios
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+    UserPushToken:
+      description: Push Notification token information for a user
+      type: object
+      properties:
+        id:
+          type: integer
+        user:
+          $ref: '#/components/schemas/User'
+        token:
+          type: string
+        platform:
+          type: string
+          description: apns, gcm
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+    Challenge:
+      description: Challenge created by a user
+      type: object
+      properties:
+        id:
+          type: integer
+        moderator:
+          $ref: '#/components/schemas/User'
+        book:
+          $ref: '#/components/schemas/Book'
+        currentState:
+          $ref: '#/components/schemas/ChallengeState'
+        completeAt:
+          type: string
+          format: date-time
+    ChallengeState:
+      description: State Machine for Challenges
+      type: object
+      properties:
+        id:
+          type: integer
+        challenge:
+          $ref: '#/components/schemas/Challenge'
+        state:
+          type: string
+          description: created, published, finished
+        createdAt:
+          type: string
+          format: date-time
+    Intention:
+      description: Intention created by a user when they commit to a challenge
+      type: object
+      properties:
+        id:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        challenge:
+          $ref: '#/components/schemas/Challenge'
+        user:
+          $ref: '#/components/schemas/User'
+        book:
+          $ref: '#/components/schemas/Book'
+        currentState:
+          $ref: '#/components/schemas/IntentionState'
+        part:
+          type: integer
+    IntentionState:
+      description: State Machine for Intentions
+      type: object
+      properties:
+        id:
+          type: integer
+        intention:
+          $ref: '#/components/schemas/Intention'
+        state:
+          type: string
+          description: started, ended, aborted
+        createdAt:
+          type: string
+          format: date-time
+    Book:
+      description: Particulars of the challenge itself
+      type: object
+      properties:
+        id:
+          type: integer
+        slugId:
+          type: string
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookPart'
+    BookPart:
+      description: Metadata about each part of a book
+      type: object
+      properties:
+        id:
+          type: integer
+        index:
+          type: integer
+        label:
+          type: string
+        content:
+          type: string

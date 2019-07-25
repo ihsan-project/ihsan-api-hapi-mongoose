@@ -15,11 +15,10 @@
 - Follow the [Server/Plugin Seperation](https://hapipal.com/best-practices/server-plugin-separation) design pattern.
 
 ## API Documentation
-- OpenAPI document: `swagger.yaml`
+Documentation is in `./openapi.yaml`
+
+- OpenAPI documentation using [Swagger](https://github.com/swagger-api/swagger-editor)
      - `docker pull swaggerapi/swagger-editor`
      - `docker run -d -p 80:8080 swaggerapi/swagger-editor`
      - `open http://localhost/`
-     - Or can install the `OpenAPI (Swagger) editor` on VSCode
-- Using [Spectacle](https://github.com/sourcey/spectacle) to generate static files:
-     - `npm run generate-docs`
-     - Open a browser to the `swagger-api` directory
+- Install the `OpenAPI (Swagger) editor` on VSCode
