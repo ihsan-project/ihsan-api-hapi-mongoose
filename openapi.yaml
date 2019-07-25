@@ -8,8 +8,7 @@ servers:
 paths:
   /user:
     get:
-      summary: Get User
-      description: User
+      description: Get User
       responses:
         '200':
           description: A JSON of a user
@@ -17,10 +16,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-  /challenge:
-    summary: Challenge
+  /user/{userId}/pushtoken:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type : integer
+    post:
+      description: Add push token for user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPushToken'
+      responses:
+        '201':
+          description: Created
+  /user/{userId}/statistics:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type : integer
     get:
-      summary: Get Challenge
+      description: Get User Statistics
+      responses:
+        '200':
+          description: A JSON of a user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStatistics'
+  /challenge:
+    get:
+      description: Get Challenge
       parameters:
         - name: challengeId
           in: path
@@ -35,7 +67,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Challenge'
     post:
-      summary: Create Challenge
+      description: Create Challenge
       requestBody:
         required: true
         content:
@@ -46,7 +78,7 @@ paths:
         '201':
           description: Created
     put:
-      summary: Update Challenge
+      description: Update Challenge
       parameters:
         - name: challengeId
           in: path
@@ -62,7 +94,7 @@ paths:
       responses:
         '205':
           description: Updated
-  /challenge/{challengeId}/intent:
+  /challenge/{challengeId}/intention:
     parameters:
       - name: challengeId
         in: path
@@ -70,35 +102,35 @@ paths:
         schema:
           type : integer
     get:
-      summary: Get Intent
+      description: Get Intention
       parameters:
-        - name: intentId
+        - name: intentionId
           in: path
           required: true
           schema:
             type : integer
       responses:
         '200':
-          description: A JSON of an Intent
+          description: A JSON of an Intention
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intent'
+                $ref: '#/components/schemas/Intention'
     post:
-      summary: Create Intent for Challenge
+      description: Create Intention for Challenge
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Intent'
+              $ref: '#/components/schemas/Intention'
       responses:
         '201':
           description: Created
     put:
-      summary: Update Intent
+      description: Update Intention
       parameters:
-        - name: intentId
+        - name: intentionId
           in: path
           required: true
           schema:
@@ -108,7 +140,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Intent'
+              $ref: '#/components/schemas/Intention'
       responses:
         '205':
           description: Updated
@@ -123,7 +155,7 @@ components:
           type: string
         lastName:
           type: string
-    UserStats:
+    UserStatistics:
       description: Track metrics on a user
       type: object
       properties:
@@ -131,11 +163,11 @@ components:
           type: integer
         user:
           $ref: '#/components/schemas/User'
-        intentsCreated:
+        intentionsCreated:
           type: integer
-        intentsFinished:
+        intentionsFinished:
           type: integer
-        intentsAborted:
+        intentionsAborted:
           type: integer
         challengesContributed:
           type: integer
@@ -208,8 +240,8 @@ components:
         createdAt:
           type: string
           format: date-time
-    Intent:
-      description: Intent created by a user when they commit to a challenge
+    Intention:
+      description: Intention created by a user when they commit to a challenge
       type: object
       properties:
         id:
@@ -224,17 +256,17 @@ components:
         book:
           $ref: '#/components/schemas/Book'
         currentState:
-          $ref: '#/components/schemas/IntentState'
+          $ref: '#/components/schemas/IntentionState'
         part:
           type: integer
-    IntentState:
-      description: State Machine for Intents
+    IntentionState:
+      description: State Machine for Intentions
       type: object
       properties:
         id:
           type: integer
-        intent:
-          $ref: '#/components/schemas/Intent'
+        intention:
+          $ref: '#/components/schemas/Intention'
         state:
           type: string
           description: started, ended, aborted
