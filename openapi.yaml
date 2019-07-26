@@ -226,6 +226,8 @@ components:
         completeAt:
           type: string
           format: date-time
+        totalParts:
+          type: integer
     ChallengeState:
       description: State Machine for Challenges
       type: object
@@ -253,8 +255,6 @@ components:
           $ref: '#/components/schemas/Challenge'
         user:
           $ref: '#/components/schemas/User'
-        book:
-          $ref: '#/components/schemas/Book'
         currentState:
           $ref: '#/components/schemas/IntentionState'
         part:
@@ -274,26 +274,15 @@ components:
           type: string
           format: date-time
     Book:
-      description: Particulars of the challenge itself
+      description: Religious text
       type: object
       properties:
         id:
           type: integer
         slugId:
           type: string
-        parts:
-          type: array
-          items:
-            $ref: '#/components/schemas/BookPart'
-    BookPart:
-      description: Metadata about each part of a book
-      type: object
-      properties:
-        id:
-          type: integer
-        index:
-          type: integer
-        label:
+        type:
           type: string
-        content:
+          description: quran, dhikr, salwaat
+        title:
           type: string
