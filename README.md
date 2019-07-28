@@ -8,6 +8,11 @@
   - `brew install node@10`
   - `brew link node@10`
   - Follow brew instruction, like having to `--force` and `--overwrite`
+- Postgres Database
+  - `brew install postgres`
+  - `brew services start postgresql`
+  - `initdb /usr/local/var/postgres`
+  - `createdb khatm-dev`
 
 ## Description
 
