@@ -12,7 +12,9 @@
   "scripts": {
     "start": "node server",
     "test": "lab -a @hapi/code -L",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "dbReset": "dropdb khatm-dev && createdb khatm-dev",
+    "dbMigrate": "npx knex migrate:latest"
   },
   "dependencies": {
     "@hapi/boom": "7.x.x",

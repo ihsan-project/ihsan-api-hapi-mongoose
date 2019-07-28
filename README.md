@@ -11,7 +11,6 @@
 - Postgres Database
   - `brew install postgres`
   - `brew services start postgresql`
-  - `initdb /usr/local/var/postgres`
   - `createdb khatm-dev`
 
 ## Description
