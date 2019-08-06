@@ -1,15 +1,15 @@
 openapi: 3.0.0
 info:
   title: Khatm API
-  description: |  
+  description: |
     ## Challenges
     Moderators create `Challenge`s. A challenge has a `book` that contains metadata regarding what type of challenge this is.
     Based on the type of book (quran, dhikr, etc), the `totalParts` will mean something different
     - If `quran` then there will be 30 totalParts for each Juuz.
     - Otherwise the totalParts will be the the total count the moderator wishes to achieve. i.e. 30,000 Kalimahs
-    
+
     ## Books
-    Books are the types of khatm challenges that a moderator can create. 
+    Books are the types of khatm challenges that a moderator can create.
     These will be created by Admins and have `slugId`s so can be identified. These are long-living objects that are going to be referenced by `Challenge`s in a one-to-many relationship.
     One of the first type of `Book`s will be the Quran. Other types of Books would be one for each Dhikr. Books can contain extra information such as the value of the dhikr, and historical or spiritual context.
 
@@ -180,6 +180,12 @@ components:
         firstName:
           type: string
         lastName:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        password:
           type: string
     UserStatistics:
       description: Track metrics on a user
