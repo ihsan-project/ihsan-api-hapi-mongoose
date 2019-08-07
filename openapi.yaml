@@ -187,6 +187,8 @@ components:
           type: string
         password:
           type: string
+        statistics:
+          $ref: '#/components/schemas/UserStatistics'
     UserStatistics:
       description: Track metrics on a user
       type: object
