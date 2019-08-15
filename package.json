@@ -13,8 +13,9 @@
     "start": "node server",
     "test": "lab -a @hapi/code -L",
     "lint": "eslint .",
-    "dbReset": "dropdb khatm-dev && createdb khatm-dev",
-    "dbMigrate": "npx knex migrate:latest"
+    "db-reset": "dropdb khatm-dev && createdb khatm-dev",
+    "db-migrate": "npx knex migrate:latest",
+    "db-seed": "npx knex seed:run"
   },
   "dependencies": {
     "@hapi/boom": "7.x.x",
