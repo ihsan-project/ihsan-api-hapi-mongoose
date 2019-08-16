@@ -12,12 +12,18 @@ const Package = require('../package.json');
 const { describe, it } = exports.lab = Lab.script();
 const { expect } = Code;
 
-describe('Deployment', () => {
+describe('Books', () => {
 
-    it('registers the main plugin.', async () => {
+    it('get the quran.', async () => {
 
         const server = await Server.deployment();
 
-        expect(server.registrations[Package.name]).to.exist();
+        const books = await server.inject({
+            method: 'get',
+            url: '/books'
+        });
+
+        expect(books.statusCode).to.equal(200);
+        console.log(books.result);
     });
 });
