@@ -27,5 +27,6 @@ describe('Books', () => {
         });
 
         expect(books.statusCode).to.equal(200);
+        expect(books.result[0].slugId).to.equal('book-quran');
     });
 });
