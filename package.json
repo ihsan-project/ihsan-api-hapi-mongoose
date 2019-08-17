@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node server",
-    "test": "lab -a @hapi/code -L",
+    "test": "lab -a @hapi/code -L -I 'server'",
     "lint": "eslint .",
     "db-reset": "dropdb khatm-dev && createdb khatm-dev",
     "db-migrate": "npx knex migrate:latest",

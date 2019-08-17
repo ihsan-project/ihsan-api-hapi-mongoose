@@ -1,3 +1,4 @@
+/* global server */
 'use strict';
 
 // Load modules
@@ -5,18 +6,20 @@
 const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
 const Server = require('../server');
-const Package = require('../package.json');
 
 // Test shortcuts
 
-const { describe, it } = exports.lab = Lab.script();
+const { describe, it, before } = exports.lab = Lab.script();
 const { expect } = Code;
+
+before(async () => {
+
+    global.server = await Server.deployment();
+});
 
 describe('Books', () => {
 
     it('get the quran.', async () => {
-
-        const server = await Server.deployment();
 
         const books = await server.inject({
             method: 'get',
@@ -24,6 +27,5 @@ describe('Books', () => {
         });
 
         expect(books.statusCode).to.equal(200);
-        console.log(books.result);
     });
 });
