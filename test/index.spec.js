@@ -1,3 +1,4 @@
+/* global server */
 'use strict';
 
 // Load modules
@@ -9,14 +10,17 @@ const Package = require('../package.json');
 
 // Test shortcuts
 
-const { describe, it } = exports.lab = Lab.script();
+const { describe, it, before } = exports.lab = Lab.script();
 const { expect } = Code;
+
+before(async () => {
+
+    global.server = await Server.deployment();
+});
 
 describe('Deployment', () => {
 
-    it('registers the main plugin.', async () => {
-
-        const server = await Server.deployment();
+    it('registers the main plugin.', () => {
 
         expect(server.registrations[Package.name]).to.exist();
     });

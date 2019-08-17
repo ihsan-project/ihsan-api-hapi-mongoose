@@ -27,7 +27,13 @@ info:
 servers:
   - url: 'http://api.khatmapp.com/v1'
 paths:
-  /user:
+  /users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type : integer
     get:
       description: Get User
       responses:
@@ -37,7 +43,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-  /user/{userId}/pushtoken:
+  /users/{userId}/pushtokens:
     parameters:
       - name: userId
         in: path
@@ -55,7 +61,7 @@ paths:
       responses:
         '201':
           description: Created
-  /user/{userId}/statistics:
+  /users/{userId}/statistics:
     parameters:
       - name: userId
         in: path
@@ -71,7 +77,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserStatistics'
-  /challenge:
+  /books:
+    summary: Book CRUD
+    get:
+      description: Get Books
+      responses:
+        '200':
+          description: A JSON of a challenge
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+  /challenges:
     summary: Challenge CRUD
     get:
       description: Get Challenge
@@ -119,7 +138,7 @@ paths:
       responses:
         '205':
           description: Updated
-  /challenge/{challengeId}/intention:
+  /challenges/{challengeId}/intentions:
     summary: Challenge Intention CRUD
     parameters:
       - name: challengeId
