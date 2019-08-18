@@ -22,6 +22,9 @@ module.exports = new Confidence.Store({
                 log: ['error'],
                 request: ['error']
             },
+            staging: {
+                request: ['implementation']
+            },
             production: {
                 request: ['implementation']
             }
@@ -36,18 +39,25 @@ module.exports = new Confidence.Store({
             {
                 plugin: 'schwifty',
                 options: {
-                    $filter: 'NODE_ENV',
+                    $filter: { $env: 'NODE_ENV' },
                     $default: {},
                     $base: {
-                        migrateOnStart: true,
                         knex: {
                             client: 'pg',
                             connection: process.env.PG_CONNECTION_STRING,
                             searchPath: ['knex', 'public']
                         }
                     },
+                    development: {
+                        knex: {
+                            connection: `${process.env.PG_CONNECTION_STRING}-dev`
+                        }
+                    },
+                    staging: {
+                        migrateOnStart: 'latest'
+                    },
                     production: {
-                        migrateOnStart: false
+                        migrateOnStart: 'latest'
                     }
                 }
             },
@@ -55,6 +65,7 @@ module.exports = new Confidence.Store({
                 plugin: {
                     $filter: { $env: 'NODE_ENV' },
                     $default: 'hpal-debug',
+                    staging: Toys.noop,
                     production: Toys.noop
                 }
             }
