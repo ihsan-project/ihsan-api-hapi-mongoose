@@ -11,7 +11,7 @@
 - Postgres Database
   - `brew install postgres`
   - `brew services start postgresql`
-  - `createdb khatm-dev`
+  - `npm dev-db-setup`
 
 ## Description
 

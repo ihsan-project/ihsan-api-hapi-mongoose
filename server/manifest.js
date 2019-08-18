@@ -48,6 +48,11 @@ module.exports = new Confidence.Store({
                             searchPath: ['knex', 'public']
                         }
                     },
+                    test: {
+                        knex: {
+                            connection: `${process.env.PG_CONNECTION_STRING}-test`
+                        }
+                    },
                     development: {
                         knex: {
                             connection: `${process.env.PG_CONNECTION_STRING}-dev`
