@@ -27,6 +27,6 @@ describe('Constants', () => {
         });
 
         expect(constants.statusCode).to.equal(200);
-        // expect(constants.result[0].slugId).to.equal('book-quran');
+        expect(constants.result.booksKey.quran).to.equal(1);
     });
 });
