@@ -24,6 +24,7 @@
     "haute-couture": "3.x.x",
     "objection": "1.x.x",
     "pg": "^7.11.0",
+    "schmervice": "^1.2.0",
     "schwifty": "4.x.x"
   },
   "peerDependencies": {
