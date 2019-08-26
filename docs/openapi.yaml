@@ -77,7 +77,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserStatistics'
-  /constants:
+  /constants/{version}:
     get:
       description: |
         # Get constants
@@ -87,7 +87,7 @@ paths:
           in: path
           required: false
           schema:
-            type : string
+            type : integer
       responses:
         '204':
           description: No changes according to the requested `version`
@@ -364,5 +364,5 @@ components:
       type: object
       properties:
         version:
-          type: string
-          default: 1.0.0
+          type: integer
+          default: 1

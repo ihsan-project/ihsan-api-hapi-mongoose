@@ -25,6 +25,27 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GET /constants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/constants",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"constants"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

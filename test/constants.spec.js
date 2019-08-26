@@ -19,7 +19,7 @@ before(async () => {
 
 describe('Constants', () => {
 
-    it('get constants.', async () => {
+    it('get constants without version.', async () => {
 
         const constants = await server.inject({
             method: 'get',
@@ -28,5 +28,29 @@ describe('Constants', () => {
 
         expect(constants.statusCode).to.equal(200);
         expect(constants.result.booksKey.quran).to.equal(1);
+    });
+
+    it('get constants with version.', async () => {
+
+        const constants = await server.inject({
+            method: 'get',
+            url: '/constants'
+        });
+
+        expect(constants.statusCode).to.equal(200);
+
+        const constantsAgain = await server.inject({
+            method: 'get',
+            url: `/constants/${constants.result.version}`
+        });
+
+        expect(constantsAgain.statusCode).to.equal(204);
+
+        const constantsAhead = await server.inject({
+            method: 'get',
+            url: `/constants/${constants.result.version + 1}`
+        });
+
+        expect(constantsAhead.statusCode).to.equal(204);
     });
 });
