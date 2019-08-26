@@ -2,6 +2,7 @@
 
 ## Environment
 - Node 10.15.3, Npm 6.4.1 (Used to match AWS Elastic Beanstalk max version as of 5/19/2019)
+  - Install [avn](https://www.npmjs.com/package/avn) to have terminal respect the .nvmrc
 
 ### Installation Instructions
 - Node and Npm [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
