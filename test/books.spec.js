@@ -7,6 +7,8 @@ const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
 const Server = require('../server');
 
+const Constants = require('../lib/constants');
+
 // Test shortcuts
 
 const { describe, it, before } = exports.lab = Lab.script();
@@ -28,5 +30,6 @@ describe('Books', () => {
 
         expect(books.statusCode).to.equal(200);
         expect(books.result[0].slugId).to.equal('book-quran');
+        expect(books.result[0].type).to.equal(Constants.bookType.quran);
     });
 });
