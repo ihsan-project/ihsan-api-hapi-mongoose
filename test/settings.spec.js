@@ -7,6 +7,8 @@ const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
 const Server = require('../server');
 
+const Constants = require('../lib/constants');
+
 // Test shortcuts
 
 const { describe, it, before } = exports.lab = Lab.script();
@@ -27,7 +29,7 @@ describe('Settings', () => {
         });
 
         expect(settings.statusCode).to.equal(200);
-        expect(settings.result.bookType.quran).to.equal(1);
+        expect(settings.result.bookType.quran).to.equal(Constants.bookType.quran);
     });
 
     it('get settings with version.', async () => {
