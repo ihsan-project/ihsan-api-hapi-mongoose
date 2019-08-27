@@ -77,11 +77,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserStatistics'
-  /constants/{version}:
+  /settings/{version}:
     get:
       description: |
-        # Get constants
-        Send `version` of last constants sync to receive back shorter responses for better performance.
+        # Get Settings
+        Send `version` of last settings sync to receive back shorter responses for better performance.
       parameters:
         - name: version
           in: path
@@ -96,7 +96,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Constants'
+                $ref: '#/components/schemas/Settings'
   /books:
     summary: Book CRUD
     get:
@@ -355,12 +355,12 @@ components:
         slugId:
           type: string
         type:
-          type: string
+          type: integer
           description: quran, dhikr, salwaat
         title:
           type: string
-    Constants:
-      description: App Constatns
+    Settings:
+      description: App Settings
       type: object
       properties:
         version:
