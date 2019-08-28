@@ -2,6 +2,12 @@ openapi: 3.0.0
 info:
   title: Khatm API
   description: |
+    ## Authentication
+    Khatm will only support SSO, relying on 3rd party services to maintain security, while reducing the need to manage authentication flows such as verifying emails or phone numbers.
+    The client application will send the service's SSO information to the Khatm API as a `UserAuthIdentity`.
+    The response will be a `UserSession` which will include the token to set in the headers of subsequent API calls.
+    If a user has the same email information between SSO services, the system will tie the `UserAuthIdentity`s to that user.
+
     ## Challenges
     Moderators create `Challenge`s. A challenge has a `book` that contains metadata regarding what type of challenge this is.
     Based on the type of book (quran, dhikr, etc), the `totalParts` will mean something different
@@ -27,6 +33,22 @@ info:
 servers:
   - url: 'http://api.khatmapp.com/v1'
 paths:
+  /session:
+    post:
+      description: Get a session token for user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuthIdentity'
+      responses:
+        '200':
+          description: A JSON of the session token
+          content:
+            application:json:
+              schema:
+                $ref: '#/components/schemas/UserSession'
   /users/{userId}:
     parameters:
       - name: userId
@@ -222,12 +244,43 @@ components:
           type: string
         email:
           type: string
-        username:
+        statistics:
+          $ref: '#/components/schemas/UserStatistics'
+    UserAuthIdentity:
+      description: Identity objects for various SSO services
+      type: object
+      properties:
+        id:
+          type: integer
+        user:
+          $ref: '#/components/schemas/User'
+        userId:
+          type: string
+        email:
           type: string
         password:
           type: string
-        statistics:
-          $ref: '#/components/schemas/UserStatistics'
+        platform:
+          type: integer
+          description: android, apple
+    UserSession:
+      description: Login session information for a user
+      type: object
+      properties:
+        id:
+          type: integer
+        user:
+          $ref: '#/components/schemas/User'
+        identity:
+          $ref: '#/components/schemas/UserAuthIdentity'
+        token:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
     UserStatistics:
       description: Track metrics on a user
       type: object
@@ -246,25 +299,6 @@ components:
           type: integer
         challengesModerated:
           type: integer
-    UserSession:
-      description: Login session information for a user
-      type: object
-      properties:
-        id:
-          type: integer
-        user:
-          $ref: '#/components/schemas/User'
-        token:
-          type: string
-        platform:
-          type: string
-          description: android, ios
-        createdAt:
-          type: string
-          format: date-time
-        expiresAt:
-          type: string
-          format: date-time
     UserPushToken:
       description: Push Notification token information for a user
       type: object
