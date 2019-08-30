@@ -3,10 +3,10 @@ info:
   title: Khatm API
   description: |
     ## Authentication
-    Khatm will only support SSO, relying on 3rd party services to maintain security, while reducing the need to manage authentication flows such as verifying emails or phone numbers.
-    The client application will send the service's SSO information to the Khatm API as a `UserAuthIdentity`.
+    Khatm will only support SSO, relying on 3rd party services to maintain security, while reducing the need to manage authentication flows such as verifying emails or encrypting and storing passwords.
+    The client application will send the service's SSO information to the Khatm API as a `UserAuthentication`.
     The response will be a `UserSession` which will include the token to set in the headers of subsequent API calls.
-    If a user has the same email information between SSO services, the system will tie the `UserAuthIdentity`s to that user.
+    If a user has the same email information between SSO services, the system will tie the `UserAuthentication`s to that user, and user will be able to login to same account using both SSO services.
 
     ## Challenges
     Moderators create `Challenge`s. A challenge has a `book` that contains metadata regarding what type of challenge this is.
@@ -41,7 +41,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserAuthIdentity'
+              $ref: '#/components/schemas/UserAuthentication'
       responses:
         '200':
           description: A JSON of the session token
@@ -246,7 +246,7 @@ components:
           type: string
         statistics:
           $ref: '#/components/schemas/UserStatistics'
-    UserAuthIdentity:
+    UserAuthentication:
       description: Identity objects for various SSO services
       type: object
       properties:
@@ -254,11 +254,10 @@ components:
           type: integer
         user:
           $ref: '#/components/schemas/User'
-        userId:
+        uuid:
+          description: The SSO service's stable unique identifier for the user
           type: string
         email:
-          type: string
-        password:
           type: string
         platform:
           type: integer
@@ -271,9 +270,10 @@ components:
           type: integer
         user:
           $ref: '#/components/schemas/User'
-        identity:
-          $ref: '#/components/schemas/UserAuthIdentity'
+        authIdentity:
+          $ref: '#/components/schemas/UserAuthentication'
         token:
+          description: Session token to validate API requests
           type: string
         createdAt:
           type: string
