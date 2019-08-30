@@ -35,7 +35,11 @@ servers:
 paths:
   /session:
     post:
-      description: Get a session token for user
+      description: |
+        # Get a session token for user
+        1. If the user and a session exists, will get back `UserSession`
+        1. If the session doesn't exist, will create a session
+        1. If user doesn't exist, will create `User`
       requestBody:
         required: true
         content:
@@ -270,7 +274,7 @@ components:
           type: integer
         user:
           $ref: '#/components/schemas/User'
-        authIdentity:
+        authencitation:
           $ref: '#/components/schemas/UserAuthentication'
         token:
           description: Session token to validate API requests
