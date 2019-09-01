@@ -23,17 +23,18 @@ describe('Sessions', () => {
 
     it('get session from SSO.', async () => {
 
-        const settings = await server.inject({
+        const session = await server.inject({
             method: 'post',
             url: '/sessions',
             payload: {
                 uuid: 'test-uuid',
                 email: 'x@y.com',
                 firstName: 'test',
-                platform: 1
+                platform: Constants.authPlatform.google
             }
         });
 
-        expect(settings.statusCode).to.equal(200);
+        expect(session.statusCode).to.equal(200);
+        expect(session.result.token).to.equal('123232ababd');
     });
 });
