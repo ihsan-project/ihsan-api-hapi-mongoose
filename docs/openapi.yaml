@@ -33,7 +33,7 @@ info:
 servers:
   - url: 'http://api.khatmapp.com/v1'
 paths:
-  /session:
+  /sessions:
     post:
       description: |
         # Get a session token for user
