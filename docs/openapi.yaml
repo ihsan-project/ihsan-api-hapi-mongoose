@@ -5,7 +5,7 @@ info:
     ## Authentication
     Khatm will only support SSO, relying on 3rd party services to maintain security, while reducing the need to manage authentication flows such as verifying emails or encrypting and storing passwords.
     The client application will send the service's SSO information to the Khatm API as a `UserAuthentication`.
-    The response will be a `UserSession` which will include the token to set in the headers of subsequent API calls.
+    The response will be a `User` and JWT token which will need to be set in the headers of subsequent API calls.
     If a user has the same email information between SSO services, the system will tie the `UserAuthentication`s to that user, and user will be able to login to same account using both SSO services.
 
     ## Challenges
@@ -37,9 +37,8 @@ paths:
     post:
       description: |
         # Get a session token for user
-        1. If the user and a session exists, will get back `UserSession`
-        1. If the session doesn't exist, will create a session
-        1. If user doesn't exist, will create `User`
+        1. If the user exists, will get back JWT token and `User`
+        1. If the user doesn't exist, will create `User` and return it with JWT token
       requestBody:
         required: true
         content:
@@ -52,7 +51,12 @@ paths:
           content:
             application:json:
               schema:
-                $ref: '#/components/schemas/UserSession'
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/User'
   /users/{userId}:
     parameters:
       - name: userId
@@ -266,25 +270,6 @@ components:
         platform:
           type: integer
           description: android, apple
-    UserSession:
-      description: Login session information for a user
-      type: object
-      properties:
-        id:
-          type: integer
-        user:
-          $ref: '#/components/schemas/User'
-        authencitation:
-          $ref: '#/components/schemas/UserAuthentication'
-        token:
-          description: Session token to validate API requests
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        expiresAt:
-          type: string
-          format: date-time
     UserStatistics:
       description: Track metrics on a user
       type: object

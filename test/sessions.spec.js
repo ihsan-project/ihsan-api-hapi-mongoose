@@ -21,20 +21,22 @@ before(async () => {
 
 describe('Sessions', () => {
 
-    it('get session from SSO.', async () => {
+    it('get jwt from SSO.', async () => {
 
+        const email = 'x@y.com';
         const session = await server.inject({
             method: 'post',
             url: '/sessions',
             payload: {
                 uuid: 'test-uuid',
-                email: 'x@y.com',
+                email,
                 firstName: 'test',
                 platform: Constants.authPlatform.google
             }
         });
 
         expect(session.statusCode).to.equal(200);
-        expect(session.result.token).to.equal('123232ababd');
+        expect(session.result.user.email).to.equal(email);
+        expect(session.result.jwt).to.exist();
     });
 });
