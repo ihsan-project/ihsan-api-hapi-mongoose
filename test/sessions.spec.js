@@ -38,5 +38,21 @@ describe('Sessions', () => {
         expect(session.statusCode).to.equal(200);
         expect(session.result.user.email).to.equal(email);
         expect(session.result.jwt).to.exist();
+
+        // Getting session with different sso service, but same email returns same user
+        const sameSession = await server.inject({
+            method: 'post',
+            url: '/sessions',
+            payload: {
+                uuid: 'different-test-uuid',
+                email,
+                firstName: 'different name',
+                platform: Constants.authPlatform.apple
+            }
+        });
+
+        expect(sameSession.statusCode).to.equal(200);
+        expect(sameSession.result.user.email).to.equal(email);
+        expect(sameSession.result.jwt).to.exist();
     });
 });
