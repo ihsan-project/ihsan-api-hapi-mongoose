@@ -60,9 +60,9 @@ paths:
                     type: string
                   user:
                     $ref: '#/components/schemas/User'
-  /users/{userId}:
+  /users/{user_id}:
     parameters:
-      - name: userId
+      - name: user_id
         in: path
         required: true
         schema:
@@ -76,9 +76,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-  /users/{userId}/pushtokens:
+  /users/{user_id}/pushtokens:
     parameters:
-      - name: userId
+      - name: user_id
         in: path
         required: true
         schema:
@@ -94,9 +94,9 @@ paths:
       responses:
         '201':
           description: Created
-  /users/{userId}/statistics:
+  /users/{user_id}/statistics:
     parameters:
-      - name: userId
+      - name: user_id
         in: path
         required: true
         schema:
