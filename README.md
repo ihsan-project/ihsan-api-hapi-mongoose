@@ -1,30 +1,46 @@
 # Khatm API
 
 ## Environment
-- Node 10.15.3, Npm 6.4.1 (Used to match AWS Elastic Beanstalk max version as of 5/19/2019)
-  - Install [avn](https://www.npmjs.com/package/avn) to have terminal respect the .nvmrc
 
-### Installation Instructions
-- Node and Npm [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
-  - `brew install node@10`
-  - `brew link node@10`
-  - Follow brew instruction, like having to `--force` and `--overwrite`
+- Node 10.15.3, Npm 6.4.1 [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
+  - Used to match AWS Elastic Beanstalk max version as of 5/19/2019
+  - (Recommended) Using Node Version Manager
+     - Install [NVM](https://github.com/nvm-sh/nvm) with `brew install nvm`. Follow the post-install directions to update your `~/.bash_profile`.
+     - Install Node Version 10.15.3 with `nvm install 10.15.3`
+     - Installing [avn](https://www.npmjs.com/package/avn)
+       - Now when you open a new terminal window, it will respect the .nvmrc
+  - Specific Node version in your system
+     - `brew install node@10`
+     - `brew link node@10`
+     - Follow brew instruction, like having to `--force` and `--overwrite`
 - Postgres Database
   - `brew install postgres`
   - `brew services start postgresql`
   - `npm dev-db-setup`
 
-## Description
+## Development
 
-- Use [Hapi Pal](https://hapipal.com/) to bootstrap some boilerplate libraries and architecture.
-- Follow the [Server/Plugin Seperation](https://hapipal.com/best-practices/server-plugin-separation) design pattern.
+- Using [Hapi Pal](https://hapipal.com/) to bootstrap some boilerplate libraries and architecture.
+- Following the [Server/Plugin Seperation](https://hapipal.com/best-practices/server-plugin-separation) design pattern.
+
+After you've followed all the steps in `Environment` section above, install all the node modules locally by running `npm install`. These are all the libraries that the server needs to run.
+
+Then you will need to setup your local databse by running `npm run dev-db-setup`. Once that runs successfully, you are ready to `npm start` your local server instance! Normally the baseURL will be `http://localhost:3000` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
+
+Make sure that you can also run `npm test` successfully. This will be required before the acceptance of any pull request for changes.
 
 ## API Documentation
+
 - `./docs/openapi.yaml` using [OpenAPI 3.0](https://swagger.io/blog/news/announcing-openapi-3-0/).
 - `./docs/Khatm-API.postman_collection.json` Postman collection 2.1 of example API calls
 - `./docs/*.postman_environment.json` Postman environments
 
+Once you've been able to run the server locally following instructions in `Development`, you can use [Postman](https://www.getpostman.com/) to test the API.
+
+After installing Postman, [import the api collection](https://learning.getpostman.com/docs/postman/collections/sharing_collections/) and the [environment](https://learning.getpostman.com/docs/postman/environments_and_globals/manage_environments#sharing-an-environment). Look in the `./docs/` directory for the exports.
+
 ### Editing OpenAPI
+
 It is encouraged to maintain the API docs with changes to not just the API, but data model properties, relationships, and as much architectural design detail as possible. Thoroughness in the documentation will mean people (including ourselves) can set aside this project and come back to it later without having to retain all the information in our brains.
 
 At the moment of writing, OpenAPI 3.0 doesn't have many intuitive tooling around generating static documentation with all the bells and whistles I want. There's quite a lot for Swagger 2.0, [ReDoc](https://github.com/Redocly/redoc) is the closest to producing something through a quick easy CLI, but it doesn't display the models, opened [Issue (7/26/2019)].
