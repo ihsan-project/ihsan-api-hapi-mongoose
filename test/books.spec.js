@@ -24,7 +24,7 @@ before(async () => {
         payload: {
             uuid: 'test-uuid',
             email: 'x@y.com',
-            firstName: 'test',
+            first_name: 'test',
             platform: Constants.authPlatform.google
         }
     });

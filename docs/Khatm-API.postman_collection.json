@@ -72,7 +72,7 @@
 							"type": "text"
 						},
 						{
-							"key": "firstName",
+							"key": "first_name",
 							"value": "mohammed",
 							"type": "text"
 						},

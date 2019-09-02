@@ -30,7 +30,7 @@ describe('Sessions', () => {
             payload: {
                 uuid: 'test-uuid',
                 email,
-                firstName: 'test',
+                first_name: 'test',
                 platform: Constants.authPlatform.google
             }
         });
@@ -46,7 +46,7 @@ describe('Sessions', () => {
             payload: {
                 uuid: 'different-test-uuid',
                 email,
-                firstName: 'different name',
+                first_name: 'different name',
                 platform: Constants.authPlatform.apple
             }
         });
