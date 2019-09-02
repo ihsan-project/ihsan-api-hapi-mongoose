@@ -6,10 +6,16 @@
 	},
 	"item": [
 		{
-			"name": "GET /books",
+			"name": "/books",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{jwt}}",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
@@ -27,7 +33,7 @@
 			"response": []
 		},
 		{
-			"name": "GET /constants",
+			"name": "/settings",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -36,12 +42,82 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{baseURL}}/constants",
+					"raw": "{{baseURL}}/settings",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"constants"
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/sessions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "uuid",
+							"value": "test-uuid",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "test@email.com",
+							"type": "text"
+						},
+						{
+							"key": "firstName",
+							"value": "mohammed",
+							"type": "text"
+						},
+						{
+							"key": "platform",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}/sessions",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"sessions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{jwt}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/users/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"1"
 					]
 				}
 			},

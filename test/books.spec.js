@@ -1,4 +1,4 @@
-/* global server */
+/* global server jwt */
 'use strict';
 
 // Load modules
@@ -17,6 +17,19 @@ const { expect } = Code;
 before(async () => {
 
     global.server = await Server.deployment();
+
+    const session = await server.inject({
+        method: 'post',
+        url: '/sessions',
+        payload: {
+            uuid: 'test-uuid',
+            email: 'x@y.com',
+            firstName: 'test',
+            platform: Constants.authPlatform.google
+        }
+    });
+
+    global.jwt = session.result.jwt;
 });
 
 describe('Books', () => {
@@ -25,7 +38,10 @@ describe('Books', () => {
 
         const books = await server.inject({
             method: 'get',
-            url: '/books'
+            url: '/books',
+            headers: {
+                authorization: `Token ${jwt}`
+            }
         });
 
         expect(books.statusCode).to.equal(200);

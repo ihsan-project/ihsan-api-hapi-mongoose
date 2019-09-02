@@ -32,6 +32,8 @@ info:
   version: 1.0.0
 servers:
   - url: 'http://api.khatmapp.com/v1'
+security:
+  - ApiKeyAuth: []
 paths:
   /sessions:
     post:
@@ -39,6 +41,7 @@ paths:
         # Get a session token for user
         1. If the user exists, will get back JWT token and `User`
         1. If the user doesn't exist, will create `User` and return it with JWT token
+      security: []
       requestBody:
         required: true
         content:
@@ -112,6 +115,7 @@ paths:
       description: |
         # Get Settings
         Send `version` of last settings sync to receive back shorter responses for better performance.
+      security: []
       parameters:
         - name: version
           in: path
@@ -240,6 +244,13 @@ paths:
         '205':
           description: Updated
 components:
+  securitySchemes:
+    ApiKeyAuth:
+      description: |
+        Prefix the `JWT` with `Token`. Ie. `Token blah-blah`
+      type: apiKey
+      in: header
+      name: Authorization
   schemas:
     User:
       type: object
