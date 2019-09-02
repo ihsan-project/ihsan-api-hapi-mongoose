@@ -33,19 +33,19 @@
     "knex": "0.16.x"
   },
   "devDependencies": {
-    "@hapi/code": "5.x.x",
+    "@hapi/code": "6.x.x",
     "@hapi/eslint-config-hapi": "^12.2.0",
     "@hapi/eslint-plugin-hapi": "^4.3.4",
     "@hapi/glue": "^6.1.1",
     "@hapi/hapi": "^18.3.2",
-    "@hapi/hoek": "6.x.x",
-    "@hapi/lab": "19.x.x",
+    "@hapi/hoek": "8.x.x",
+    "@hapi/lab": "20.x.x",
     "confidence": "4.x.x",
     "dotenv": "^8.1.0",
     "eslint": "^6.3.0",
     "hpal": "^2.2.1",
     "hpal-debug": "1.x.x",
-    "knex": "0.16.x",
+    "knex": "0.19.x",
     "sqlite3": "^4.1.0",
     "toys": "2.x.x"
   }
