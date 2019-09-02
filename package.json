@@ -19,13 +19,13 @@
     "db-seed": "npx knex seed:run"
   },
   "dependencies": {
-    "@hapi/boom": "7.x.x",
-    "@hapi/joi": "15.x.x",
+    "@hapi/boom": "^7.4.3",
+    "@hapi/joi": "^15.1.1",
     "hapi-auth-jwt2": "^8.6.2",
     "haute-couture": "3.x.x",
     "jsonwebtoken": "^8.5.1",
     "objection": "1.x.x",
-    "pg": "^7.11.0",
+    "pg": "^7.12.1",
     "schmervice": "^1.2.0",
     "schwifty": "4.x.x"
   },
@@ -33,20 +33,20 @@
     "knex": "0.16.x"
   },
   "devDependencies": {
-    "@hapi/code": "5.x.x",
-    "@hapi/eslint-config-hapi": "12.x.x",
-    "@hapi/eslint-plugin-hapi": "4.x.x",
-    "@hapi/glue": "6.x.x",
-    "@hapi/hapi": "18.x.x",
-    "@hapi/hoek": "6.x.x",
-    "@hapi/lab": "19.x.x",
+    "@hapi/code": "6.x.x",
+    "@hapi/eslint-config-hapi": "^12.2.0",
+    "@hapi/eslint-plugin-hapi": "^4.3.4",
+    "@hapi/glue": "^6.1.1",
+    "@hapi/hapi": "^18.3.2",
+    "@hapi/hoek": "8.x.x",
+    "@hapi/lab": "20.x.x",
     "confidence": "4.x.x",
-    "dotenv": "8.x.x",
-    "eslint": "5.x.x",
-    "hpal": "^2.2.0",
+    "dotenv": "^8.1.0",
+    "eslint": "^6.3.0",
+    "hpal": "^2.2.1",
     "hpal-debug": "1.x.x",
-    "knex": "0.16.x",
-    "sqlite3": "4.x.x",
+    "knex": "0.19.x",
+    "sqlite3": "^4.1.0",
     "toys": "2.x.x"
   }
 }
