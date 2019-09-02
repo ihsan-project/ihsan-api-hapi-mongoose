@@ -119,7 +119,8 @@ paths:
       parameters:
         - name: version
           in: path
-          required: false
+          required: true
+          description: Not really required
           schema:
             type : integer
       responses:
