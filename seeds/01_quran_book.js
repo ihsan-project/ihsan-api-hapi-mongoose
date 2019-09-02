@@ -4,13 +4,13 @@ const Constants = require('../lib/constants');
 
 exports.seed = (knex, Promise) => {
 
-    return knex('Books').del()
+    return knex('books').del()
         .then(() => {
 
-            return knex('Books').insert([
+            return knex('books').insert([
                 {
                     id: 1,
-                    slugId: 'book-quran',
+                    slug_id: 'book-quran',
                     type: Constants.bookType.quran,
                     title: 'Quran'
                 }
