@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node server",
     "pretest": "createdb khatm-test && NODE_ENV=test npm run db-migrate && NODE_ENV=test npm run db-seed",
-    "test": "NODE_ENV=test lab -a @hapi/code -L -I 'server' ; dropdb khatm-test",
+    "test": "NODE_ENV=test lab -a @hapi/code -L -I 'server,jwt,user' ; dropdb khatm-test",
     "lint": "eslint .",
     "dev-db-setup": "dropdb khatm-dev ; createdb khatm-dev && npm run db-migrate && npm run db-seed",
     "db-migrate": "npx knex migrate:latest",
@@ -21,7 +21,9 @@
   "dependencies": {
     "@hapi/boom": "7.x.x",
     "@hapi/joi": "15.x.x",
+    "hapi-auth-jwt2": "^8.6.2",
     "haute-couture": "3.x.x",
+    "jsonwebtoken": "^8.5.1",
     "objection": "1.x.x",
     "pg": "^7.11.0",
     "schmervice": "^1.2.0",
