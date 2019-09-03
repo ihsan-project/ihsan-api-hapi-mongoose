@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f5b3ede6-2445-4a28-bf47-60c6c967bb29",
+		"_postman_id": "83f424cf-868f-4d30-ac9a-85a01f06ffaf",
 		"name": "Khatm-API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -96,7 +96,7 @@
 			"response": []
 		},
 		{
-			"name": "/users",
+			"name": "/users/{id}",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -118,6 +118,33 @@
 					"path": [
 						"users",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{jwt}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users"
 					]
 				}
 			},
