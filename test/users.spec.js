@@ -83,5 +83,6 @@ describe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(404);
+        expect(getUser.result.errors).to.exist();
     });
 });
