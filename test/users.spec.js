@@ -57,4 +57,18 @@ describe('Users', () => {
 
         expect(getUser.statusCode).to.equal(200);
     });
+
+    it('get logged in user.', async () => {
+
+        const getUser = await server.inject({
+            method: 'get',
+            url: `/users`,
+            headers: {
+                authorization: `Token ${jwt}`
+            }
+        });
+
+        expect(getUser.statusCode).to.equal(200);
+        expect(getUser.result.id).to.equal(user.id);
+    });
 });
