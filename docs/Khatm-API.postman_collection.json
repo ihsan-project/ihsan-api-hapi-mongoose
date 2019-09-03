@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "36c62fe2-7a64-43fc-bead-2bb90a3cd256",
+		"_postman_id": "f5b3ede6-2445-4a28-bf47-60c6c967bb29",
 		"name": "Khatm-API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -54,7 +54,7 @@
 			"response": []
 		},
 		{
-			"name": "/sessions",
+			"name": "/authentications",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -84,12 +84,12 @@
 					]
 				},
 				"url": {
-					"raw": "{{baseURL}}/sessions",
+					"raw": "{{baseURL}}/authentications",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"sessions"
+						"authentications"
 					]
 				}
 			},

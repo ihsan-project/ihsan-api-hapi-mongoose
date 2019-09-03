@@ -35,7 +35,7 @@ servers:
 security:
   - ApiKeyAuth: []
 paths:
-  /sessions:
+  /authentications:
     post:
       description: |
         # Get a session token for user
