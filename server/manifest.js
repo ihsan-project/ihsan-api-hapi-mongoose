@@ -40,6 +40,12 @@ module.exports = new Confidence.Store({
                         $default: {
                             $env: 'JWT_SECRET_KEY'
                         }
+                    },
+                    jwt_secret_token : {
+                        $filter: { $env: 'NODE_ENV' },
+                        $default: {
+                            $env: 'JWT_SECRET_TOKEN'
+                        }
                     }
                 }
             },

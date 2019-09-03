@@ -60,6 +60,16 @@ paths:
                     type: string
                   user:
                     $ref: '#/components/schemas/User'
+  /users:
+    get:
+      description: Get current user for `Authorization` information
+      responses:
+        '200':
+          description: A JSON of a user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
   /users/{user_id}:
     parameters:
       - name: user_id
