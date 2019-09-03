@@ -20,11 +20,11 @@ before(async () => {
 
     const session = await server.inject({
         method: 'post',
-        url: '/sessions',
+        url: '/authentications',
         payload: {
             uuid: 'test-uuid',
             email: 'x@y.com',
-            firstName: 'test',
+            first_name: 'test',
             platform: Constants.authPlatform.google
         }
     });
@@ -45,7 +45,7 @@ describe('Books', () => {
         });
 
         expect(books.statusCode).to.equal(200);
-        expect(books.result[0].slugId).to.equal('book-quran');
+        expect(books.result[0].slug_id).to.equal('book-quran');
         expect(books.result[0].type).to.equal(Constants.bookType.quran);
     });
 });

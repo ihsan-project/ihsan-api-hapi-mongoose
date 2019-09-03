@@ -20,11 +20,11 @@ before(async () => {
 
     const session = await server.inject({
         method: 'post',
-        url: '/sessions',
+        url: '/authentications',
         payload: {
             uuid: 'test-uuid',
             email: 'x@y.com',
-            firstName: 'test',
+            first_name: 'test',
             platform: Constants.authPlatform.google
         }
     });

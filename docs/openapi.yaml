@@ -10,13 +10,13 @@ info:
 
     ## Challenges
     Moderators create `Challenge`s. A challenge has a `book` that contains metadata regarding what type of challenge this is.
-    Based on the type of book (quran, dhikr, etc), the `totalParts` will mean something different
-    - If `quran` then there will be 30 totalParts for each Juuz.
-    - Otherwise the totalParts will be the the total count the moderator wishes to achieve. i.e. 30,000 Kalimahs
+    Based on the type of book (quran, dhikr, etc), the `total_parts` will mean something different
+    - If `quran` then there will be 30 total_parts for each Juuz.
+    - Otherwise the total_parts will be the the total count the moderator wishes to achieve. i.e. 30,000 Kalimahs
 
     ## Books
     Books are the types of khatm challenges that a moderator can create.
-    These will be created by Admins and have `slugId`s so can be identified. These are long-living objects that are going to be referenced by `Challenge`s in a one-to-many relationship.
+    These will be created by Admins and have `slug_id`s so can be identified. These are long-living objects that are going to be referenced by `Challenge`s in a one-to-many relationship.
     One of the first type of `Book`s will be the Quran. Other types of Books would be one for each Dhikr. Books can contain extra information such as the value of the dhikr, and historical or spiritual context.
 
     ## Intentions
@@ -24,7 +24,7 @@ info:
     There can be only one `active` intention per user per challenge. Users can have one Intention in multiple Challenges.
     The `parts` property of an Intention plays two roles based on the book.type,
     - If `quran` then parts will be the index of which Juuz.
-    - Otherwise the totalParts will be the the number of recitations the User has Intentioned
+    - Otherwise the total_parts will be the the number of recitations the User has Intentioned
 
     ## State Machines
     Objects such as `ChallengeState` and `IntentionState` are a way of tracking the state change of objects, and when that state has changed.
@@ -35,7 +35,7 @@ servers:
 security:
   - ApiKeyAuth: []
 paths:
-  /sessions:
+  /authentications:
     post:
       description: |
         # Get a session token for user
@@ -60,9 +60,9 @@ paths:
                     type: string
                   user:
                     $ref: '#/components/schemas/User'
-  /users/{userId}:
+  /users/{user_id}:
     parameters:
-      - name: userId
+      - name: user_id
         in: path
         required: true
         schema:
@@ -76,9 +76,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-  /users/{userId}/pushtokens:
+  /users/{user_id}/pushtokens:
     parameters:
-      - name: userId
+      - name: user_id
         in: path
         required: true
         schema:
@@ -94,9 +94,9 @@ paths:
       responses:
         '201':
           description: Created
-  /users/{userId}/statistics:
+  /users/{user_id}/statistics:
     parameters:
-      - name: userId
+      - name: user_id
         in: path
         required: true
         schema:
@@ -119,7 +119,8 @@ paths:
       parameters:
         - name: version
           in: path
-          required: false
+          required: true
+          description: Not really required
           schema:
             type : integer
       responses:
@@ -149,7 +150,7 @@ paths:
     get:
       description: Get Challenge
       parameters:
-        - name: challengeId
+        - name: challenge_id
           in: path
           required: true
           schema:
@@ -165,7 +166,7 @@ paths:
       description: |
         Create Challenge
         ## Notes
-        - Instead of sending the entire `book` information, just need the `slugId`
+        - Instead of sending the entire `book` information, just need the `slug_id`
       requestBody:
         required: true
         content:
@@ -178,7 +179,7 @@ paths:
     put:
       description: Update Challenge
       parameters:
-        - name: challengeId
+        - name: challenge_id
           in: path
           required: true
           schema:
@@ -192,10 +193,10 @@ paths:
       responses:
         '205':
           description: Updated
-  /challenges/{challengeId}/intentions:
+  /challenges/{challenge_id}/intentions:
     summary: Challenge Intention CRUD
     parameters:
-      - name: challengeId
+      - name: challenge_id
         in: path
         required: true
         schema:
@@ -203,7 +204,7 @@ paths:
     get:
       description: Get Intention
       parameters:
-        - name: intentionId
+        - name: intention_id
           in: path
           required: true
           schema:
@@ -229,7 +230,7 @@ paths:
     put:
       description: Update Intention
       parameters:
-        - name: intentionId
+        - name: intention_id
           in: path
           required: true
           schema:
@@ -257,9 +258,9 @@ components:
       properties:
         id:
           type: integer
-        firstName:
+        first_name:
           type: string
-        lastName:
+        last_name:
           type: string
         email:
           type: string
@@ -289,15 +290,15 @@ components:
           type: integer
         user:
           $ref: '#/components/schemas/User'
-        intentionsCreated:
+        intentions_created:
           type: integer
-        intentionsFinished:
+        intentions_finished:
           type: integer
-        intentionsAborted:
+        intentions_aborted:
           type: integer
-        challengesContributed:
+        challenges_contributed:
           type: integer
-        challengesModerated:
+        challenges_moderated:
           type: integer
     UserPushToken:
       description: Push Notification token information for a user
@@ -312,10 +313,10 @@ components:
         platform:
           type: string
           description: apns, gcm
-        createdAt:
+        created_at:
           type: string
           format: date-time
-        expiresAt:
+        expires_at:
           type: string
           format: date-time
     Challenge:
@@ -330,10 +331,10 @@ components:
           $ref: '#/components/schemas/Book'
         currentState:
           $ref: '#/components/schemas/ChallengeState'
-        completeAt:
+        complete_at:
           type: string
           format: date-time
-        totalParts:
+        total_parts:
           type: integer
     ChallengeState:
       description: State Machine for Challenges
@@ -346,7 +347,7 @@ components:
         state:
           type: string
           description: active, finished
-        createdAt:
+        created_at:
           type: string
           format: date-time
     Intention:
@@ -355,7 +356,7 @@ components:
       properties:
         id:
           type: integer
-        createdAt:
+        created_at:
           type: string
           format: date-time
         challenge:
@@ -377,7 +378,7 @@ components:
         state:
           type: string
           description: active, achieved, aborted
-        createdAt:
+        created_at:
           type: string
           format: date-time
     Book:
@@ -386,7 +387,7 @@ components:
       properties:
         id:
           type: integer
-        slugId:
+        slug_id:
           type: string
         type:
           type: integer
