@@ -19,6 +19,7 @@
     "db-seed": "npx knex seed:run"
   },
   "dependencies": {
+    "@hapi/basic": "^5.1.1",
     "@hapi/boom": "^7.4.3",
     "@hapi/joi": "^15.1.1",
     "avocat": "^1.0.2",
