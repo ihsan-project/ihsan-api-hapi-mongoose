@@ -40,7 +40,7 @@ describe('Books', () => {
             method: 'get',
             url: '/books',
             headers: {
-                authorization: `Basic ${jwt}`
+                authorization: `Token ${jwt}`
             }
         });
 

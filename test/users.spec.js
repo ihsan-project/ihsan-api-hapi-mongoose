@@ -51,7 +51,7 @@ describe('Users', () => {
             method: 'get',
             url: `/users/${user.id}`,
             headers: {
-                authorization: `Basic ${jwt}`
+                authorization: `Token ${jwt}`
             }
         });
 
@@ -64,7 +64,7 @@ describe('Users', () => {
             method: 'get',
             url: `/users`,
             headers: {
-                authorization: `Basic ${jwt}`
+                authorization: `Token ${jwt}`
             }
         });
 
@@ -78,7 +78,7 @@ describe('Users', () => {
             method: 'get',
             url: `/users/${user.id + 99}`,
             headers: {
-                authorization: `Basic ${jwt}`
+                authorization: `Token ${jwt}`
             }
         });
 
