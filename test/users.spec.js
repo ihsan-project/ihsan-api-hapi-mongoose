@@ -1,4 +1,4 @@
-/* global server user jwt */
+/* global server user access */
 'use strict';
 
 // Load modules
@@ -29,8 +29,8 @@ before(async () => {
         }
     });
 
-    global.user = session.result.user;
-    global.jwt = session.result.jwt;
+    global.user = session.result;
+    global.access = session.result.access;
 });
 
 describe('Users', () => {
@@ -51,7 +51,7 @@ describe('Users', () => {
             method: 'get',
             url: `/users/${user.id}`,
             headers: {
-                authorization: `Token ${jwt}`
+                authorization: access
             }
         });
 
@@ -64,7 +64,7 @@ describe('Users', () => {
             method: 'get',
             url: `/users`,
             headers: {
-                authorization: `Token ${jwt}`
+                authorization: access
             }
         });
 
@@ -78,7 +78,7 @@ describe('Users', () => {
             method: 'get',
             url: `/users/${user.id + 99}`,
             headers: {
-                authorization: `Token ${jwt}`
+                authorization: access
             }
         });
 

@@ -35,18 +35,7 @@ module.exports = new Confidence.Store({
             {
                 plugin: '../lib', // Main plugin
                 options: {
-                    jwt_secret_key : {
-                        $filter: { $env: 'NODE_ENV' },
-                        $default: {
-                            $env: 'JWT_SECRET_KEY'
-                        }
-                    },
-                    jwt_secret_token : {
-                        $filter: { $env: 'NODE_ENV' },
-                        $default: {
-                            $env: 'JWT_SECRET_TOKEN'
-                        }
-                    }
+
                 }
             },
             {

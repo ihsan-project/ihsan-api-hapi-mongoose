@@ -21,7 +21,7 @@ before(async () => {
 
 describe('Sessions', () => {
 
-    it('get jwt from SSO.', async () => {
+    it('get user from SSO.', async () => {
 
         const email = 'x@y.com';
         const session = await server.inject({
@@ -36,8 +36,8 @@ describe('Sessions', () => {
         });
 
         expect(session.statusCode).to.equal(200);
-        expect(session.result.user.email).to.equal(email);
-        expect(session.result.jwt).to.exist();
+        expect(session.result.email).to.equal(email);
+        expect(session.result.access).to.exist();
 
         // Getting session with different sso service, but same email returns same user
         const sameSession = await server.inject({
@@ -52,7 +52,7 @@ describe('Sessions', () => {
         });
 
         expect(sameSession.statusCode).to.equal(200);
-        expect(sameSession.result.user.email).to.equal(email);
-        expect(sameSession.result.jwt).to.exist();
+        expect(sameSession.result.email).to.equal(email);
+        expect(sameSession.result.access).to.exist();
     });
 });
