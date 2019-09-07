@@ -38,6 +38,7 @@ describe('Sessions', () => {
         expect(session.statusCode).to.equal(200);
         expect(session.result.email).to.equal(email);
         expect(session.result.access).to.exist();
+        const access = session.result.access;
 
         // Getting session with different sso service, but same email returns same user
         const sameSession = await server.inject({
@@ -53,6 +54,6 @@ describe('Sessions', () => {
 
         expect(sameSession.statusCode).to.equal(200);
         expect(sameSession.result.email).to.equal(email);
-        expect(sameSession.result.access).to.exist();
+        expect(sameSession.result.access).to.equal(access);
     });
 });
