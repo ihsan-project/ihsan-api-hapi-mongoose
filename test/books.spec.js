@@ -1,4 +1,4 @@
-/* global server jwt */
+/* global server access */
 'use strict';
 
 // Load modules
@@ -29,7 +29,7 @@ before(async () => {
         }
     });
 
-    global.jwt = session.result.jwt;
+    global.access = session.result.access;
 });
 
 describe('Books', () => {
@@ -40,7 +40,7 @@ describe('Books', () => {
             method: 'get',
             url: '/books',
             headers: {
-                authorization: `Token ${jwt}`
+                authorization: access
             }
         });
 

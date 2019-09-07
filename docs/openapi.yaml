@@ -5,7 +5,7 @@ info:
     ## Authentication
     Khatm will only support SSO, relying on 3rd party services to maintain security, while reducing the need to manage authentication flows such as verifying emails or encrypting and storing passwords.
     The client application will send the service's SSO information to the Khatm API as a `UserAuthentication`.
-    The response will be a `User` and JWT token which will need to be set in the headers of subsequent API calls.
+    The response will be a `User` with an `access` property which will need to be set in the headers of subsequent API calls.
     If a user has the same email information between SSO services, the system will tie the `UserAuthentication`s to that user, and user will be able to login to same account using both SSO services.
 
     ## Challenges
@@ -39,8 +39,8 @@ paths:
     post:
       description: |
         # Get a session token for user
-        1. If the user exists, will get back JWT token and `User`
-        1. If the user doesn't exist, will create `User` and return it with JWT token
+        1. If the user exists, will get back `User`
+        1. If the user doesn't exist, will create `User` and return it
       security: []
       requestBody:
         required: true
@@ -50,16 +50,11 @@ paths:
               $ref: '#/components/schemas/UserAuthentication'
       responses:
         '200':
-          description: A JSON of the session token
+          description: A JSON of a user
           content:
             application:json:
               schema:
-                type: object
-                properties:
-                  jwt:
-                    type: string
-                  user:
-                    $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/User'
   /users:
     get:
       description: Get current user for `Authorization` information
@@ -257,8 +252,7 @@ paths:
 components:
   securitySchemes:
     ApiKeyAuth:
-      description: |
-        Prefix the `JWT` with `Token`. Ie. `Token blah-blah`
+      description: Access key
       type: apiKey
       in: header
       name: Authorization
@@ -273,6 +267,9 @@ components:
         last_name:
           type: string
         email:
+          type: string
+        access:
+          description: Access key for Khatm API
           type: string
         statistics:
           $ref: '#/components/schemas/UserStatistics'
