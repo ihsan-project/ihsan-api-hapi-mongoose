@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node server",
     "pretest": "createdb khatm-test && NODE_ENV=test npm run db-migrate && NODE_ENV=test npm run db-seed",
-    "test": "NODE_ENV=test lab -a @hapi/code -L -I 'server,access,user' ; dropdb khatm-test",
+    "test": "NODE_ENV=test lab -a @hapi/code -L -I 'server,access,user' -v ; dropdb khatm-test",
     "lint": "eslint .",
     "dev-db-setup": "dropdb khatm-dev ; createdb khatm-dev && npm run db-migrate && npm run db-seed",
     "db-migrate": "npx knex migrate:latest",
