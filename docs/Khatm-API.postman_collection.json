@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "83f424cf-868f-4d30-ac9a-85a01f06ffaf",
+		"_postman_id": "877f6b03-c426-4d5c-812d-bdb6ae211dfc",
 		"name": "Khatm-API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,7 +12,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token {{jwt}}",
+						"value": "{{access}}",
 						"type": "text"
 					}
 				],
@@ -102,7 +102,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token {{jwt}}",
+						"value": "{{access}}",
 						"type": "text"
 					}
 				],
@@ -131,7 +131,7 @@
 					{
 						"key": "Authorization",
 						"type": "text",
-						"value": "Token {{jwt}}"
+						"value": "{{access}}"
 					}
 				],
 				"body": {
