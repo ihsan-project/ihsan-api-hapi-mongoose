@@ -38,6 +38,12 @@ describe('Sessions', () => {
         expect(session.statusCode).to.equal(200);
         expect(session.result.email).to.equal(email);
         expect(session.result.access).to.exist();
+
+        // Check that post user create hooks ran
+        const { UserStatistics } = server.models();
+        const statistics = await UserStatistics.query().findOne({ user_id: session.result.id });
+        expect(statistics).to.exist();
+
         const access = session.result.access;
 
         // Getting session with different sso service, but same email returns same user
