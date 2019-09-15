@@ -20,12 +20,9 @@
 
 ## Development
 
-- Using [Hapi Pal](https://hapipal.com/) to bootstrap some boilerplate libraries and architecture.
-- Following the [Server/Plugin Seperation](https://hapipal.com/best-practices/server-plugin-separation) design pattern.
+After you've followed all the steps in `Environment` section above, install node modules by running `npm install`. These are all the libraries that the server needs to run.
 
-After you've followed all the steps in `Environment` section above, install all the node modules locally by running `npm install`. These are all the libraries that the server needs to run.
-
-Then you will need to setup your local databse by running `npm run dev-db-setup`. Once that runs successfully, you are ready to `npm start` your local server instance! Normally the baseURL will be `http://localhost:3000` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
+Then setup your local databse by running `npm run dev-db-setup`. Once that runs successfully, you are ready to `npm start` your local server instance! Normally the baseURL will be `http://localhost:3000` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
 
 Make sure that you can also run `npm test` successfully. A full successful run of these tests is required before any pull request for changes are accepted. Use `npm test -- -i [test id]` to run a specific test (or ranges use `-i 1-3,5`). Use `npm run test-list` to get a list of all the tests in the systerm.
 
