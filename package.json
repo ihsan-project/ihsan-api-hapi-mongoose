@@ -28,12 +28,7 @@
     "objection": "1.x.x",
     "pg": "^7.12.1",
     "schmervice": "^1.2.0",
-    "schwifty": "4.x.x"
-  },
-  "peerDependencies": {
-    "knex": "0.16.x"
-  },
-  "devDependencies": {
+    "schwifty": "4.x.x",
     "@hapi/code": "6.x.x",
     "@hapi/eslint-config-hapi": "^12.2.0",
     "@hapi/eslint-plugin-hapi": "^4.3.4",
@@ -47,7 +42,6 @@
     "hpal": "^2.2.1",
     "hpal-debug": "1.x.x",
     "knex": "0.19.x",
-    "sqlite3": "^4.1.0",
     "toys": "2.x.x"
   }
 }
