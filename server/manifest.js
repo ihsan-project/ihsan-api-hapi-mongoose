@@ -46,18 +46,23 @@ module.exports = new Confidence.Store({
                     $base: {
                         knex: {
                             client: 'pg',
-                            connection: process.env.PG_CONNECTION_STRING,
+                            connection: {
+                                host : process.env.PG_CONNECTION_STRING,
+                                password : process.env.PG_CONNECTION_PASSWORD,
+                                user: process.env.PG_CONNECTION_USER,
+                                database: process.env.PG_CONNECTION_DB_NAME
+                            },
                             searchPath: ['knex', 'public']
                         }
                     },
                     test: {
                         knex: {
-                            connection: `${process.env.PG_CONNECTION_STRING}-test`
+                            connection: 'postgres://localhost:5432/khatm-test'
                         }
                     },
                     development: {
                         knex: {
-                            connection: `${process.env.PG_CONNECTION_STRING}-dev`
+                            connection: 'postgres://localhost:5432/khatm-dev'
                         }
                     },
                     staging: {
