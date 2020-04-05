@@ -46,7 +46,7 @@
 			"response": []
 		},
 		{
-			"name": "/authentications",
+			"name": "/authorization",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -76,12 +76,12 @@
 					]
 				},
 				"url": {
-					"raw": "{{baseURL}}/authentications",
+					"raw": "{{baseURL}}/authorizations",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"authentications"
+						"authorizations"
 					]
 				}
 			},
