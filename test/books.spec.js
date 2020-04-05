@@ -26,6 +26,9 @@ before(async () => {
             email: 'x@y.com',
             first_name: 'test',
             platform: Constants.authPlatform.google
+        },
+        headers: {
+            'x-api-key': process.env.API_KEY
         }
     });
 

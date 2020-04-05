@@ -21,7 +21,18 @@ before(async () => {
 
 describe('Settings', () => {
 
-    it('get settings without version.', async () => {
+    it('keyless api call.', async () => {
+
+        const settings = await server.inject({
+            method: 'get',
+            url: '/api/settings'
+        });
+
+        expect(settings.statusCode).to.equal(401);
+        expect(settings.result.errors.unauthorized).to.only.contain('invalid key');
+    });
+
+    it('without version.', async () => {
 
         const settings = await server.inject({
             method: 'get',
@@ -35,7 +46,7 @@ describe('Settings', () => {
         expect(settings.result.bookType.quran).to.equal(Constants.bookType.quran);
     });
 
-    it('get settings with version.', async () => {
+    it('with version.', async () => {
 
         const settings = await server.inject({
             method: 'get',

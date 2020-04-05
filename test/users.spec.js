@@ -26,6 +26,9 @@ before(async () => {
             email: 'x@y.com',
             first_name: 'test',
             platform: Constants.authPlatform.google
+        },
+        headers: {
+            'x-api-key': process.env.API_KEY
         }
     });
 
@@ -35,7 +38,7 @@ before(async () => {
 
 describe('Users', () => {
 
-    it('unauthorized api call.', async () => {
+    it('authless api call.', async () => {
 
         const getUser = await server.inject({
             method: 'get',
@@ -43,6 +46,35 @@ describe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(401);
+        expect(getUser.result.errors.unauthorized).to.only.contain('invalid key');
+    });
+
+    it('unauthorized api call.', async () => {
+
+        const getUser = await server.inject({
+            method: 'get',
+            url: `/api/users/${user.id}`,
+            headers: {
+                'x-api-key': process.env.API_KEY
+            }
+        });
+
+        expect(getUser.statusCode).to.equal(401);
+        expect(getUser.result.errors.unauthorized).to.only.contain('invalid access');
+    });
+
+    it('key-less authorized api call.', async () => {
+
+        const getUser = await server.inject({
+            method: 'get',
+            url: `/api/users/${user.id}`,
+            headers: {
+                authorization: access
+            }
+        });
+
+        expect(getUser.statusCode).to.equal(401);
+        expect(getUser.result.errors.unauthorized).to.only.contain('invalid key');
     });
 
     it('get user.', async () => {
@@ -59,7 +91,8 @@ describe('Users', () => {
         expect(getUser.statusCode).to.equal(200);
     });
 
-    it('get logged in user.', async () => {
+    // TODO: Get rid of this API
+    it('get list of users.', async () => {
 
         const getUser = await server.inject({
             method: 'get',
