@@ -2,11 +2,11 @@ openapi: 3.0.0
 info:
   title: Khatm API
   description: |
-    ## Authentication
-    Khatm will only support SSO, relying on 3rd party services to maintain security, while reducing the need to manage authentication flows such as verifying emails or encrypting and storing passwords.
-    The client application will send the service's SSO information to the Khatm API as a `UserAuthentication`.
+    ## Authorization
+    Khatm will only support SSO, relying on 3rd party services to maintain security, while reducing the need to manage authorization flows such as verifying emails or encrypting and storing passwords.
+    The client application will send the service's SSO information to the Khatm API as a `UserAuthorization`.
     The response will be a `User` with an `access` property which will need to be set in the headers of subsequent API calls.
-    If a user has the same email information between SSO services, the system will tie the `UserAuthentication`s to that user, and user will be able to login to same account using both SSO services.
+    If a user has the same email information between SSO services, the system will tie the `UserAuthorization`s to that user, and user will be able to login to same account using both SSO services.
 
     ## Challenges
     Moderators create `Challenge`s. A challenge has a `book` that contains metadata regarding what type of challenge this is.
@@ -35,7 +35,7 @@ servers:
 security:
   - ApiKeyAuth: []
 paths:
-  /authentications:
+  /authorizations:
     post:
       description: |
         # Get a session token for user
@@ -47,7 +47,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserAuthentication'
+              $ref: '#/components/schemas/UserAuthorization'
       responses:
         '200':
           description: A JSON of a user
@@ -273,7 +273,7 @@ components:
           type: string
         statistics:
           $ref: '#/components/schemas/UserStatistics'
-    UserAuthentication:
+    UserAuthorization:
       description: Identity objects for various SSO services
       type: object
       properties:
