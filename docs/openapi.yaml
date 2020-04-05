@@ -31,7 +31,7 @@ info:
     This makes it easy to track history of events in the system.
   version: 1.0.0
 servers:
-  - url: 'http://api.khatmapp.com/v1'
+  - url: 'http://api.khatmapp.com/api'
 security:
   - ApiKeyAuth: []
 paths:

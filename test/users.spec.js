@@ -20,7 +20,7 @@ before(async () => {
 
     const session = await server.inject({
         method: 'post',
-        url: '/authentications',
+        url: '/api/authentications',
         payload: {
             uuid: 'test-uuid',
             email: 'x@y.com',
@@ -39,7 +39,7 @@ describe('Users', () => {
 
         const getUser = await server.inject({
             method: 'get',
-            url: `/users/${user.id}`
+            url: `/api/users/${user.id}`
         });
 
         expect(getUser.statusCode).to.equal(401);
@@ -49,7 +49,7 @@ describe('Users', () => {
 
         const getUser = await server.inject({
             method: 'get',
-            url: `/users/${user.id}`,
+            url: `/api/users/${user.id}`,
             headers: {
                 authorization: access
             }
@@ -62,7 +62,7 @@ describe('Users', () => {
 
         const getUser = await server.inject({
             method: 'get',
-            url: `/users`,
+            url: `/api/users`,
             headers: {
                 authorization: access
             }
@@ -76,7 +76,7 @@ describe('Users', () => {
 
         const getUser = await server.inject({
             method: 'get',
-            url: `/users/${user.id + 99}`,
+            url: `/api/users/${user.id + 99}`,
             headers: {
                 authorization: access
             }

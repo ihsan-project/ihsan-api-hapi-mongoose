@@ -25,7 +25,7 @@ describe('Settings', () => {
 
         const settings = await server.inject({
             method: 'get',
-            url: '/settings'
+            url: '/api/settings'
         });
 
         expect(settings.statusCode).to.equal(200);
@@ -36,21 +36,21 @@ describe('Settings', () => {
 
         const settings = await server.inject({
             method: 'get',
-            url: '/settings'
+            url: '/api/settings'
         });
 
         expect(settings.statusCode).to.equal(200);
 
         const settingsAgain = await server.inject({
             method: 'get',
-            url: `/settings/${settings.result.version}`
+            url: `/api/settings/${settings.result.version}`
         });
 
         expect(settingsAgain.statusCode).to.equal(204);
 
         const settingsAhead = await server.inject({
             method: 'get',
-            url: `/settings/${settings.result.version + 1}`
+            url: `/api/settings/${settings.result.version + 1}`
         });
 
         expect(settingsAhead.statusCode).to.equal(204);

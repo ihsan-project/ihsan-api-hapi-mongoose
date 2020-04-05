@@ -16,10 +16,6 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{baseURL}}/books",
 					"host": [
@@ -37,10 +33,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{baseURL}}/settings",
 					"host": [
@@ -106,10 +98,6 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{baseURL}}/users/1",
 					"host": [
@@ -134,10 +122,6 @@
 						"value": "{{access}}"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{baseURL}}/users",
 					"host": [
