@@ -26,7 +26,7 @@ describe('Sessions', () => {
         const email = 'x@y.com';
         const session = await server.inject({
             method: 'post',
-            url: '/authentications',
+            url: '/api/authentications',
             payload: {
                 uuid: 'test-uuid',
                 email,
@@ -49,7 +49,7 @@ describe('Sessions', () => {
         // Getting session with different sso service, but same email returns same user
         const sameSession = await server.inject({
             method: 'post',
-            url: '/authentications',
+            url: '/api/authentications',
             payload: {
                 uuid: 'different-test-uuid',
                 email,

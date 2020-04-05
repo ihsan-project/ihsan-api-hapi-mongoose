@@ -20,7 +20,7 @@ before(async () => {
 
     const session = await server.inject({
         method: 'post',
-        url: '/authentications',
+        url: '/api/authentications',
         payload: {
             uuid: 'test-uuid',
             email: 'x@y.com',
@@ -38,7 +38,7 @@ describe('Books', () => {
 
         const books = await server.inject({
             method: 'get',
-            url: '/books',
+            url: '/api/books',
             headers: {
                 authorization: access
             }
