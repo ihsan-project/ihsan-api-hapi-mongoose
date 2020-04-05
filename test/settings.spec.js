@@ -25,7 +25,10 @@ describe('Settings', () => {
 
         const settings = await server.inject({
             method: 'get',
-            url: '/api/settings'
+            url: '/api/settings',
+            headers: {
+                'x-api-key': process.env.API_KEY
+            }
         });
 
         expect(settings.statusCode).to.equal(200);
@@ -36,21 +39,30 @@ describe('Settings', () => {
 
         const settings = await server.inject({
             method: 'get',
-            url: '/api/settings'
+            url: '/api/settings',
+            headers: {
+                'x-api-key': process.env.API_KEY
+            }
         });
 
         expect(settings.statusCode).to.equal(200);
 
         const settingsAgain = await server.inject({
             method: 'get',
-            url: `/api/settings/${settings.result.version}`
+            url: `/api/settings/${settings.result.version}`,
+            headers: {
+                'x-api-key': process.env.API_KEY
+            }
         });
 
         expect(settingsAgain.statusCode).to.equal(204);
 
         const settingsAhead = await server.inject({
             method: 'get',
-            url: `/api/settings/${settings.result.version + 1}`
+            url: `/api/settings/${settings.result.version + 1}`,
+            headers: {
+                'x-api-key': process.env.API_KEY
+            }
         });
 
         expect(settingsAhead.statusCode).to.equal(204);
