@@ -51,7 +51,8 @@ describe('Users', () => {
             method: 'get',
             url: `/api/users/${user.id}`,
             headers: {
-                authorization: access
+                authorization: access,
+                'x-api-key': process.env.API_KEY
             }
         });
 
@@ -64,7 +65,8 @@ describe('Users', () => {
             method: 'get',
             url: `/api/users`,
             headers: {
-                authorization: access
+                authorization: access,
+                'x-api-key': process.env.API_KEY
             }
         });
 
@@ -78,7 +80,8 @@ describe('Users', () => {
             method: 'get',
             url: `/api/users/${user.id + 99}`,
             headers: {
-                authorization: access
+                authorization: access,
+                'x-api-key': process.env.API_KEY
             }
         });
 
