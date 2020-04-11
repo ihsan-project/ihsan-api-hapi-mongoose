@@ -55,7 +55,7 @@ paths:
             application:json:
               schema:
                 $ref: '#/components/schemas/User'
-  /users:
+  /profile:
     get:
       description: Get current user for `Authorization` information
       responses:

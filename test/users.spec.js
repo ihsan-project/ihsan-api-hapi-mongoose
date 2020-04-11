@@ -77,6 +77,21 @@ describe('Users', () => {
         expect(getUser.result.errors.unauthorized).to.only.contain('invalid key');
     });
 
+    it('get profile.', async () => {
+
+        const getUser = await server.inject({
+            method: 'get',
+            url: `/api/users/profile`,
+            headers: {
+                authorization: access,
+                'x-api-key': process.env.API_KEY
+            }
+        });
+
+        expect(getUser.statusCode).to.equal(200);
+        expect(getUser.result.email).to.equal(user.email);
+    });
+
     it('get user.', async () => {
 
         const getUser = await server.inject({
