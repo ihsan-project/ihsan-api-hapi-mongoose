@@ -91,22 +91,6 @@ describe('Users', () => {
         expect(getUser.statusCode).to.equal(200);
     });
 
-    // TODO: Get rid of this API
-    it('get list of users.', async () => {
-
-        const getUser = await server.inject({
-            method: 'get',
-            url: `/api/users`,
-            headers: {
-                authorization: access,
-                'x-api-key': process.env.API_KEY
-            }
-        });
-
-        expect(getUser.statusCode).to.equal(200);
-        expect(getUser.result.id).to.equal(user.id);
-    });
-
     it('get invalid user.', async () => {
 
         const getUser = await server.inject({
