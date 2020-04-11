@@ -14,15 +14,26 @@
 						"key": "Authorization",
 						"value": "{{access}}",
 						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{baseURL}}/books",
+					"raw": "{{baseURL}}/books?",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
 						"books"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
 					]
 				}
 			},
@@ -32,7 +43,13 @@
 			"name": "/settings",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{baseURL}}/settings",
 					"host": [
@@ -49,7 +66,13 @@
 			"name": "/authorization",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
@@ -112,7 +135,7 @@
 			"response": []
 		},
 		{
-			"name": "/users",
+			"name": "/users/profile",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -120,15 +143,21 @@
 						"key": "Authorization",
 						"type": "text",
 						"value": "{{access}}"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{baseURL}}/users",
+					"raw": "{{baseURL}}/users/profile",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"users"
+						"users",
+						"profile"
 					]
 				}
 			},
