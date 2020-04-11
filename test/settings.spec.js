@@ -21,36 +21,59 @@ before(async () => {
 
 describe('Settings', () => {
 
-    it('get settings without version.', async () => {
+    it('keyless api call.', async () => {
 
         const settings = await server.inject({
             method: 'get',
             url: '/api/settings'
+        });
+
+        expect(settings.statusCode).to.equal(401);
+        expect(settings.result.errors.unauthorized).to.only.contain('invalid key');
+    });
+
+    it('without version.', async () => {
+
+        const settings = await server.inject({
+            method: 'get',
+            url: '/api/settings',
+            headers: {
+                'x-api-key': process.env.API_KEY
+            }
         });
 
         expect(settings.statusCode).to.equal(200);
         expect(settings.result.bookType.quran).to.equal(Constants.bookType.quran);
     });
 
-    it('get settings with version.', async () => {
+    it('with version.', async () => {
 
         const settings = await server.inject({
             method: 'get',
-            url: '/api/settings'
+            url: '/api/settings',
+            headers: {
+                'x-api-key': process.env.API_KEY
+            }
         });
 
         expect(settings.statusCode).to.equal(200);
 
         const settingsAgain = await server.inject({
             method: 'get',
-            url: `/api/settings/${settings.result.version}`
+            url: `/api/settings/${settings.result.version}`,
+            headers: {
+                'x-api-key': process.env.API_KEY
+            }
         });
 
         expect(settingsAgain.statusCode).to.equal(204);
 
         const settingsAhead = await server.inject({
             method: 'get',
-            url: `/api/settings/${settings.result.version + 1}`
+            url: `/api/settings/${settings.result.version + 1}`,
+            headers: {
+                'x-api-key': process.env.API_KEY
+            }
         });
 
         expect(settingsAhead.statusCode).to.equal(204);

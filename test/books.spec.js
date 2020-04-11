@@ -26,6 +26,9 @@ before(async () => {
             email: 'x@y.com',
             first_name: 'test',
             platform: Constants.authPlatform.google
+        },
+        headers: {
+            'x-api-key': process.env.API_KEY
         }
     });
 
@@ -40,7 +43,8 @@ describe('Books', () => {
             method: 'get',
             url: '/api/books',
             headers: {
-                authorization: access
+                authorization: access,
+                'x-api-key': process.env.API_KEY
             }
         });
 

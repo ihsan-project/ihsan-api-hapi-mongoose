@@ -21,6 +21,24 @@ before(async () => {
 
 describe('Sessions', () => {
 
+    it('keyless api call.', async () => {
+
+        const email = 'x@y.com';
+        const session = await server.inject({
+            method: 'post',
+            url: '/api/authorizations',
+            payload: {
+                uuid: 'test-uuid',
+                email,
+                first_name: 'test',
+                platform: Constants.authPlatform.google
+            }
+        });
+
+        expect(session.statusCode).to.equal(401);
+        expect(session.result.errors.unauthorized).to.only.contain('invalid key');
+    });
+
     it('get user from SSO.', async () => {
 
         const email = 'x@y.com';
@@ -32,6 +50,9 @@ describe('Sessions', () => {
                 email,
                 first_name: 'test',
                 platform: Constants.authPlatform.google
+            },
+            headers: {
+                'x-api-key': process.env.API_KEY
             }
         });
 
@@ -55,6 +76,9 @@ describe('Sessions', () => {
                 email,
                 first_name: 'different name',
                 platform: Constants.authPlatform.apple
+            },
+            headers: {
+                'x-api-key': process.env.API_KEY
             }
         });
 
