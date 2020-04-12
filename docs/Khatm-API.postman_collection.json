@@ -93,7 +93,12 @@
 						},
 						{
 							"key": "platform",
-							"value": "1",
+							"value": "-1",
+							"type": "text"
+						},
+						{
+							"key": "digest",
+							"value": "notNeededFor-1Platform",
 							"type": "text"
 						}
 					]
