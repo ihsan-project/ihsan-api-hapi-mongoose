@@ -17,6 +17,10 @@
   - `brew install postgres`
   - `brew services start postgresql`
   - `npm dev-db-setup`
+- .env
+  - `cp .env-keep .env`
+  - Ask the Admin for the value required for GOOGLE_SSO_CLIENT_ID if you don't have access to the google-services.json file
+    - If you are not running an Android app against the server, then you don't need to update this key as long as you authorize with `platform=-1`
 
 ## Development
 

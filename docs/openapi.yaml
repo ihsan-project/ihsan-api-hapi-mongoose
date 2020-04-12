@@ -8,7 +8,7 @@ info:
     ## Authorization
     Khatm will only support SSO from the client platform (Android, iOS) to maintain security, while reducing the need to manage authorization flows such as verifying emails or encrypting and storing passwords.
     The client application will send the service's SSO information to the Khatm API as a `UserAuthorization`.
-    The response will be a `User` with an `access` property which will need to be set in the headers of subsequent API calls.
+    The response will be a `User` with an `access` property which will need to be set as the `Authorization` header of subsequent API calls.
     If a user has the same email information between SSO services, the system will tie the `UserAuthorization`s to that user, and user will be able to login to same account using both SSO services.
 
     ## Challenges
@@ -297,9 +297,19 @@ components:
           type: string
         email:
           type: string
+        digest:
+          type: string
+          description: |
+            The platform SSO digest to validate on the server side.
+            - For Android, this is the GoogleSignInAccount.idToken
         platform:
           type: integer
-          description: android, apple
+          description: |
+            Types:
+              - android
+              - apple
+
+            For debug instances, pass -1 value to skip digest verifcation
     UserStatistics:
       description: Track metrics on a user
       type: object
