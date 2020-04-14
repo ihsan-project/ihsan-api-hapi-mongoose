@@ -11,7 +11,7 @@ exports.seed = (knex, Promise) => {
                 {
                     id: 1,
                     slug_id: 'book-quran',
-                    type: Constants.bookType.quran,
+                    type: Constants.book_type.quran,
                     title: 'Quran'
                 }
             ]);

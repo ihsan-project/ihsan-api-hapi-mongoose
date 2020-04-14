@@ -7,8 +7,6 @@ const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
 const Server = require('../server');
 
-const Constants = require('../lib/constants');
-
 // Test shortcuts
 
 const { describe, it, before } = exports.lab = Lab.script();
@@ -29,9 +27,10 @@ describe('Sessions', () => {
             url: '/api/authorizations',
             payload: {
                 uuid: 'test-uuid',
+                digest: 'digest',
                 email,
                 first_name: 'test',
-                platform: Constants.authPlatform.google
+                platform: -1
             }
         });
 
@@ -47,9 +46,10 @@ describe('Sessions', () => {
             url: '/api/authorizations',
             payload: {
                 uuid: 'test-uuid',
+                digest: 'digest',
                 email,
                 first_name: 'test',
-                platform: Constants.authPlatform.google
+                platform: -1
             },
             headers: {
                 'x-api-key': process.env.API_KEY
@@ -73,9 +73,10 @@ describe('Sessions', () => {
             url: '/api/authorizations',
             payload: {
                 uuid: 'different-test-uuid',
+                digest: 'digest',
                 email,
                 first_name: 'different name',
-                platform: Constants.authPlatform.apple
+                platform: -2
             },
             headers: {
                 'x-api-key': process.env.API_KEY
