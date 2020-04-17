@@ -23,9 +23,10 @@ before(async () => {
         url: '/api/authorizations',
         payload: {
             uuid: 'test-uuid',
+            digest: 'digest',
             email: 'x@y.com',
             first_name: 'test',
-            platform: Constants.authPlatform.google
+            platform: -1
         },
         headers: {
             'x-api-key': process.env.API_KEY
@@ -50,6 +51,6 @@ describe('Books', () => {
 
         expect(books.statusCode).to.equal(200);
         expect(books.result[0].slug_id).to.equal('book-quran');
-        expect(books.result[0].type).to.equal(Constants.bookType.quran);
+        expect(books.result[0].type).to.equal(Constants.book_type.quran);
     });
 });

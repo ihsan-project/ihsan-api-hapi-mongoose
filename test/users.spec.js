@@ -7,8 +7,6 @@ const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
 const Server = require('../server');
 
-const Constants = require('../lib/constants');
-
 // Test shortcuts
 
 const { describe, it, before } = exports.lab = Lab.script();
@@ -23,9 +21,10 @@ before(async () => {
         url: '/api/authorizations',
         payload: {
             uuid: 'test-uuid',
+            digest: 'digest',
             email: 'x@y.com',
             first_name: 'test',
-            platform: Constants.authPlatform.google
+            platform: -1
         },
         headers: {
             'x-api-key': process.env.API_KEY
