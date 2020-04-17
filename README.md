@@ -26,7 +26,7 @@
 
 After you've followed all the steps in `Environment` section above, install node modules by running `npm install`. These are all the libraries that the server needs to run.
 
-Then setup your local databse by running `npm run dev-db-setup`. Once that runs successfully, you are ready to `npm start` your local server instance! Normally the baseURL will be `http://localhost:3000` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
+Then setup your local databse by running `npm run dev-db-setup`. Once that runs successfully, you are ready to `npm run dev` your local server instance! Normally the baseURL will be `http://localhost:3000` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
 
 Make sure that you can also run `npm test` successfully. A full successful run of these tests is required before any pull request for changes are accepted. Use `npm test -- -i [test id]` to run a specific test (or ranges use `-i 1-3,5`). Use `npm run test-list` to get a list of all the tests in the systerm.
 
