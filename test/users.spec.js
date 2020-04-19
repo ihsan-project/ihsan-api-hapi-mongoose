@@ -45,7 +45,7 @@ describe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(401);
-        expect(getUser.result.errors.unauthorized).to.only.contain('invalid key');
+        expect(getUser.result.errors.error).to.only.contain('invalid key');
     });
 
     it('unauthorized api call.', async () => {
@@ -59,7 +59,7 @@ describe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(401);
-        expect(getUser.result.errors.unauthorized).to.only.contain('invalid access');
+        expect(getUser.result.errors.error).to.only.contain('invalid access');
     });
 
     it('key-less authorized api call.', async () => {
@@ -73,7 +73,7 @@ describe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(401);
-        expect(getUser.result.errors.unauthorized).to.only.contain('invalid key');
+        expect(getUser.result.errors.error).to.only.contain('invalid key');
     });
 
     it('get profile.', async () => {

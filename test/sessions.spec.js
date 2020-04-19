@@ -35,7 +35,7 @@ describe('Sessions', () => {
         });
 
         expect(session.statusCode).to.equal(401);
-        expect(session.result.errors.unauthorized).to.only.contain('invalid key');
+        expect(session.result.errors.error).to.only.contain('invalid key');
     });
 
     it('get user from SSO.', async () => {
