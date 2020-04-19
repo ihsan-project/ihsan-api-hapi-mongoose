@@ -2,16 +2,16 @@
 
 ## Environment
 
-- Node 12.14.1, Npm 6.4.1 [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
+- Node 12.16.1, Npm 6.4.1 [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
   - Used to match AWS Elastic Beanstalk max version as of 5/19/2019
   - (Recommended) Using Node Version Manager
      - Install [NVM](https://github.com/nvm-sh/nvm) with `brew install nvm`. Follow the post-install directions to update your `~/.bash_profile`.
-     - Install Node Version 12.14.1 with `nvm install 12.14.1`
+     - Install Node Version 12.16.1 with `nvm install 12.16.1`
      - Installing [avn](https://www.npmjs.com/package/avn)
        - Now when you open a new terminal window, it will respect the .nvmrc
   - Specific Node version in your system
-     - `brew install node@10`
-     - `brew link node@10`
+     - `brew install node@12`
+     - `brew link node@12`
      - Follow brew instruction, like having to `--force` and `--overwrite`
 - Postgres Database
   - `brew install postgres`
