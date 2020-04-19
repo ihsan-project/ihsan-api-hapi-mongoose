@@ -7,8 +7,6 @@ const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
 const Server = require('../server');
 
-const Constants = require('../lib/constants');
-
 // Test shortcuts
 
 const { describe, it, before } = exports.lab = Lab.script();
@@ -21,17 +19,40 @@ before(async () => {
 
 describe('Sessions', () => {
 
+    it('keyless api call.', async () => {
+
+        const email = 'x@y.com';
+        const session = await server.inject({
+            method: 'post',
+            url: '/api/authorizations',
+            payload: {
+                uuid: 'test-uuid',
+                digest: 'digest',
+                email,
+                first_name: 'test',
+                platform: -1
+            }
+        });
+
+        expect(session.statusCode).to.equal(401);
+        expect(session.result.errors.error).to.only.contain('invalid key');
+    });
+
     it('get user from SSO.', async () => {
 
         const email = 'x@y.com';
         const session = await server.inject({
             method: 'post',
-            url: '/authentications',
+            url: '/api/authorizations',
             payload: {
                 uuid: 'test-uuid',
+                digest: 'digest',
                 email,
                 first_name: 'test',
-                platform: Constants.authPlatform.google
+                platform: -1
+            },
+            headers: {
+                'x-api-key': process.env.API_KEY
             }
         });
 
@@ -49,12 +70,16 @@ describe('Sessions', () => {
         // Getting session with different sso service, but same email returns same user
         const sameSession = await server.inject({
             method: 'post',
-            url: '/authentications',
+            url: '/api/authorizations',
             payload: {
                 uuid: 'different-test-uuid',
+                digest: 'digest',
                 email,
                 first_name: 'different name',
-                platform: Constants.authPlatform.apple
+                platform: -2
+            },
+            headers: {
+                'x-api-key': process.env.API_KEY
             }
         });
 

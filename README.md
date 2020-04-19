@@ -2,27 +2,31 @@
 
 ## Environment
 
-- Node 12.14.1, Npm 6.4.1 [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
+- Node 12.16.1, Npm 6.4.1 [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
   - Used to match AWS Elastic Beanstalk max version as of 5/19/2019
   - (Recommended) Using Node Version Manager
      - Install [NVM](https://github.com/nvm-sh/nvm) with `brew install nvm`. Follow the post-install directions to update your `~/.bash_profile`.
-     - Install Node Version 12.14.1 with `nvm install 12.14.1`
+     - Install Node Version 12.16.1 with `nvm install 12.16.1`
      - Installing [avn](https://www.npmjs.com/package/avn)
        - Now when you open a new terminal window, it will respect the .nvmrc
   - Specific Node version in your system
-     - `brew install node@10`
-     - `brew link node@10`
+     - `brew install node@12`
+     - `brew link node@12`
      - Follow brew instruction, like having to `--force` and `--overwrite`
 - Postgres Database
   - `brew install postgres`
   - `brew services start postgresql`
   - `npm dev-db-setup`
+- .env
+  - `cp .env-keep .env`
+  - Ask the Admin for the value required for GOOGLE_SSO_CLIENT_ID if you don't have access to the google-services.json file
+    - If you are not running an Android app against the server, then you don't need to update this key as long as you authorize with `platform=-1`
 
 ## Development
 
 After you've followed all the steps in `Environment` section above, install node modules by running `npm install`. These are all the libraries that the server needs to run.
 
-Then setup your local databse by running `npm run dev-db-setup`. Once that runs successfully, you are ready to `npm start` your local server instance! Normally the baseURL will be `http://localhost:3000` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
+Then setup your local databse by running `npm run dev-db-setup`. Once that runs successfully, you are ready to `npm run dev` your local server instance! Normally the baseURL will be `http://localhost:3000` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
 
 Make sure that you can also run `npm test` successfully. A full successful run of these tests is required before any pull request for changes are accepted. Use `npm test -- -i [test id]` to run a specific test (or ranges use `-i 1-3,5`). Use `npm run test-list` to get a list of all the tests in the systerm.
 

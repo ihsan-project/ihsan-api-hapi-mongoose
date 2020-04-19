@@ -36,6 +36,9 @@ module.exports = new Confidence.Store({
                 plugin: '../lib', // Main plugin
                 options: {
 
+                },
+                routes: {
+                    prefix: '/api'
                 }
             },
             {
@@ -47,8 +50,8 @@ module.exports = new Confidence.Store({
                         knex: {
                             client: 'pg',
                             connection: {
-                                host : process.env.PG_CONNECTION_STRING,
-                                password : process.env.PG_CONNECTION_PASSWORD,
+                                host: process.env.PG_CONNECTION_STRING,
+                                password: process.env.PG_CONNECTION_PASSWORD,
                                 user: process.env.PG_CONNECTION_USER,
                                 database: process.env.PG_CONNECTION_DB_NAME
                             },

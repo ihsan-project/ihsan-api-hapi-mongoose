@@ -7,8 +7,6 @@ const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
 const Server = require('../server');
 
-const Constants = require('../lib/constants');
-
 // Test shortcuts
 
 const { describe, it, before } = exports.lab = Lab.script();
@@ -20,12 +18,16 @@ before(async () => {
 
     const session = await server.inject({
         method: 'post',
-        url: '/authentications',
+        url: '/api/authorizations',
         payload: {
             uuid: 'test-uuid',
+            digest: 'digest',
             email: 'x@y.com',
             first_name: 'test',
-            platform: Constants.authPlatform.google
+            platform: -1
+        },
+        headers: {
+            'x-api-key': process.env.API_KEY
         }
     });
 
@@ -35,50 +37,82 @@ before(async () => {
 
 describe('Users', () => {
 
+    it('authless api call.', async () => {
+
+        const getUser = await server.inject({
+            method: 'get',
+            url: `/api/users/${user.id}`
+        });
+
+        expect(getUser.statusCode).to.equal(401);
+        expect(getUser.result.errors.error).to.only.contain('invalid key');
+    });
+
     it('unauthorized api call.', async () => {
 
         const getUser = await server.inject({
             method: 'get',
-            url: `/users/${user.id}`
+            url: `/api/users/${user.id}`,
+            headers: {
+                'x-api-key': process.env.API_KEY
+            }
         });
 
         expect(getUser.statusCode).to.equal(401);
+        expect(getUser.result.errors.error).to.only.contain('invalid access');
+    });
+
+    it('key-less authorized api call.', async () => {
+
+        const getUser = await server.inject({
+            method: 'get',
+            url: `/api/users/${user.id}`,
+            headers: {
+                authorization: access
+            }
+        });
+
+        expect(getUser.statusCode).to.equal(401);
+        expect(getUser.result.errors.error).to.only.contain('invalid key');
+    });
+
+    it('get profile.', async () => {
+
+        const getUser = await server.inject({
+            method: 'get',
+            url: `/api/users/profile`,
+            headers: {
+                authorization: access,
+                'x-api-key': process.env.API_KEY
+            }
+        });
+
+        expect(getUser.statusCode).to.equal(200);
+        expect(getUser.result.email).to.equal(user.email);
     });
 
     it('get user.', async () => {
 
         const getUser = await server.inject({
             method: 'get',
-            url: `/users/${user.id}`,
+            url: `/api/users/${user.id}`,
             headers: {
-                authorization: access
+                authorization: access,
+                'x-api-key': process.env.API_KEY
             }
         });
 
         expect(getUser.statusCode).to.equal(200);
-    });
-
-    it('get logged in user.', async () => {
-
-        const getUser = await server.inject({
-            method: 'get',
-            url: `/users`,
-            headers: {
-                authorization: access
-            }
-        });
-
-        expect(getUser.statusCode).to.equal(200);
-        expect(getUser.result.id).to.equal(user.id);
     });
 
     it('get invalid user.', async () => {
 
         const getUser = await server.inject({
             method: 'get',
-            url: `/users/${user.id + 99}`,
+            url: `/api/users/${user.id + 99}`,
             headers: {
-                authorization: access
+                authorization: access,
+                'x-api-key': process.env.API_KEY
             }
         });
 

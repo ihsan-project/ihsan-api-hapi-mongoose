@@ -14,19 +14,26 @@
 						"key": "Authorization",
 						"value": "{{access}}",
 						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
-					"raw": "{{baseURL}}/books",
+					"raw": "{{baseURL}}/books?",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
 						"books"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
 					]
 				}
 			},
@@ -36,11 +43,13 @@
 			"name": "/settings",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "{{baseURL}}/settings",
 					"host": [
@@ -54,10 +63,16 @@
 			"response": []
 		},
 		{
-			"name": "/authentications",
+			"name": "/authorization",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
@@ -78,18 +93,23 @@
 						},
 						{
 							"key": "platform",
-							"value": "1",
+							"value": "-1",
+							"type": "text"
+						},
+						{
+							"key": "digest",
+							"value": "notNeededFor-1Platform",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{baseURL}}/authentications",
+					"raw": "{{baseURL}}/authorizations",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"authentications"
+						"authorizations"
 					]
 				}
 			},
@@ -106,10 +126,6 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{baseURL}}/users/1",
 					"host": [
@@ -124,7 +140,7 @@
 			"response": []
 		},
 		{
-			"name": "/users",
+			"name": "/users/profile",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -132,19 +148,21 @@
 						"key": "Authorization",
 						"type": "text",
 						"value": "{{access}}"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
-					"raw": "{{baseURL}}/users",
+					"raw": "{{baseURL}}/users/profile",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"users"
+						"users",
+						"profile"
 					]
 				}
 			},

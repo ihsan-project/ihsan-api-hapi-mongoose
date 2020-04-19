@@ -20,12 +20,16 @@ before(async () => {
 
     const session = await server.inject({
         method: 'post',
-        url: '/authentications',
+        url: '/api/authorizations',
         payload: {
             uuid: 'test-uuid',
+            digest: 'digest',
             email: 'x@y.com',
             first_name: 'test',
-            platform: Constants.authPlatform.google
+            platform: -1
+        },
+        headers: {
+            'x-api-key': process.env.API_KEY
         }
     });
 
@@ -38,14 +42,15 @@ describe('Books', () => {
 
         const books = await server.inject({
             method: 'get',
-            url: '/books',
+            url: '/api/books',
             headers: {
-                authorization: access
+                authorization: access,
+                'x-api-key': process.env.API_KEY
             }
         });
 
         expect(books.statusCode).to.equal(200);
-        expect(books.result[0].slug_id).to.equal('book-quran');
-        expect(books.result[0].type).to.equal(Constants.bookType.quran);
+        expect(books.result.books[0].slug_id).to.equal('book-quran');
+        expect(books.result.books[0].type).to.equal(Constants.book_type.quran);
     });
 });

@@ -2,11 +2,14 @@ openapi: 3.0.0
 info:
   title: Khatm API
   description: |
-    ## Authentication
-    Khatm will only support SSO, relying on 3rd party services to maintain security, while reducing the need to manage authentication flows such as verifying emails or encrypting and storing passwords.
-    The client application will send the service's SSO information to the Khatm API as a `UserAuthentication`.
-    The response will be a `User` with an `access` property which will need to be set in the headers of subsequent API calls.
-    If a user has the same email information between SSO services, the system will tie the `UserAuthentication`s to that user, and user will be able to login to same account using both SSO services.
+    ## API Key
+    It's good practice to validate a key for all requests. This key isn't encrypted nor a secret, it's only a first line of defense against crawlers. All Khatm's APIs require the `x-api-key` header to be present.
+
+    ## Authorization
+    Khatm will only support SSO from the client platform (Android, iOS) to maintain security, while reducing the need to manage authorization flows such as verifying emails or encrypting and storing passwords.
+    The client application will send the service's SSO information to the Khatm API as a `UserAuthorization`.
+    The response will be a `User` with an `access` property which will need to be set as the `Authorization` header of subsequent API calls.
+    If a user has the same email information between SSO services, the system will tie the `UserAuthorization`s to that user, and user will be able to login to same account using both SSO services.
 
     ## Challenges
     Moderators create `Challenge`s. A challenge has a `book` that contains metadata regarding what type of challenge this is.
@@ -31,38 +34,30 @@ info:
     This makes it easy to track history of events in the system.
   version: 1.0.0
 servers:
-  - url: 'http://api.khatmapp.com/v1'
+  - url: 'https://staging-api.khatmapp.com'
 security:
   - ApiKeyAuth: []
+  - AccessAuth: []
 paths:
-  /authentications:
+  /authorizations:
     post:
       description: |
         # Get a session token for user
         1. If the user exists, will get back `User`
         1. If the user doesn't exist, will create `User` and return it
-      security: []
+      security:
+        - ApiKeyAuth: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserAuthentication'
+              $ref: '#/components/schemas/UserAuthorization'
       responses:
         '200':
           description: A JSON of a user
           content:
             application:json:
-              schema:
-                $ref: '#/components/schemas/User'
-  /users:
-    get:
-      description: Get current user for `Authorization` information
-      responses:
-        '200':
-          description: A JSON of a user
-          content:
-            application/json:
               schema:
                 $ref: '#/components/schemas/User'
   /users/{user_id}:
@@ -74,6 +69,16 @@ paths:
           type : integer
     get:
       description: Get User
+      responses:
+        '200':
+          description: A JSON of a user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/profile:
+    get:
+      description: Get current user for `Authorization` information
       responses:
         '200':
           description: A JSON of a user
@@ -120,7 +125,8 @@ paths:
       description: |
         # Get Settings
         Send `version` of last settings sync to receive back shorter responses for better performance.
-      security: []
+      security:
+        - ApiKeyAuth: []
       parameters:
         - name: version
           in: path
@@ -252,7 +258,12 @@ paths:
 components:
   securitySchemes:
     ApiKeyAuth:
-      description: Access key
+      description: Api Key
+      type: apiKey
+      in: header
+      name: x-api-key
+    AccessAuth:
+      description: Authorization Token
       type: apiKey
       in: header
       name: Authorization
@@ -273,7 +284,7 @@ components:
           type: string
         statistics:
           $ref: '#/components/schemas/UserStatistics'
-    UserAuthentication:
+    UserAuthorization:
       description: Identity objects for various SSO services
       type: object
       properties:
@@ -286,9 +297,19 @@ components:
           type: string
         email:
           type: string
+        digest:
+          type: string
+          description: |
+            The platform SSO digest to validate on the server side.
+            - For Android, this is the GoogleSignInAccount.idToken
         platform:
           type: integer
-          description: android, apple
+          description: |
+            Types:
+              - android
+              - apple
+
+            For debug instances, pass -1 value to skip digest verifcation
     UserStatistics:
       description: Track metrics on a user
       type: object

@@ -68,3 +68,7 @@ api-docs/
 
 # Documentation
 /swagger-api
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
