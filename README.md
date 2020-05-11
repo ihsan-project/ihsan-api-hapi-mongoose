@@ -3,7 +3,7 @@
 ## Environment
 
 - Node 12.16.1, Npm 6.4.1 [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
-  - Used to match AWS Elastic Beanstalk max version as of 5/19/2019
+  - Used to match AWS Elastic Beanstalk max version as of 4/19/2020
   - (Recommended) Using Node Version Manager
      - Install [NVM](https://github.com/nvm-sh/nvm) with `brew install nvm`. Follow the post-install directions to update your `~/.bash_profile`.
      - Install Node Version 12.16.1 with `nvm install 12.16.1`
