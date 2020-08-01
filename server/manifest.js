@@ -73,6 +73,12 @@ module.exports = new Confidence.Store({
                     },
                     production: {
                         migrateOnStart: 'latest'
+                    },
+                    docker: {
+                        knex: {
+                            // To connect to a local instance of postgres during development
+                            connection: 'postgres://host.docker.internal:5432/khatm-dev'
+                        }
                     }
                 }
             },

@@ -30,6 +30,11 @@ Then setup your local databse by running `npm run dev-db-setup`. Once that runs 
 
 Make sure that you can also run `npm test` successfully. A full successful run of these tests is required before any pull request for changes are accepted. Use `npm test -- -i [test id]` to run a specific test (or ranges use `-i 1-3,5`). Use `npm run test-list` to get a list of all the tests in the systerm.
 
+### Docker
+
+- `docker-compose build`
+- `docker-compose up`
+
 ## API Documentation
 
 - `./docs/openapi.yaml` using [OpenAPI 3.0](https://swagger.io/blog/news/announcing-openapi-3-0/).
