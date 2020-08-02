@@ -8,8 +8,10 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      # - aws --version
-      # - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - echo $AWS_DEFAULT_REGION
+      - echo $AWS_ACCESS_KEY_ID
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
