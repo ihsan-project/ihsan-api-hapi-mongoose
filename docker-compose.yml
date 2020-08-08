@@ -4,8 +4,9 @@ services:
   api:
     build: .
     ports:
-      - '49160:8080'
+      - '8080:8080'
     environment:
       - NODE_ENV=docker
       - API_KEY=development-key
       - PGUSER=mmislam101
+      - PORT=8080

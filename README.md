@@ -32,8 +32,9 @@ Make sure that you can also run `npm test` successfully. A full successful run o
 
 ### Docker
 
-- `docker-compose build`
-- `docker-compose up`
+Running `npm start docker` will run the following:
+- `docker-compose build` - Builds the image with the configuration in docker-compose
+- `docker-compose up` - Runs the containers defined in docker-compose
 
 ## API Documentation
 
