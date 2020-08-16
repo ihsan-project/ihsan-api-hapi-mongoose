@@ -3,7 +3,7 @@
 ## Environment
 
 - Node 12.16.1, Npm 6.4.1 [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
-  - Used to match AWS Elastic Beanstalk max version as of 5/19/2019
+  - Used to match AWS Elastic Beanstalk max version as of 4/19/2020
   - (Recommended) Using Node Version Manager
      - Install [NVM](https://github.com/nvm-sh/nvm) with `brew install nvm`. Follow the post-install directions to update your `~/.bash_profile`.
      - Install Node Version 12.16.1 with `nvm install 12.16.1`
@@ -29,6 +29,12 @@ After you've followed all the steps in `Environment` section above, install node
 Then setup your local databse by running `npm run dev-db-setup`. Once that runs successfully, you are ready to `npm run dev` your local server instance! Normally the baseURL will be `http://localhost:3000` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
 
 Make sure that you can also run `npm test` successfully. A full successful run of these tests is required before any pull request for changes are accepted. Use `npm test -- -i [test id]` to run a specific test (or ranges use `-i 1-3,5`). Use `npm run test-list` to get a list of all the tests in the systerm.
+
+### Docker
+
+Running `npm start docker` will run the following:
+- `docker-compose build` - Builds the image with the configuration in docker-compose
+- `docker-compose up` - Runs the containers defined in docker-compose
 
 ## API Documentation
 

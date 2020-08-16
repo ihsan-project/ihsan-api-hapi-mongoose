@@ -10,11 +10,11 @@ Dotenv.config({ path: `${__dirname}/.env` });
 // Glue manifest as a confidence store
 module.exports = new Confidence.Store({
     server: {
-        host: 'localhost',
+        // host: 'localhost', This was causing it to not work with docker
         port: {
             $env: 'PORT',
             $coerce: 'number',
-            $default: 3000
+            $default: 8080
         },
         debug: {
             $filter: { $env: 'NODE_ENV' },
@@ -73,6 +73,12 @@ module.exports = new Confidence.Store({
                     },
                     production: {
                         migrateOnStart: 'latest'
+                    },
+                    docker: {
+                        knex: {
+                            // To connect to a local instance of postgres during development
+                            connection: 'postgres://host.docker.internal:5432/khatm-dev'
+                        }
                     }
                 }
             },
