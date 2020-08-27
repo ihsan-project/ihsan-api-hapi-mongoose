@@ -5,7 +5,6 @@ phases:
   install:
     runtime-versions:
       docker: 18
-      nodejs: 12
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -25,10 +24,6 @@ phases:
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - npm install -g --force npx
-      - npm install -g knex
-      - npm install
-      - npx knex migrate:latest
       - printf '[{"name":"khatm-staging-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
   files: imagedefinitions.json
