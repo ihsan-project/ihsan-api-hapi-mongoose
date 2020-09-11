@@ -1,5 +1,8 @@
 # Khatm API
 
+- [The Khatm Organization](https://khatm.org/)
+- [The API Architecture](https://github.com/khatm-org/khatm-api/wiki/Architecture)
+
 ## Environment
 
 - Node 12.16.1, Npm 6.4.1 [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
