@@ -22,18 +22,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseURL}}/books?",
+					"raw": "{{baseURL}}/books",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
 						"books"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": null
-						}
 					]
 				}
 			},
@@ -71,37 +65,16 @@
 						"key": "x-api-key",
 						"value": "{{apiKey}}",
 						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "uuid",
-							"value": "test-uuid",
-							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "test@email.com",
-							"type": "text"
-						},
-						{
-							"key": "first_name",
-							"value": "mohammed",
-							"type": "text"
-						},
-						{
-							"key": "platform",
-							"value": "-1",
-							"type": "text"
-						},
-						{
-							"key": "digest",
-							"value": "notNeededFor-1Platform",
-							"type": "text"
-						}
-					]
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"mmislam101@gmail.com\",\n    \"uuid\": \"112565975420113579083\",\n    \"first_name\": \"Mohammed Islam\",\n    \"digest\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IjBhN2RjMTI2NjQ1OTBjOTU3ZmZhZWJmN2I2NzE4Mjk3Yjg2NGJhOTEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3OTE1MDc1ODk5NzYtYmNlcGE1OWptNXQyM2pnczNjNXU3dHRmdnB1Y2ZraW0uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI3OTE1MDc1ODk5NzYtbWRndGRsdHJmZWNzNzhkZXJnMnFzZ2xobzc5anQzcDkuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTI1NjU5NzU0MjAxMTM1NzkwODMiLCJlbWFpbCI6Im1taXNsYW0xMDFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJNb2hhbW1lZCBJc2xhbSIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS0vQU9oMTRHaTBHOVdpYm9PUjBlZTZjZHF0MHJHaVJycC1lR0tyMnVBWWE1N3djdz1zOTYtYyIsImdpdmVuX25hbWUiOiJNb2hhbW1lZCIsImZhbWlseV9uYW1lIjoiSXNsYW0iLCJsb2NhbGUiOiJlbiIsImlhdCI6MTU5ODU5MjE5MywiZXhwIjoxNTk4NTk1NzkzfQ.Wrr6Rc1z2Ngc5tWIG5sJkIzd58FmwBKlYYgS75gwE_Gy6ewx_CN7S5g_KSB_KdJz0v8bfV7LH3wBb2cPzIyB8NIhWvl4vMTx8aJu_H9NMbuecIAIZaqj6wbDTlPis0_aUXXqVcc_zZf45HoLuZNwP7QOKzee4Gj299mUtDIY65kTTexHhWJsDcCXNuUieRChZH8sCQK4U-qUd9wua1ObPKH4IZnjj8l1PEs4VJfixCP0os4-LF8IlTm0DSue7r2Gf7Cp9NLJcL4485na9BUoJh1jAxI5viHgNep-NOajSTeV0OXLpbolnsLe_oEYaEgtc7tSxSIwHSVyBOaTWTPAlQ\",\n    \"platform\": 1\n}"
 				},
 				"url": {
 					"raw": "{{baseURL}}/authorizations",
@@ -163,6 +136,29 @@
 					"path": [
 						"users",
 						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/version",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/version",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"version"
 					]
 				}
 			},
