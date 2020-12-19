@@ -52,5 +52,7 @@ describe('Books', () => {
         expect(books.statusCode).to.equal(200);
         expect(books.result.books[0].slug_id).to.equal('book-quran');
         expect(books.result.books[0].type).to.equal(Constants.book_type.quran);
+
+        expect(books.result.books[9].type).to.equal(Constants.book_type.salawaat);
     });
 });
