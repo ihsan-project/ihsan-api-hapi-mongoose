@@ -83,6 +83,16 @@ module.exports = new Confidence.Store({
                 }
             },
             {
+                plugin: 'hapi-pagination',
+                options: {
+                    query: {
+                        limit: {
+                            default: 5
+                        }
+                    }
+                }
+            },
+            {
                 plugin: {
                     $filter: { $env: 'NODE_ENV' },
                     $default: 'hpal-debug',
