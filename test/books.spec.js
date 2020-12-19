@@ -38,7 +38,7 @@ before(async () => {
 
 describe('Books', () => {
 
-    it('get the quran.', async () => {
+    it('Defaults to 5 books without page information', async () => {
 
         const books = await server.inject({
             method: 'get',
@@ -50,6 +50,8 @@ describe('Books', () => {
         });
 
         expect(books.statusCode).to.equal(200);
+        expect(books.result.total).to.equal(11);
+
         expect(books.result.books[0].slug_id).to.equal('book-quran');
         expect(books.result.books[0].type).to.equal(Constants.book_type.quran);
 
