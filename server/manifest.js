@@ -89,6 +89,9 @@ module.exports = new Confidence.Store({
                         limit: {
                             default: 5
                         }
+                    },
+                    routes: {
+                        include: []
                     }
                 }
             },
