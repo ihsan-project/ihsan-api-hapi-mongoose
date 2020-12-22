@@ -104,22 +104,6 @@ paths:
       responses:
         '201':
           description: Created
-  /users/{user_id}/statistics:
-    parameters:
-      - name: user_id
-        in: path
-        required: true
-        schema:
-          type : integer
-    get:
-      description: Get User Statistics
-      responses:
-        '200':
-          description: A JSON of a user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserStatistics'
   /settings/{version}:
     get:
       description: |
@@ -282,8 +266,6 @@ components:
         access:
           description: Access key for Khatm API
           type: string
-        statistics:
-          $ref: '#/components/schemas/UserStatistics'
     UserAuthorization:
       description: Identity objects for various SSO services
       type: object
@@ -310,24 +292,6 @@ components:
               - apple
 
             For debug instances, pass -1 value to skip digest verifcation
-    UserStatistics:
-      description: Track metrics on a user
-      type: object
-      properties:
-        id:
-          type: integer
-        user:
-          $ref: '#/components/schemas/User'
-        intentions_created:
-          type: integer
-        intentions_finished:
-          type: integer
-        intentions_aborted:
-          type: integer
-        challenges_contributed:
-          type: integer
-        challenges_moderated:
-          type: integer
     UserPushToken:
       description: Push Notification token information for a user
       type: object
