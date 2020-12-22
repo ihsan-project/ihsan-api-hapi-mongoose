@@ -37,6 +37,7 @@
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "google-auth-library": "^6.0.0",
+    "hapi-pagination": "^4.0.0",
     "haute-couture": "^3.5.0",
     "hpal": "^2.4.0",
     "hpal-debug": "^1.4.0",
