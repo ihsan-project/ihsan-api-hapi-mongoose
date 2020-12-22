@@ -21,17 +21,6 @@ info:
     Books are the types of khatm challenges that a moderator can create.
     These will be created by Admins and have `slug_id`s so can be identified. These are long-living objects that are going to be referenced by `Challenge`s in a one-to-many relationship.
     One of the first type of `Book`s will be the Quran. Other types of Books would be one for each Dhikr. Books can contain extra information such as the value of the dhikr, and historical or spiritual context.
-
-    ## Intentions
-    Users commit to a challenge through an `Intention` that they create.
-    There can be only one `active` intention per user per challenge. Users can have one Intention in multiple Challenges.
-    The `parts` property of an Intention plays two roles based on the book.type,
-    - If `quran` then parts will be the index of which Juuz.
-    - Otherwise the total_parts will be the the number of recitations the User has Intentioned
-
-    ## State Machines
-    Objects such as `ChallengeState` and `IntentionState` are a way of tracking the state change of objects, and when that state has changed.
-    This makes it easy to track history of events in the system.
   version: 1.0.0
 servers:
   - url: 'https://staging-api.khatmapp.com'
@@ -131,114 +120,28 @@ paths:
     summary: Book CRUD
     get:
       description: Get Books
+      parameters:
+        - name: page
+          in: path
+          required: true
+          description: Not really required
+          schema:
+            type : integer
+        - name: limit
+          in: path
+          required: true
+          description: Not really required
+          schema:
+            type : integer
       responses:
         '200':
-          description: A JSON of a challenge
+          description: A JSON of a book
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
-  /challenges:
-    summary: Challenge CRUD
-    get:
-      description: Get Challenge
-      parameters:
-        - name: challenge_id
-          in: path
-          required: true
-          schema:
-            type : integer
-      responses:
-        '200':
-          description: A JSON of a challenge
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Challenge'
-    post:
-      description: |
-        Create Challenge
-        ## Notes
-        - Instead of sending the entire `book` information, just need the `slug_id`
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Challenge'
-      responses:
-        '201':
-          description: Created
-    put:
-      description: Update Challenge
-      parameters:
-        - name: challenge_id
-          in: path
-          required: true
-          schema:
-            type : integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Challenge'
-      responses:
-        '205':
-          description: Updated
-  /challenges/{challenge_id}/intentions:
-    summary: Challenge Intention CRUD
-    parameters:
-      - name: challenge_id
-        in: path
-        required: true
-        schema:
-          type : integer
-    get:
-      description: Get Intention
-      parameters:
-        - name: intention_id
-          in: path
-          required: true
-          schema:
-            type : integer
-      responses:
-        '200':
-          description: A JSON of an Intention
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Intention'
-    post:
-      description: Create Intention for Challenge
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Intention'
-      responses:
-        '201':
-          description: Created
-    put:
-      description: Update Intention
-      parameters:
-        - name: intention_id
-          in: path
-          required: true
-          schema:
-            type : integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Intention'
-      responses:
-        '205':
-          description: Updated
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -309,68 +212,6 @@ components:
           type: string
           format: date-time
         expires_at:
-          type: string
-          format: date-time
-    Challenge:
-      description: Challenge object
-      type: object
-      properties:
-        id:
-          type: integer
-        moderator:
-          $ref: '#/components/schemas/User'
-        book:
-          $ref: '#/components/schemas/Book'
-        currentState:
-          $ref: '#/components/schemas/ChallengeState'
-        complete_at:
-          type: string
-          format: date-time
-        total_parts:
-          type: integer
-    ChallengeState:
-      description: State Machine for Challenges
-      type: object
-      properties:
-        id:
-          type: integer
-        challenge:
-          $ref: '#/components/schemas/Challenge'
-        state:
-          type: string
-          description: active, finished
-        created_at:
-          type: string
-          format: date-time
-    Intention:
-      description: Intention created by a user when they commit to a challenge
-      type: object
-      properties:
-        id:
-          type: integer
-        created_at:
-          type: string
-          format: date-time
-        challenge:
-          $ref: '#/components/schemas/Challenge'
-        user:
-          $ref: '#/components/schemas/User'
-        currentState:
-          $ref: '#/components/schemas/IntentionState'
-        parts:
-          type: integer
-    IntentionState:
-      description: State Machine for Intentions
-      type: object
-      properties:
-        id:
-          type: integer
-        intention:
-          $ref: '#/components/schemas/Intention'
-        state:
-          type: string
-          description: active, achieved, aborted
-        created_at:
           type: string
           format: date-time
     Book:

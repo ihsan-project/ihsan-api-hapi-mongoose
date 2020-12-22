@@ -22,12 +22,23 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseURL}}/books",
+					"raw": "{{baseURL}}/books?page=2",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
 						"books"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "limit",
+							"value": "3",
+							"disabled": true
+						}
 					]
 				}
 			},
