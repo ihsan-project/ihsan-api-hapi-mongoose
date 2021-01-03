@@ -1,7 +1,7 @@
 # Khatm API
 
-- [The Khatm Organization](https://khatm.org/)
-- [The API Architecture](https://github.com/khatm-org/khatm-api/wiki/Architecture)
+- [The Ihsan Project](https://ihsanproject.com/)
+- [The API Architecture](https://github.com/ihsan-project/ihsan-api-hapi/wiki/Architecture)
 
 ## Environment
 
@@ -61,7 +61,7 @@ After installing Postman, [import the api collection](https://learning.getpostma
 
 It is encouraged to maintain the API docs with changes to not just the API, but data model properties, relationships, and as much architectural design detail as possible. Thoroughness in the documentation will mean people (including ourselves) can set aside this project and come back to it later without having to retain all the information in our brains.
 
-At the moment of writing, OpenAPI 3.0 doesn't have many intuitive tooling around generating static documentation with all the bells and whistles I want. There's quite a lot for Swagger 2.0, [ReDoc](https://github.com/Redocly/redoc) is the closest to producing something through a quick easy CLI, but it doesn't display the models, opened [Issue (7/26/2019)](https://github.com/khatm-org/khatm-api/issues/12).
+At the moment of writing, OpenAPI 3.0 doesn't have many intuitive tooling around generating static documentation with all the bells and whistles I want. There's quite a lot for Swagger 2.0, [ReDoc](https://github.com/Redocly/redoc) is the closest to producing something through a quick easy CLI, but it doesn't display the models, opened [Issue (7/26/2019)](https://github.com/ihsan-project/ihsan-api-hapi/issues/12).
 
 In the meantime, here are the methods of viewing/editing the documentation:
 1. (Recommended) Install the [Swagger Viewer](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer) on VSCode
