@@ -1,7 +1,7 @@
 {
-  "name": "khatm-api",
+  "name": "ihsan-hapi-api",
   "version": "1.0.0",
-  "description": "Khatm API",
+  "description": "Ihsan Hapi API",
   "author": "Mohammed Islam",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -13,11 +13,11 @@
     "start": "node server",
     "docker": "docker-compose build ; docker-compose up",
     "dev": "npx nodemon server",
-    "pretest": "dropdb khatm-test ; createdb khatm-test && NODE_ENV=test npm run db-migrate && NODE_ENV=test npm run db-seed",
+    "pretest": "dropdb ihsan-test ; createdb ihsan-test && NODE_ENV=test npm run db-migrate && NODE_ENV=test npm run db-seed",
     "test": "NODE_ENV=test API_KEY=test_key lab -a @hapi/code -L -I 'server,access,user' -v",
     "test-list": "lab -v -d",
     "lint": "eslint .",
-    "dev-db-setup": "dropdb khatm-dev ; createdb khatm-dev && npm run db-migrate && npm run db-seed",
+    "dev-db-setup": "dropdb ihsan-dev ; createdb ihsan-dev && npm run db-migrate && npm run db-seed",
     "db-migrate": "npx knex migrate:latest",
     "db-seed": "npx knex seed:run"
   },

@@ -1,13 +1,13 @@
 openapi: 3.0.0
 info:
-  title: Khatm API
+  title: Ihsan Hapi API
   description: |
     ## API Key
-    It's good practice to validate a key for all requests. This key isn't encrypted nor a secret, it's only a first line of defense against crawlers. All Khatm's APIs require the `x-api-key` header to be present.
+    It's good practice to validate a key for all requests. This key isn't encrypted nor a secret, it's only a first line of defense against crawlers. All Ihsan's APIs require the `x-api-key` header to be present.
 
     ## Authorization
-    Khatm will only support SSO from the client platform (Android, iOS) to maintain security, while reducing the need to manage authorization flows such as verifying emails or encrypting and storing passwords.
-    The client application will send the service's SSO information to the Khatm API as a `UserAuthorization`.
+    Ihsan will only support SSO from the client platform (Android, iOS) to maintain security, while reducing the need to manage authorization flows such as verifying emails or encrypting and storing passwords.
+    The client application will send the service's SSO information to the Ihsan API as a `UserAuthorization`.
     The response will be a `User` with an `access` property which will need to be set as the `Authorization` header of subsequent API calls.
     If a user has the same email information between SSO services, the system will tie the `UserAuthorization`s to that user, and user will be able to login to same account using both SSO services.
 
@@ -18,12 +18,12 @@ info:
     - Otherwise the total_parts will be the the total count the moderator wishes to achieve. i.e. 30,000 Kalimahs
 
     ## Books
-    Books are the types of khatm challenges that a moderator can create.
+    Books are the types of Ihsan challenges that a moderator can create.
     These will be created by Admins and have `slug_id`s so can be identified. These are long-living objects that are going to be referenced by `Challenge`s in a one-to-many relationship.
     One of the first type of `Book`s will be the Quran. Other types of Books would be one for each Dhikr. Books can contain extra information such as the value of the dhikr, and historical or spiritual context.
   version: 1.0.0
 servers:
-  - url: 'https://staging-api.khatmapp.com'
+  - url: 'https://ihsanproject.com'
 security:
   - ApiKeyAuth: []
   - AccessAuth: []
@@ -167,7 +167,7 @@ components:
         email:
           type: string
         access:
-          description: Access key for Khatm API
+          description: Access key for Ihsan API
           type: string
     UserAuthorization:
       description: Identity objects for various SSO services
