@@ -60,12 +60,12 @@ module.exports = new Confidence.Store({
                     },
                     test: {
                         knex: {
-                            connection: 'postgres://localhost:5432/khatm-test'
+                            connection: 'postgres://localhost:5432/ihsan-test'
                         }
                     },
                     development: {
                         knex: {
-                            connection: 'postgres://localhost:5432/khatm-dev'
+                            connection: 'postgres://localhost:5432/ihsan-dev'
                         }
                     },
                     staging: {
@@ -77,7 +77,7 @@ module.exports = new Confidence.Store({
                     docker: {
                         knex: {
                             // To connect to a local instance of postgres during development
-                            connection: 'postgres://host.docker.internal:5432/khatm-dev'
+                            connection: 'postgres://host.docker.internal:5432/ihsan-dev'
                         }
                     }
                 }
