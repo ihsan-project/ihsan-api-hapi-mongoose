@@ -1,41 +1,21 @@
-/* global server user access */
+/* global server user headers */
 'use strict';
 
 // Load modules
 
 const Code = require('@hapi/code');
-const Lab = require('@hapi/lab');
-const Server = require('../server');
+const TestBase = require('..');
 
 // Test shortcuts
 
-const { describe, it, before } = exports.lab = Lab.script();
+const {
+    authenticatedDescribe,
+    lab: { it }
+} = TestBase;
 const { expect } = Code;
 
-before(async () => {
 
-    global.server = await Server.deployment();
-
-    const session = await server.inject({
-        method: 'post',
-        url: '/api/authorizations',
-        payload: {
-            uuid: 'test-uuid',
-            digest: 'digest',
-            email: 'x@y.com',
-            first_name: 'test',
-            platform: -1
-        },
-        headers: {
-            'x-api-key': process.env.API_KEY
-        }
-    });
-
-    global.user = session.result;
-    global.access = session.result.access;
-});
-
-describe('Users', () => {
+authenticatedDescribe('Users', () => {
 
     it('authless api call.', async () => {
 
@@ -68,7 +48,7 @@ describe('Users', () => {
             method: 'get',
             url: `/api/users/${user.id}`,
             headers: {
-                authorization: access
+                authorization: headers.authorization
             }
         });
 
@@ -82,7 +62,7 @@ describe('Users', () => {
             method: 'get',
             url: `/api/users/profile`,
             headers: {
-                authorization: access,
+                authorization: headers.authorization,
                 'x-api-key': process.env.API_KEY
             }
         });
@@ -97,7 +77,7 @@ describe('Users', () => {
             method: 'get',
             url: `/api/users/${user.id}`,
             headers: {
-                authorization: access,
+                authorization: headers.authorization,
                 'x-api-key': process.env.API_KEY
             }
         });
@@ -111,7 +91,7 @@ describe('Users', () => {
             method: 'get',
             url: `/api/users/${user.id + 99}`,
             headers: {
-                authorization: access,
+                authorization: headers.authorization,
                 'x-api-key': process.env.API_KEY
             }
         });

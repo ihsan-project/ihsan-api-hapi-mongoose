@@ -4,22 +4,17 @@
 // Load modules
 
 const Code = require('@hapi/code');
-const Lab = require('@hapi/lab');
-const Server = require('../server');
+const TestBase = require('..');
 
 // Test shortcuts
 
-const { describe, it, before } = exports.lab = Lab.script();
+const { describe, it } = TestBase.lab;
 const { expect } = Code;
 
-before(async () => {
 
-    global.server = await Server.deployment();
-});
+describe('Create Authorizations', () => {
 
-describe('Sessions', () => {
-
-    it('keyless api call.', async () => {
+    it('fails without api key.', async () => {
 
         const email = 'x@y.com';
         const session = await server.inject({
@@ -38,7 +33,7 @@ describe('Sessions', () => {
         expect(session.result.errors.error).to.only.contain('invalid key');
     });
 
-    it('get user from SSO.', async () => {
+    it('returns user after successful authorization.', async () => {
 
         const email = 'x@y.com';
         const session = await server.inject({

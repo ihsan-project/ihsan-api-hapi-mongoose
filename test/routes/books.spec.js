@@ -1,42 +1,20 @@
-/* global server access */
+/* global server headers */
 'use strict';
 
 // Load modules
 
 const Code = require('@hapi/code');
-const Lab = require('@hapi/lab');
-const Server = require('../server');
+const TestBase = require('..');
 
-const Constants = require('../lib/constants');
+const Constants = require('../../lib/constants');
 
 // Test shortcuts
 
-const { describe, it, before } = exports.lab = Lab.script();
+const { authenticatedDescribe, lab: { it } } = TestBase;
 const { expect } = Code;
 
-before(async () => {
 
-    global.server = await Server.deployment();
-
-    const session = await server.inject({
-        method: 'post',
-        url: '/api/authorizations',
-        payload: {
-            uuid: 'test-uuid',
-            digest: 'digest',
-            email: 'x@y.com',
-            first_name: 'test',
-            platform: -1
-        },
-        headers: {
-            'x-api-key': process.env.API_KEY
-        }
-    });
-
-    global.access = session.result.access;
-});
-
-describe('Books', () => {
+authenticatedDescribe('Books', () => {
 
     it('defaults to 5 books without page information', async () => {
         // The default limit is set in the manifest for hapi-pagination
@@ -45,7 +23,7 @@ describe('Books', () => {
             method: 'get',
             url: '/api/books',
             headers: {
-                authorization: access,
+                authorization: headers.authorization,
                 'x-api-key': process.env.API_KEY
             }
         });
@@ -67,7 +45,7 @@ describe('Books', () => {
             method: 'get',
             url: '/api/books?page=2&limit=3',
             headers: {
-                authorization: access,
+                authorization: headers.authorization,
                 'x-api-key': process.env.API_KEY
             }
         });
