@@ -4,20 +4,15 @@
 // Load modules
 
 const Code = require('@hapi/code');
-const Lab = require('@hapi/lab');
-const Server = require('../server');
+const TestBase = require('..');
 
-const Constants = require('../lib/constants');
+const Constants = require('../../lib/constants');
 
 // Test shortcuts
 
-const { describe, it, before } = exports.lab = Lab.script();
+const { describe, it } = TestBase.lab;
 const { expect } = Code;
 
-before(async () => {
-
-    global.server = await Server.deployment();
-});
 
 describe('Settings', () => {
 
