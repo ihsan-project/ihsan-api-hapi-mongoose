@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Ihsan Hapi API
+  title: Maktabah Backend
   description: |
     ## API Key
     It's good practice to validate a key for all requests. This key isn't encrypted nor a secret, it's only a first line of defense against crawlers. All Ihsan's APIs require the `x-api-key` header to be present.

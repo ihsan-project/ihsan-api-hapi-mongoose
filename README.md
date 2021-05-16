@@ -1,7 +1,7 @@
-# Ihsan Hapi API
+# Maktabah Hapi API
 
 - [The Ihsan Project](https://ihsanproject.com/)
-- [The API Architecture](https://github.com/ihsan-project/ihsan-api-hapi/wiki/Architecture)
+- [The API Architecture](https://github.com/ihsan-project/maktabah-backend/wiki/Architecture)
 
 ## Environment
 
@@ -50,7 +50,7 @@ Running `npm start docker` will run the following:
 ## API Documentation
 
 - `./docs/openapi.yaml` using [OpenAPI 3.0](https://swagger.io/blog/news/announcing-openapi-3-0/).
-- `./docs/Ihsan-Hapi-API.postman_collection.json` Postman collection 2.1 of example API calls
+- `./docs/Maktabah-Backend.postman_collection.json` Postman collection 2.1 of example API calls
 - `./docs/*.postman_environment.json` Postman environments
 
 Once you've been able to run the server locally following instructions in `Development`, you can use [Postman](https://www.getpostman.com/) to test the API.
