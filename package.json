@@ -1,0 +1,58 @@
+{
+  "name": "ihsan-hapi-api",
+  "version": "1.0.0",
+  "description": "Ihsan Hapi API",
+  "author": "Mohammed Islam",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server",
+    "docker": "docker-compose build ; docker-compose up",
+    "dev": "npx nodemon server",
+    "pretest": "dropdb ihsan-test ; createdb ihsan-test && NODE_ENV=test npm run db-migrate && NODE_ENV=test npm run db-seed",
+    "test": "NODE_ENV=test API_KEY=test_key lab -a @hapi/code -L -I 'server,headers,user' -v",
+    "test-list": "lab -v -d",
+    "lint": "eslint .",
+    "dev-db-setup": "dropdb ihsan-dev ; createdb ihsan-dev && npm run db-migrate && npm run db-seed",
+    "db-migrate": "npx knex migrate:latest",
+    "db-seed": "npx knex seed:run"
+  },
+  "dependencies": {
+    "@hapi/basic": "^6.0.0",
+    "@hapi/boom": "^9.1.0",
+    "@hapi/eslint-config-hapi": "^13.0.2",
+    "@hapi/eslint-plugin-hapi": "^4.3.5",
+    "@hapi/glue": "^7.0.0",
+    "@hapi/hapi": "^19.1.1",
+    "@hapi/hoek": "^9.0.4",
+    "@hapi/joi": "^17.1.1",
+    "avocat": "^2.0.0",
+    "aws-sdk": "^2.817.0",
+    "confidence": "4.x.x",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "google-auth-library": "^6.0.0",
+    "hapi-pagination": "^4.0.0",
+    "haute-couture": "^3.5.0",
+    "hpal": "^2.4.0",
+    "hpal-debug": "^1.4.0",
+    "knex": "^0.21.0",
+    "moment": "^2.29.1",
+    "objection": "^2.1.3",
+    "pg": "^8.0.2",
+    "schmervice": "^1.5.0",
+    "schwifty": "^5.2.1",
+    "toys": "^2.3.1"
+  },
+  "devDependencies": {
+    "@hapi/code": "^8.0.1",
+    "@hapi/lab": "^22.0.4",
+    "faker": "^5.2.0",
+    "knex-cleaner": "^1.3.1",
+    "timekeeper": "^2.2.0"
+  }
+}
