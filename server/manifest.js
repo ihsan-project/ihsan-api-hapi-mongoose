@@ -47,10 +47,10 @@ module.exports = new Confidence.Store({
                     $filter: { $env: 'NODE_ENV' },
                     $default: {},
                     $base: {
-                        url: process.env.PG_CONNECTION_STRING,
+                        url: process.env.MONGO_CONNECTION_STRING,
                     },
                     test: {
-                        url: `${process.env.PG_CONNECTION_STRING}-test`,
+                        url: `${process.env.MONGO_CONNECTION_STRING}-test`,
                     },
                     docker: {
                         url: 'mongodb://host.docker.internal:27017/maktabah'
