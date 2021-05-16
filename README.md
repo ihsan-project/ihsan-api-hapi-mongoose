@@ -16,10 +16,10 @@
      - `brew install node@12`
      - `brew link node@12`
      - Follow brew instruction, like having to `--force` and `--overwrite`
-- Postgres Database
-  - `brew install postgres`
-  - `brew services start postgresql`
-  - `npm dev-db-setup`
+- [MongoDb Database](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
+  - `brew tap mongodb/brew`
+  - `brew install mongodb-community@4.4`
+  - `brew services start mongodb-community@4.4`
 - .env
   - `cp .env-keep .env`
   - Ask the Admin for the value required for GOOGLE_SSO_CLIENT_ID if you don't have access to the google-services.json file
