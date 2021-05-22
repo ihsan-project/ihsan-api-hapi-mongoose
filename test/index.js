@@ -10,7 +10,7 @@ const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
 const Server = require('../server');
 const Package = require('../package.json');
-const KnexCleaner = require('knex-cleaner');
+// const KnexCleaner = require('knex-cleaner');
 
 // Test shortcuts
 
@@ -26,13 +26,13 @@ beforeEach(async () => {
 
     // This ensures that each test starts from the same starting point
     // Use befores and beforeEach along with describe's to setup the Db for the test
-    const knex = require('knex')({
-        client: 'pg',
-        connection: process.env.LOCAL_PG_CONNECTION_STRING_TEST
-    });
+    // const knex = require('knex')({
+    //     client: 'pg',
+    //     connection: process.env.LOCAL_PG_CONNECTION_STRING_TEST
+    // });
 
-    await KnexCleaner.clean(knex);
-    await knex.seed.run();
+    // await KnexCleaner.clean(knex);
+    // await knex.seed.run();
 });
 
 describe('Deployment', () => {

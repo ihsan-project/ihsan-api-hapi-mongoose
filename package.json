@@ -13,7 +13,7 @@
     "start": "node server",
     "docker": "docker-compose build ; docker-compose up",
     "dev": "npx nodemon server",
-    "pretest": "dropdb maktabah-test ; createdb maktabah-test && NODE_ENV=test npm run db-migrate && NODE_ENV=test npm run db-seed",
+    "pretest": "",
     "test": "NODE_ENV=test API_KEY=test_key lab -a @hapi/code -L -I 'server,headers,user' -v",
     "test-list": "lab -v -d",
     "lint": "eslint .",
@@ -41,11 +41,11 @@
     "haute-couture": "^3.5.0",
     "hpal": "^2.4.0",
     "hpal-debug": "^1.4.0",
-    "knex": "^0.21.0",
     "moment": "^2.29.1",
     "mongoose": "^5.12.9",
     "objection": "^2.1.3",
     "schmervice": "^1.5.0",
+    "schwifty": "^5.2.1",
     "toys": "^2.3.1"
   },
   "devDependencies": {
