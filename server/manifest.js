@@ -2,7 +2,7 @@
 
 const Dotenv = require('dotenv');
 const Confidence = require('@hapipal/confidence');
-const Toys = require('toys');
+const Toys = require('@hapipal/toys');
 
 // Pull .env into process.env
 Dotenv.config({ path: `${__dirname}/.env` });
