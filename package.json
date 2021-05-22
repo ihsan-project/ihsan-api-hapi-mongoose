@@ -41,6 +41,7 @@
     "haute-couture": "^3.5.0",
     "hpal": "^2.4.0",
     "hpal-debug": "^1.4.0",
+    "knex": "^0.21.0",
     "moment": "^2.29.1",
     "mongoose": "^5.12.9",
     "objection": "^2.1.3",
