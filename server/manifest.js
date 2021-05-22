@@ -1,7 +1,7 @@
 'use strict';
 
 const Dotenv = require('dotenv');
-const Confidence = require('confidence');
+const Confidence = require('@hapipal/confidence');
 const Toys = require('toys');
 
 // Pull .env into process.env
