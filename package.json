@@ -30,6 +30,7 @@
     "@hapi/hapi": "^19.1.1",
     "@hapi/hoek": "^9.0.4",
     "@hapi/joi": "^17.1.1",
+    "@hapipal/haute-couture": "^4.1.0",
     "aws-sdk": "^2.817.0",
     "confidence": "4.x.x",
     "dotenv": "^8.2.0",
@@ -37,9 +38,6 @@
     "google-auth-library": "^6.0.0",
     "hapi-mongodb": "^9.0.2",
     "hapi-pagination": "^4.0.0",
-    "haute-couture": "^3.6.1",
-    "hpal": "^2.4.0",
-    "hpal-debug": "^1.4.0",
     "moment": "^2.29.1",
     "mongoose": "^5.12.9",
     "schmervice": "^1.5.0",
@@ -48,6 +46,8 @@
   "devDependencies": {
     "@hapi/code": "^8.0.1",
     "@hapi/lab": "^22.0.4",
+    "@hapipal/hpal": "^3.0.0",
+    "@hapipal/hpal-debug": "^2.0.0",
     "faker": "^5.2.0",
     "timekeeper": "^2.2.0"
   }
