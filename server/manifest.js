@@ -33,33 +33,34 @@ module.exports = new Confidence.Store({
     register: {
         plugins: [
             {
-                plugin: '../lib', // Main plugin
-                options: {
-
-                },
-                routes: {
-                    prefix: '/api'
-                }
-            },
-            {
-                plugin: 'hapi-mongodb',
+                plugin: 'hapi-mongoose',
                 options: {
                     $filter: { $env: 'NODE_ENV' },
                     $default: {
+                        promises: 'native',
                         settings: {
                             poolSize: 10
                         },
                         decorate: true
                     },
                     $base: {
-                        url: process.env.MONGO_CONNECTION_STRING,
+                        uri: process.env.MONGO_CONNECTION_STRING,
                     },
                     test: {
-                        url: `${process.env.MONGO_CONNECTION_STRING}-test`,
+                        uri: `${process.env.MONGO_CONNECTION_STRING}-test`,
                     },
                     docker: {
-                        url: 'mongodb://host.docker.internal:27017/maktabah'
+                        uri: 'mongodb://host.docker.internal:27017/maktabah'
                     }
+                }
+            },
+            {
+                plugin: '../lib', // Main plugin
+                options: {
+
+                },
+                routes: {
+                    prefix: '/api'
                 }
             },
             {
