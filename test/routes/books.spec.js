@@ -10,11 +10,15 @@ const Constants = require('../../lib/constants');
 
 // Test shortcuts
 
-const { authenticatedDescribe, lab: { it } } = TestBase;
+const { authenticate, lab: { it, describe, before } } = TestBase;
 const { expect } = Code;
 
 
-authenticatedDescribe('Books', () => {
+describe('Books', () => {
+
+    before(async () => {
+        await authenticate();
+    })
 
     it('defaults to 5 books without page information', async () => {
         // The default limit is set in the manifest for hapi-pagination

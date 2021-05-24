@@ -8,14 +8,15 @@ const TestBase = require('..');
 
 // Test shortcuts
 
-const {
-    authenticatedDescribe,
-    lab: { it }
-} = TestBase;
+const { authenticate, lab: { it, before, describe } } = TestBase;
 const { expect } = Code;
 
 
-authenticatedDescribe('Users', () => {
+describe('Users', () => {
+
+    before(() => {
+        authenticate();
+    })
 
     it('authless api call.', async () => {
 
