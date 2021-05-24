@@ -17,8 +17,9 @@ const { expect } = Code;
 describe('Books', () => {
 
     before(async () => {
+
         await authenticate();
-    })
+    });
 
     it('defaults to 5 books without page information', async () => {
         // The default limit is set in the manifest for hapi-pagination

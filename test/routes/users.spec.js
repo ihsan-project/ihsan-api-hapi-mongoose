@@ -15,8 +15,9 @@ const { expect } = Code;
 describe('Users', () => {
 
     before(() => {
+
         authenticate();
-    })
+    });
 
     it('authless api call.', async () => {
 

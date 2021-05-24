@@ -44,10 +44,10 @@ module.exports = new Confidence.Store({
                         decorate: true
                     },
                     $base: {
-                        uri: process.env.MONGO_CONNECTION_STRING,
+                        uri: process.env.MONGO_CONNECTION_STRING
                     },
                     test: {
-                        uri: `${process.env.MONGO_CONNECTION_STRING}-test`,
+                        uri: `${process.env.MONGO_CONNECTION_STRING}-test`
                     },
                     docker: {
                         uri: 'mongodb://host.docker.internal:27017/maktabah'
