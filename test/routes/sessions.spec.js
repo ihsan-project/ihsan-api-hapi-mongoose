@@ -51,6 +51,8 @@ describe('Create Authorizations', () => {
             }
         });
 
+        console.log("mmi: session.result", session.result);
+
         expect(session.statusCode).to.equal(200);
         expect(session.result.email).to.equal(email);
         expect(session.result.access).to.exist();
