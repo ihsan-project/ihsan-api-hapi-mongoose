@@ -17,9 +17,8 @@
      - `brew link node@12`
      - Follow brew instruction, like having to `--force` and `--overwrite`
 - [MongoDb Database](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
-  - `brew tap mongodb/brew`
-  - `brew install mongodb-community@4.4`
-  - `brew services start mongodb-community@4.4`
+  - `npm install run-rs -g` (https://stackoverflow.com/a/51462024/3166719)
+  - `run-rs -v 4.4.0` in a seperate terminal window
 - .env
   - `cp .env-keep .env`
   - Ask the Admin for the value required for GOOGLE_SSO_CLIENT_ID if you don't have access to the google-services.json file
