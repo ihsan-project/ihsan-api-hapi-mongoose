@@ -160,9 +160,9 @@ components:
       properties:
         id:
           type: integer
-        first_name:
+        firstName:
           type: string
-        last_name:
+        lastName:
           type: string
         email:
           type: string

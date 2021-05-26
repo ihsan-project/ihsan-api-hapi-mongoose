@@ -30,7 +30,7 @@ beforeEach(async () => {
 
     // This ensures that each test starts from the same starting point
     // Use befores and beforeEach along with describe's to setup the Db for the test
-    server.plugins['hapi-mongoose'].connection.db.dropDatabase();
+    await server.plugins['hapi-mongoose'].connection.db.dropDatabase();
 });
 
 describe('Deployment', () => {
@@ -51,7 +51,7 @@ exports.authenticate = async () => {
             uuid: 'test-uuid',
             digest: 'digest',
             email: 'x@y.com',
-            first_name: 'test',
+            firstName: 'test',
             platform: -1
         },
         headers: {

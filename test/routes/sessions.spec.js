@@ -24,7 +24,7 @@ describe('Create Authorizations', () => {
                 uuid: 'test-uuid',
                 digest: 'digest',
                 email,
-                first_name: 'test',
+                firstName: 'test',
                 platform: -1
             }
         });
@@ -43,7 +43,7 @@ describe('Create Authorizations', () => {
                 uuid: 'test-uuid',
                 digest: 'digest',
                 email,
-                first_name: 'test',
+                firstName: 'test',
                 platform: -1
             },
             headers: {
@@ -51,16 +51,9 @@ describe('Create Authorizations', () => {
             }
         });
 
-        console.log("mmi: session.result", session.result);
-
         expect(session.statusCode).to.equal(200);
         expect(session.result.email).to.equal(email);
         expect(session.result.access).to.exist();
-
-        // Check that post user create hooks ran
-        const { UserStatistics } = server.models();
-        const statistics = await UserStatistics.query().findOne({ user_id: session.result.id });
-        expect(statistics).to.exist();
 
         const access = session.result.access;
 
@@ -72,7 +65,7 @@ describe('Create Authorizations', () => {
                 uuid: 'different-test-uuid',
                 digest: 'digest',
                 email,
-                first_name: 'different name',
+                firstName: 'different name',
                 platform: -2
             },
             headers: {
