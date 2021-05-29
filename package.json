@@ -40,8 +40,12 @@
     "google-auth-library": "^6.1.6",
     "hapi-mongoose": "^2.0.0",
     "hapi-pagination": "^4.0.0",
+    "install": "^0.13.0",
+    "migrate-mongoose": "^4.0.0",
     "moment": "^2.29.1",
-    "mongoose": "^5.12.10"
+    "mongo-seeding": "^3.6.0",
+    "mongoose": "^5.12.10",
+    "npm": "^7.15.0"
   },
   "devDependencies": {
     "@hapi/code": "^8.0.3",
