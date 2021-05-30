@@ -42,7 +42,7 @@ module.exports = new Confidence.Store({
                 }
             },
             {
-                plugin: 'schwifty',
+                plugin: '@hapipal/schwifty',
                 options: {
                     $filter: { $env: 'NODE_ENV' },
                     $default: {},
