@@ -2,7 +2,7 @@
 
 const Dotenv = require('dotenv');
 const Confidence = require('confidence');
-const Toys = require('toys');
+const Toys = require('@hapipal/toys');
 
 // Pull .env into process.env
 Dotenv.config({ path: `${__dirname}/.env` });
@@ -42,7 +42,7 @@ module.exports = new Confidence.Store({
                 }
             },
             {
-                plugin: 'schwifty',
+                plugin: '@hapipal/schwifty',
                 options: {
                     $filter: { $env: 'NODE_ENV' },
                     $default: {},
@@ -98,7 +98,7 @@ module.exports = new Confidence.Store({
             {
                 plugin: {
                     $filter: { $env: 'NODE_ENV' },
-                    $default: 'hpal-debug',
+                    $default: '@hapipal/hpal-debug',
                     staging: Toys.noop,
                     production: Toys.noop
                 }
