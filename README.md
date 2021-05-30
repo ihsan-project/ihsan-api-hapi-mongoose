@@ -32,6 +32,11 @@ Then setup your local databse by running `npm run dev-db-setup`. Once that runs 
 
 Make sure that you can also run `npm test` successfully. A full successful run of these tests is required before any pull request for changes are accepted. Use `npm test -- -i [test id]` to run a specific test (or ranges use `-i 1-3,5`). Use `npm run test-list` to get a list of all the tests in the systerm.
 
+### Migrations
+
+If you're starting from scratch, before you run locally, you'll want to run migrations which will seed the database with the static information you'll need.
+`./node_modules/.bin/migrate up`
+
 ### Debugging
 
 You can debug using `npx hpal run debug:repl`. You will have the hapi `server` in context to use.
