@@ -10,13 +10,13 @@ const Constants = require('../../lib/constants');
 
 // Test shortcuts
 
-const { authenticate, lab: { it, describe, before } } = TestBase;
+const { authenticate, lab: { it, describe, beforeEach } } = TestBase;
 const { expect } = Code;
 
 
 describe('Books', () => {
 
-    before(async () => {
+    beforeEach(async () => {
 
         await authenticate();
     });
