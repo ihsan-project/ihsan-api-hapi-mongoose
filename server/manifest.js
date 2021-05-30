@@ -98,7 +98,7 @@ module.exports = new Confidence.Store({
             {
                 plugin: {
                     $filter: { $env: 'NODE_ENV' },
-                    $default: 'hpal-debug',
+                    $default: '@hapipal/hpal-debug',
                     staging: Toys.noop,
                     production: Toys.noop
                 }
