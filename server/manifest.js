@@ -50,7 +50,7 @@ module.exports = new Confidence.Store({
                         uri: process.env.MONGO_CONNECTION_STRING_TEST
                     },
                     docker: {
-                        uri: 'mongodb://host.docker.internal:27017/maktabah?replicaSet=rs'
+                        uri: 'mongodb://host.docker.internal:27017/ihsan-api-hapi-mongoose?replicaSet=rs'
                     }
                 }
             },
