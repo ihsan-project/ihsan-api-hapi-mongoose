@@ -56,9 +56,9 @@ describe('Create Authorizations', () => {
         expect(session.result.access).to.exist();
 
         // Check that post user create hooks ran
-        const { UserStatistics } = server.models();
-        const statistics = await UserStatistics.query().findOne({ user_id: session.result.id });
-        expect(statistics).to.exist();
+        const user = await server.models().User.query().findById(session.result.id);
+        expect(user).to.exist();
+        expect(await user.$relatedQuery('statistics')).to.exist();
 
         const access = session.result.access;
 
