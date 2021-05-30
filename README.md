@@ -34,8 +34,10 @@ Make sure that you can also run `npm test` successfully. A full successful run o
 
 ### Migrations
 
-If you're starting from scratch, before you run locally, you'll want to run migrations which will seed the database with the static information you'll need.
-`./node_modules/.bin/migrate up`
+Run migrations which will seed the database with the static information you'll need to run the app locally
+`npm run migrate`
+
+For other migration commands, run `./node_modules/.bin/migrate help`
 
 ### Debugging
 

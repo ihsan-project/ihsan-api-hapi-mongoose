@@ -10,6 +10,7 @@ const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
 const Server = require('../server');
 const Package = require('../package.json');
+const Path = require('path');
 
 // Test shortcuts
 
@@ -31,6 +32,11 @@ beforeEach(async () => {
     // This ensures that each test starts from the same starting point
     // Use befores and beforeEach along with describe's to setup the Db for the test
     await server.plugins['hapi-mongoose'].connection.db.dropDatabase();
+
+    // Run the necessary seeds for testing
+    const seeder = server.plugins['hapi-mongo-seeding'].seeder;
+    const collections = seeder.readCollectionsFromPath(Path.resolve("seeds"));
+    await seeder.import(collections);
 });
 
 describe('Deployment', () => {

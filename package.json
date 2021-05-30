@@ -17,9 +17,7 @@
     "test": "NODE_ENV=test API_KEY=test_key lab -a @hapi/code -L -I 'server,headers,user' -v",
     "test-list": "lab -v -d",
     "lint": "eslint .",
-    "dev-db-setup": "dropdb maktabah-dev ; createdb maktabah-dev && npm run db-migrate && npm run db-seed",
-    "db-migrate": "npx knex migrate:latest",
-    "db-seed": "npx knex seed:run"
+    "migrate": "./node_modules/.bin/migrate up --autosync"
   },
   "dependencies": {
     "@hapi/basic": "^6.0.0",

@@ -38,7 +38,7 @@ describe('Books', () => {
         expect(books.result.meta.totalCount).to.equal(11);
         expect(books.result.results.length).to.equal(5);
 
-        expect(books.result.results[0].slug_id).to.equal('book-quran');
+        expect(books.result.results[0].slugId).to.equal('book-quran');
         expect(books.result.results[0].type).to.equal(Constants.book_type.quran);
 
         expect(books.result.results[4].type).to.equal(Constants.book_type.zikr);
@@ -63,10 +63,10 @@ describe('Books', () => {
         expect(books.result.meta.totalCount).to.equal(11);
         expect(books.result.meta.pageCount).to.equal(4);
 
-        expect(books.result.results[0].slug_id).to.equal('book-zikr-surah-ikhlas');
+        expect(books.result.results[0].slugId).to.equal('book-zikr-surah-ikhlas');
         expect(books.result.results[0].type).to.equal(Constants.book_type.zikr);
 
-        expect(books.result.results[2].slug_id).to.equal('book-zikr-alhamdu');
+        expect(books.result.results[2].slugId).to.equal('book-zikr-alhamdu');
         expect(books.result.results[2].type).to.equal(Constants.book_type.zikr);
     });
 });

@@ -1,4 +1,5 @@
 const getServer = require('./');
+const Path = require('path');
 
 /**
  * Make any changes you need to make to the database here
@@ -6,9 +7,11 @@ const getServer = require('./');
 async function up () {
 
   const server = await getServer();
-  console.log("mmi: server", server);
+  const seeder = server.plugins['hapi-mongo-seeding'].seeder;
 
-  throw new Error('TESTING ERROR!!!');
+  const collections = seeder.readCollectionsFromPath(Path.resolve("seeds"));
+
+  return await seeder.import(collections);
 }
 
 /**
