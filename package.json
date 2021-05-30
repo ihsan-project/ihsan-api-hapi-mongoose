@@ -1,7 +1,7 @@
 {
-  "name": "maktabah-backend",
+  "name": "ihsan-api-hapi-mongoose",
   "version": "1.0.0",
-  "description": "Maktabah Backend",
+  "description": "Ihsan Hapi Mongoose API",
   "author": "Mohammed Islam",
   "license": "Apache-2.0",
   "main": "lib/index.js",
