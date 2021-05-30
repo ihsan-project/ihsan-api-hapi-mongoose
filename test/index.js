@@ -35,7 +35,7 @@ beforeEach(async () => {
 
     // Run the necessary seeds for testing
     const seeder = server.plugins['hapi-mongo-seeding'].seeder;
-    const collections = seeder.readCollectionsFromPath(Path.resolve("seeds"));
+    const collections = seeder.readCollectionsFromPath(Path.resolve('seeds'));
     await seeder.import(collections);
 });
 
