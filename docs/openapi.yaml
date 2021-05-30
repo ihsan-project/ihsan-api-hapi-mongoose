@@ -23,7 +23,7 @@ info:
     One of the first type of `Book`s will be the Quran. Other types of Books would be one for each Dhikr. Books can contain extra information such as the value of the dhikr, and historical or spiritual context.
   version: 1.0.0
 servers:
-  - url: 'https://ihsanproject.com'
+  - url: 'http://macbook-pro-2.local:8080/api/'
 security:
   - ApiKeyAuth: []
   - AccessAuth: []
@@ -75,7 +75,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-  /users/{user_id}/pushtokens (pending):
+  /users/{user_id}/pushtokens:
     parameters:
       - name: user_id
         in: path
@@ -83,7 +83,7 @@ paths:
         schema:
           type : integer
     post:
-      description: Add push token for user
+      description: (PENDING) Add push token for user
       requestBody:
         required: true
         content:
@@ -195,8 +195,8 @@ components:
               - apple
 
             For debug instances, pass -1 value to skip digest verifcation
-    UserPushToken (pending):
-      description: Push Notification token information for a user
+    UserPushToken:
+      description: (PENDING) Push Notification token information for a user
       type: object
       properties:
         id:
