@@ -16,10 +16,9 @@
      - `brew install node@12`
      - `brew link node@12`
      - Follow brew instruction, like having to `--force` and `--overwrite`
-- Postgres Database
-  - `brew install postgres`
-  - `brew services start postgresql`
-  - `npm dev-db-setup`
+- [MongoDb Database](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
+  - `npm install run-rs -g` (https://stackoverflow.com/a/51462024/3166719)
+  - `run-rs -v 4.4.0` in a seperate terminal window
 - .env
   - `cp .env-keep .env`
   - Ask the Admin for the value required for GOOGLE_SSO_CLIENT_ID if you don't have access to the google-services.json file
@@ -32,6 +31,13 @@ After you've followed all the steps in `Environment` section above, install node
 Then setup your local databse by running `npm run dev-db-setup`. Once that runs successfully, you are ready to `npm run dev` your local server instance! Normally the baseURL will be `http://localhost:8080` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
 
 Make sure that you can also run `npm test` successfully. A full successful run of these tests is required before any pull request for changes are accepted. Use `npm test -- -i [test id]` to run a specific test (or ranges use `-i 1-3,5`). Use `npm run test-list` to get a list of all the tests in the systerm.
+
+### Migrations
+
+Run migrations which will seed the database with the static information you'll need to run the app locally
+`npm run migrate`
+
+For other migration commands, run `./node_modules/.bin/migrate help`
 
 ### Debugging
 

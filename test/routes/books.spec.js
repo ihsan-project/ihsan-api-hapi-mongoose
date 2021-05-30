@@ -10,11 +10,16 @@ const Constants = require('../../lib/constants');
 
 // Test shortcuts
 
-const { authenticatedDescribe, lab: { it } } = TestBase;
+const { authenticate, lab: { it, describe, beforeEach } } = TestBase;
 const { expect } = Code;
 
 
-authenticatedDescribe('Books', () => {
+describe('Books', () => {
+
+    beforeEach(async () => {
+
+        await authenticate();
+    });
 
     it('defaults to 5 books without page information', async () => {
         // The default limit is set in the manifest for hapi-pagination
@@ -33,7 +38,7 @@ authenticatedDescribe('Books', () => {
         expect(books.result.meta.totalCount).to.equal(11);
         expect(books.result.results.length).to.equal(5);
 
-        expect(books.result.results[0].slug_id).to.equal('book-quran');
+        expect(books.result.results[0].slugId).to.equal('book-quran');
         expect(books.result.results[0].type).to.equal(Constants.book_type.quran);
 
         expect(books.result.results[4].type).to.equal(Constants.book_type.zikr);
@@ -58,10 +63,10 @@ authenticatedDescribe('Books', () => {
         expect(books.result.meta.totalCount).to.equal(11);
         expect(books.result.meta.pageCount).to.equal(4);
 
-        expect(books.result.results[0].slug_id).to.equal('book-zikr-surah-ikhlas');
+        expect(books.result.results[0].slugId).to.equal('book-zikr-surah-ikhlas');
         expect(books.result.results[0].type).to.equal(Constants.book_type.zikr);
 
-        expect(books.result.results[2].slug_id).to.equal('book-zikr-alhamdu');
+        expect(books.result.results[2].slugId).to.equal('book-zikr-alhamdu');
         expect(books.result.results[2].type).to.equal(Constants.book_type.zikr);
     });
 });

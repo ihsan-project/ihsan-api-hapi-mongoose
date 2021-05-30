@@ -8,14 +8,16 @@ const TestBase = require('..');
 
 // Test shortcuts
 
-const {
-    authenticatedDescribe,
-    lab: { it }
-} = TestBase;
+const { authenticate, lab: { it, beforeEach, describe } } = TestBase;
 const { expect } = Code;
 
 
-authenticatedDescribe('Users', () => {
+describe('Users', () => {
+
+    beforeEach(async () => {
+
+        await authenticate();
+    });
 
     it('authless api call.', async () => {
 
@@ -25,7 +27,7 @@ authenticatedDescribe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(401);
-        expect(getUser.result.errors.error).to.only.contain('invalid key');
+        expect(getUser.result.message).to.only.contain('invalid key');
     });
 
     it('unauthorized api call.', async () => {
@@ -39,7 +41,7 @@ authenticatedDescribe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(401);
-        expect(getUser.result.errors.error).to.only.contain('invalid access');
+        expect(getUser.result.message).to.only.contain('invalid access');
     });
 
     it('key-less authorized api call.', async () => {
@@ -53,7 +55,7 @@ authenticatedDescribe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(401);
-        expect(getUser.result.errors.error).to.only.contain('invalid key');
+        expect(getUser.result.message).to.only.contain('invalid key');
     });
 
     it('get profile.', async () => {
@@ -83,6 +85,7 @@ authenticatedDescribe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(200);
+        expect(getUser.result.email).to.equal(user.email);
     });
 
     it('get invalid user.', async () => {
@@ -97,6 +100,6 @@ authenticatedDescribe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(404);
-        expect(getUser.result.errors).to.exist();
+        expect(getUser.result.error).to.exist();
     });
 });

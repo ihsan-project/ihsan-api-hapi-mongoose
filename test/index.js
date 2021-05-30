@@ -10,12 +10,17 @@ const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
 const Server = require('../server');
 const Package = require('../package.json');
-const KnexCleaner = require('knex-cleaner');
+const Path = require('path');
 
 // Test shortcuts
 
 const { describe, it, before, beforeEach } = exports.lab = Lab.script();
 const { expect } = Code;
+
+const internals = {
+    runAuthentication: false
+};
+
 
 before(async () => {
 
@@ -26,13 +31,12 @@ beforeEach(async () => {
 
     // This ensures that each test starts from the same starting point
     // Use befores and beforeEach along with describe's to setup the Db for the test
-    const knex = require('knex')({
-        client: 'pg',
-        connection: process.env.LOCAL_PG_CONNECTION_STRING_TEST
-    });
+    await server.plugins['hapi-mongoose'].connection.db.dropDatabase();
 
-    await KnexCleaner.clean(knex);
-    await knex.seed.run();
+    // Run the necessary seeds for testing
+    const seeder = server.plugins['hapi-mongo-seeding'].seeder;
+    const collections = seeder.readCollectionsFromPath(Path.resolve('seeds'));
+    await seeder.import(collections);
 });
 
 describe('Deployment', () => {
@@ -44,35 +48,26 @@ describe('Deployment', () => {
 });
 
 
-exports.authenticatedDescribe = (title, tests) => {
+exports.authenticate = async () => {
 
-    beforeEach(async () => {
-
-        const session = await server.inject({
-            method: 'post',
-            url: '/api/authorizations',
-            payload: {
-                uuid: 'test-uuid',
-                digest: 'digest',
-                email: 'x@y.com',
-                first_name: 'test',
-                platform: -1
-            },
-            headers: {
-                'x-api-key': process.env.API_KEY
-            }
-        });
-
-        global.user = session.result;
-        global.headers =  {
-            authorization: session.result.access,
+    const session = await server.inject({
+        method: 'post',
+        url: '/api/authorizations',
+        payload: {
+            uuid: 'test-uuid',
+            digest: 'digest',
+            email: 'x@y.com',
+            firstName: 'test',
+            platform: -1
+        },
+        headers: {
             'x-api-key': process.env.API_KEY
-        };
+        }
     });
 
-    describe(title, () => {
-
-        tests();
-    });
-
+    global.user = session.result;
+    global.headers =  {
+        authorization: session.result.access,
+        'x-api-key': process.env.API_KEY
+    };
 };

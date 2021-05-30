@@ -24,7 +24,7 @@ describe('Settings', () => {
         });
 
         expect(settings.statusCode).to.equal(401);
-        expect(settings.result.errors.error).to.only.contain('invalid key');
+        expect(settings.result.message).to.only.contain('invalid key');
     });
 
     it('without version.', async () => {

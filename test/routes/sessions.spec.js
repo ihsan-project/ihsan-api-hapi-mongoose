@@ -24,13 +24,13 @@ describe('Create Authorizations', () => {
                 uuid: 'test-uuid',
                 digest: 'digest',
                 email,
-                first_name: 'test',
+                firstName: 'test',
                 platform: -1
             }
         });
 
         expect(session.statusCode).to.equal(401);
-        expect(session.result.errors.error).to.only.contain('invalid key');
+        expect(session.result.message).to.only.contain('invalid key');
     });
 
     it('returns user after successful authorization.', async () => {
@@ -43,7 +43,7 @@ describe('Create Authorizations', () => {
                 uuid: 'test-uuid',
                 digest: 'digest',
                 email,
-                first_name: 'test',
+                firstName: 'test',
                 platform: -1
             },
             headers: {
@@ -55,11 +55,6 @@ describe('Create Authorizations', () => {
         expect(session.result.email).to.equal(email);
         expect(session.result.access).to.exist();
 
-        // Check that post user create hooks ran
-        const { UserStatistics } = server.models();
-        const statistics = await UserStatistics.query().findOne({ user_id: session.result.id });
-        expect(statistics).to.exist();
-
         const access = session.result.access;
 
         // Getting session with different sso service, but same email returns same user
@@ -70,7 +65,7 @@ describe('Create Authorizations', () => {
                 uuid: 'different-test-uuid',
                 digest: 'digest',
                 email,
-                first_name: 'different name',
+                firstName: 'different name',
                 platform: -2
             },
             headers: {

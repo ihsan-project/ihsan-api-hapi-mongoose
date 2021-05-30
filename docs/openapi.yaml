@@ -19,7 +19,7 @@ info:
 
     ## Books
     Books are the types of Ihsan challenges that a moderator can create.
-    These will be created by Admins and have `slug_id`s so can be identified. These are long-living objects that are going to be referenced by `Challenge`s in a one-to-many relationship.
+    These will be created by Admins and have `slugId`s so can be identified. These are long-living objects that are going to be referenced by `Challenge`s in a one-to-many relationship.
     One of the first type of `Book`s will be the Quran. Other types of Books would be one for each Dhikr. Books can contain extra information such as the value of the dhikr, and historical or spiritual context.
   version: 1.0.0
 servers:
@@ -160,9 +160,9 @@ components:
       properties:
         id:
           type: integer
-        first_name:
+        firstName:
           type: string
-        last_name:
+        lastName:
           type: string
         email:
           type: string
@@ -220,7 +220,7 @@ components:
       properties:
         id:
           type: integer
-        slug_id:
+        slugId:
           type: string
         type:
           type: integer
