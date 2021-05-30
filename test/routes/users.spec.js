@@ -85,6 +85,7 @@ describe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(200);
+        expect(getUser.result.email).to.equal(user.email);
     });
 
     it('get invalid user.', async () => {
@@ -99,6 +100,6 @@ describe('Users', () => {
         });
 
         expect(getUser.statusCode).to.equal(404);
-        expect(getUser.result.errors).to.exist();
+        expect(getUser.result.error).to.exist();
     });
 });
