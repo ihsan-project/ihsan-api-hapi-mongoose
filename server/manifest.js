@@ -5,7 +5,7 @@ const Confidence = require('@hapipal/confidence');
 const Toys = require('@hapipal/toys');
 
 // Pull .env into process.env
-Dotenv.config({ path: `${__dirname}/.env` });
+Dotenv.config();
 
 // Glue manifest as a confidence store
 module.exports = new Confidence.Store({
