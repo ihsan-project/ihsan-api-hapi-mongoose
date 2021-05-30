@@ -30,7 +30,7 @@ describe('Create Authorizations', () => {
         });
 
         expect(session.statusCode).to.equal(401);
-        expect(session.result.errors.error).to.only.contain('invalid key');
+        expect(session.result.message).to.only.contain('invalid key');
     });
 
     it('returns user after successful authorization.', async () => {
