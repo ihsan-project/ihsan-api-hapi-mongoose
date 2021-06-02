@@ -5,7 +5,7 @@
 
 ## Environment
 
-- Node 12.16.1, Npm 6.4.1 [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
+- Node 12.16.1 [source](https://medium.com/@katopz/how-to-install-specific-nodejs-version-c6e1cec8aa11)
   - Used to match AWS Elastic Beanstalk max version as of 4/19/2020
   - (Recommended) Using Node Version Manager
      - Install [NVM](https://github.com/nvm-sh/nvm) with `brew install nvm`. Follow the post-install directions to update your `~/.bash_profile`.
@@ -16,10 +16,12 @@
      - `brew install node@12`
      - `brew link node@12`
      - Follow brew instruction, like having to `--force` and `--overwrite`
+- Yarn
+  - `npm install --global yarn`
 - Postgres Database
   - `brew install postgres`
   - `brew services start postgresql`
-  - `npm dev-db-setup`
+  - `yarn dev-db-setup`
 - .env
   - `cp .env-keep .env`
   - Ask the Admin for the value required for GOOGLE_SSO_CLIENT_ID if you don't have access to the google-services.json file
@@ -27,11 +29,11 @@
 
 ## Development
 
-After you've followed all the steps in `Environment` section above, install node modules by running `npm install`. These are all the libraries that the server needs to run.
+After you've followed all the steps in `Environment` section above, install node modules by running `yarn install`. These are all the libraries that the server needs to run.
 
-Then setup your local databse by running `npm run dev-db-setup`. Once that runs successfully, you are ready to `npm run dev` your local server instance! Normally the baseURL will be `http://localhost:8080` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
+Then setup your local databse by running `yarn dev-db-setup`. Once that runs successfully, you are ready to `yarn dev` your local server instance! Normally the baseURL will be `http://localhost:8080` unless you play with the `./server/mainfest.js` file's `host` and `port` keys.
 
-Make sure that you can also run `npm test` successfully. A full successful run of these tests is required before any pull request for changes are accepted. Use `npm test -- -i [test id]` to run a specific test (or ranges use `-i 1-3,5`). Use `npm run test-list` to get a list of all the tests in the systerm.
+Make sure that you can also run `yarn test` successfully. A full successful run of these tests is required before any pull request for changes are accepted. Use `yarn test -- -i [test id]` to run a specific test (or ranges use `-i 1-3,5`). Use `yarn test-list` to get a list of all the tests in the systerm.
 
 ### Debugging
 
@@ -43,7 +45,7 @@ You can also call routes directly by,
 - Run a route with: `npx hpal run debug:curl settings`
 ### Docker
 
-Running `npm start docker` will run the following:
+Running `yarn docker` will run the following:
 - `docker-compose build` - Builds the image with the configuration in docker-compose
 - `docker-compose up` - Runs the containers defined in docker-compose
 
