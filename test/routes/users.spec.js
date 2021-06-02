@@ -9,13 +9,17 @@ const TestBase = require('..');
 // Test shortcuts
 
 const {
-    authenticatedDescribe,
-    lab: { it }
+    authenticate, lab: { describe, it, beforeEach }
 } = TestBase;
 const { expect } = Code;
 
 
-authenticatedDescribe('Users', () => {
+describe('Users', () => {
+
+    beforeEach(async () => {
+
+        await authenticate();
+    });
 
     it('authless api call.', async () => {
 
