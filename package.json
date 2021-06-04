@@ -13,11 +13,11 @@
     "start": "node server",
     "docker": "docker-compose build ; docker-compose up",
     "dev": "npx nodemon server",
-    "pretest": "dropdb ihsan-test ; createdb ihsan-test && NODE_ENV=test npm run db-migrate && NODE_ENV=test npm run db-seed",
     "test": "NODE_ENV=test API_KEY=test_key lab -a @hapi/code -L -I 'server,headers,user' -v",
     "test-list": "lab -v -d",
     "lint": "eslint .",
-    "dev-db-setup": "dropdb ihsan-dev ; createdb ihsan-dev && npm run db-migrate && npm run db-seed",
+    "db-setup": "dropdb ihsan-dev ; createdb ihsan-dev && npm run db-migrate && npm run db-seed; yarn db-setup-test",
+    "db-setup-test": "dropdb ihsan-test ; createdb ihsan-test && NODE_ENV=test npm run db-migrate && NODE_ENV=test npm run db-seed",
     "db-migrate": "npx knex migrate:latest",
     "db-seed": "npx knex seed:run"
   },
