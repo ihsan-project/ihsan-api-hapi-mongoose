@@ -21,7 +21,7 @@
 - Postgres Database
   - `brew install postgres`
   - `brew services start postgresql`
-  - `yarn dev-db-setup`
+  - `yarn db-setup`
 - .env
   - `cp .env-keep .env`
   - Ask the Admin for the value required for GOOGLE_SSO_CLIENT_ID if you don't have access to the google-services.json file
