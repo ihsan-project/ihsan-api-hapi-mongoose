@@ -53,6 +53,4 @@ jobs:
         AWS_ACCESS_KEY_ID: test
         AWS_SECRET_ACCESS_KEY: test
         AWS_REGION: us-east-1
-        GCM_PUSH_SQS_URL: https://sqs.us-east-1.amazonaws.com/952442618488/queue-8566975
-        LOCAL_PG_CONNECTION_STRING_TEST: postgres://postgres:postgres@localhost:5432/postgres
-        LOCAL_PG_CONNECTION_STRING_DEV: postgres://postgres:postgres@localhost:5432/postgres
+        GCM_PUSH_SQS_URL: none

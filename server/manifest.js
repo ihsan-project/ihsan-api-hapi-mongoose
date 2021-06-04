@@ -60,12 +60,12 @@ module.exports = new Confidence.Store({
                     },
                     test: {
                         knex: {
-                            connection: 'postgres://localhost:5432/ihsan-test'
+                            connection: `${process.env.PG_CONNECTION_STRING}-test`
                         }
                     },
                     development: {
                         knex: {
-                            connection: 'postgres://localhost:5432/ihsan-dev'
+                            connection: `${process.env.PG_CONNECTION_STRING}-dev`
                         }
                     },
                     staging: {

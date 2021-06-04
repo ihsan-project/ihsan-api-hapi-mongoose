@@ -28,7 +28,7 @@ beforeEach(async () => {
     // Use befores and beforeEach along with describe's to setup the Db for the test
     const knex = require('knex')({
         client: 'pg',
-        connection: process.env.LOCAL_PG_CONNECTION_STRING_TEST
+        connection: `${process.env.PG_CONNECTION_STRING}-test`
     });
 
     await KnexCleaner.clean(knex);
