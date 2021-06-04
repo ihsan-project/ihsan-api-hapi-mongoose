@@ -10,10 +10,11 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  container-job:
+    # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
     # Docker Hub image that `container-job` executes in
-    container: node:10.18-jessie
+    container: node:12.16.1-alpine3.11
 
     # Service containers to run with `container-job`
     services:
@@ -31,20 +32,13 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-    strategy:
-      matrix:
-        node-version: [12.16.1]
-        # https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn
-    - run: yarn test
-      # Environment variables used by the `client.js` script to create a new PostgreSQL table.
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: yarn
+    - name: Run tests
+      run: yarn test
       env:
         NODE_ENV: ci
         API_KEY: development-key
