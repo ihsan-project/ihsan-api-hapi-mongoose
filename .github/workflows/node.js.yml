@@ -11,8 +11,25 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    # Docker Hub image that `container-job` executes in
+    container: node:10.18-jessie
+
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     strategy:
       matrix:
@@ -27,3 +44,19 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn
     - run: yarn test
+      # Environment variables used by the `client.js` script to create a new PostgreSQL table.
+      env:
+        # The hostname used to communicate with the PostgreSQL service container
+        POSTGRES_HOST: postgres
+        # The default PostgreSQL port
+        POSTGRES_PORT: 5432
+        NODE_ENV: development
+        API_KEY: development-key
+        GOOGLE_SSO_CLIENT_ID: nothing
+        AWS_ACCESS_KEY_ID: nothing
+        AWS_SECRET_ACCESS_KEY: nothing
+        AWS_REGION: region
+        GCM_PUSH_SQS_URL: url
+        MONGO_CONNECTION_STRING: mongodb://localhost:27017/ihsan-api-hapi-mongoose?replicaSet=rs
+        MONGO_CONNECTION_STRING_TEST: mongodb://localhost:27017/ihsan-api-hapi-mongoose-test?replicaSet=rs
+        MIGRATE_dbConnectionUri: mongodb://localhost:27017/ihsan-api-hapi-mongoose?replicaSet=rs
