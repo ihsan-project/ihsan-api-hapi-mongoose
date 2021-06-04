@@ -26,10 +26,23 @@ beforeEach(async () => {
 
     // This ensures that each test starts from the same starting point
     // Use befores and beforeEach along with describe's to setup the Db for the test
-    const knex = require('knex')({
+    let knex = require('knex')({
         client: 'pg',
         connection: `${process.env.PG_CONNECTION_STRING}-test`
     });
+
+    if (process.env.NODE_ENV === 'ci') {
+        knex = require('knex')({
+            client: 'pg',
+            connection: {
+                host: process.env.POSTGRES_HOST,
+                port: process.env.POSTGRES_PORT,
+                user: 'postgres',
+                password: 'postgres',
+                database: 'postgres'
+            }
+        });
+    }
 
     await KnexCleaner.clean(knex);
     await knex.seed.run();
