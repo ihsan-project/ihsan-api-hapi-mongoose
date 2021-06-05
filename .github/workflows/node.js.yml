@@ -40,7 +40,7 @@ jobs:
     - name: Migrate db
       run: yarn db-migrate
     - name: Run tests
-      run: yarn test
+      run: yarn ci-test
       env:
         NODE_ENV: ci
         API_KEY: development-key
