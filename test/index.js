@@ -31,7 +31,9 @@ beforeEach(async () => {
         connection: `${process.env.PG_CONNECTION_STRING}-test`
     });
 
+    console.log("butt!!!", process.env.NODE_ENV);
     if (process.env.NODE_ENV === 'ci') {
+    console.log("monkey!!!");
         knex = require('knex')({
             client: 'pg',
             connection: {

@@ -13,7 +13,7 @@
     "start": "node server",
     "docker": "docker-compose build ; docker-compose up",
     "dev": "npx nodemon server",
-    "test": "NODE_ENV=test API_KEY=test_key lab -a @hapi/code -L -I 'server,headers,user' -v",
+    "test": "API_KEY=test_key lab -a @hapi/code -L -I 'server,headers,user' -v",
     "test-list": "lab -v -d",
     "lint": "eslint .",
     "db-setup": "dropdb ihsan-dev ; createdb ihsan-dev && npm run db-migrate && npm run db-seed; yarn db-setup-test",

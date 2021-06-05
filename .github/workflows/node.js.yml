@@ -14,23 +14,23 @@ jobs:
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
     # Docker Hub image that `container-job` executes in
-    container: node:12.16.1-alpine3.11
+    container:
+      image: node:12.16.1-alpine3.11
 
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
       postgres:
-        # Docker Hub image
-        image: postgres
+        image: postgres:10.8
         # Provide the password for postgres
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+        - 5432:5432
         # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
     - name: Checkout code
@@ -38,7 +38,7 @@ jobs:
     - name: Install dependencies
       run: yarn
     - name: Run tests
-      run: yarn test
+      run: yarn start
       env:
         NODE_ENV: ci
         API_KEY: development-key
@@ -47,5 +47,5 @@ jobs:
         AWS_SECRET_ACCESS_KEY: test
         AWS_REGION: us-east-1
         GCM_PUSH_SQS_URL: none
-        POSTGRES_HOST: localhost
-        POSTGRES_PORT: 5432
+        POSTGRES_HOST: postgres
+        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}

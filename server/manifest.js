@@ -73,8 +73,8 @@ module.exports = new Confidence.Store({
                             connection: {
                                 host: process.env.POSTGRES_HOST,
                                 port: process.env.POSTGRES_PORT,
-                                user: 'postgres',
-                                password: 'postgres',
+                                user: 'postgres1',
+                                password: 'postgres1',
                                 database: 'postgres'
                             }
                         }
