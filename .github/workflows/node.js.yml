@@ -39,10 +39,14 @@ jobs:
       run: yarn
     - name: Migrate db
       run: yarn db-migrate
+      env:
+        PG_CONNECTION_STRING: postgres
+        PG_CONNECTION_USER: postgres
+        PG_CONNECTION_PASSWORD: postgres
+        PG_CONNECTION_DB_NAME: postgres
     - name: Run tests
       run: yarn ci-test
       env:
-        NODE_ENV: ci
         API_KEY: development-key
         GOOGLE_SSO_CLIENT_ID: test
         AWS_ACCESS_KEY_ID: test
