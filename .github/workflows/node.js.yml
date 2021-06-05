@@ -37,6 +37,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Install dependencies
       run: yarn
+    - name: Migrate db
+      run: yarn db-migrate
     - name: Run tests
       run: yarn test
       env:
