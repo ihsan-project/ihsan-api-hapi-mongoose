@@ -28,23 +28,13 @@ beforeEach(async () => {
     // Use befores and beforeEach along with describe's to setup the Db for the test
     let knex = require('knex')({
         client: 'pg',
-        connection: `${process.env.PG_CONNECTION_STRING}-test`
+        connection: {
+            host: process.env.PG_CONNECTION_STRING,
+            password: process.env.PG_CONNECTION_PASSWORD,
+            user: process.env.PG_CONNECTION_USER,
+            database: process.env.PG_CONNECTION_DB_NAME
+        },
     });
-
-    console.log("butt!!!", process.env.NODE_ENV);
-    if (process.env.NODE_ENV === 'ci') {
-    console.log("monkey!!!");
-        knex = require('knex')({
-            client: 'pg',
-            connection: {
-                host: process.env.POSTGRES_HOST,
-                port: process.env.POSTGRES_PORT,
-                user: 'postgres',
-                password: 'postgres',
-                database: 'postgres'
-            }
-        });
-    }
 
     await KnexCleaner.clean(knex);
     await knex.seed.run();

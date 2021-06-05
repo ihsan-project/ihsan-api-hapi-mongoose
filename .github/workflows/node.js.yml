@@ -38,7 +38,7 @@ jobs:
     - name: Install dependencies
       run: yarn
     - name: Run tests
-      run: yarn start
+      run: yarn test
       env:
         NODE_ENV: ci
         API_KEY: development-key
@@ -47,5 +47,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: test
         AWS_REGION: us-east-1
         GCM_PUSH_SQS_URL: none
-        POSTGRES_HOST: postgres
-        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+        PG_CONNECTION_STRING: postgres
+        PG_CONNECTION_USER: postgres
+        PG_CONNECTION_PASSWORD: postgres
+        PG_CONNECTION_DB_NAME: postgres

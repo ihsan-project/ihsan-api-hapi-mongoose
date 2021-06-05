@@ -58,27 +58,6 @@ module.exports = new Confidence.Store({
                             searchPath: ['knex', 'public']
                         }
                     },
-                    test: {
-                        knex: {
-                            connection: `${process.env.PG_CONNECTION_STRING}-test`
-                        }
-                    },
-                    development: {
-                        knex: {
-                            connection: `${process.env.PG_CONNECTION_STRING}-dev`
-                        }
-                    },
-                    ci: {
-                        knex: {
-                            connection: {
-                                host: process.env.POSTGRES_HOST,
-                                port: process.env.POSTGRES_PORT,
-                                user: 'postgres1',
-                                password: 'postgres1',
-                                database: 'postgres'
-                            }
-                        }
-                    },
                     staging: {
                         migrateOnStart: 'latest'
                     },
