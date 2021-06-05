@@ -58,16 +58,6 @@ module.exports = new Confidence.Store({
                             searchPath: ['knex', 'public']
                         }
                     },
-                    test: {
-                        knex: {
-                            connection: 'postgres://localhost:5432/ihsan-test'
-                        }
-                    },
-                    development: {
-                        knex: {
-                            connection: 'postgres://localhost:5432/ihsan-dev'
-                        }
-                    },
                     staging: {
                         migrateOnStart: 'latest'
                     },

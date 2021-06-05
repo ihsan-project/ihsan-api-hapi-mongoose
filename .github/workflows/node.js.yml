@@ -1,0 +1,59 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  container-job:
+    # Containers must run in Linux based operating systems
+    runs-on: ubuntu-latest
+    # Docker Hub image that `container-job` executes in
+    container:
+      image: node:12.16.1-alpine3.11
+
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        image: postgres:10.8
+        # Provide the password for postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+        - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: yarn
+    - name: Migrate db
+      run: yarn db-migrate
+      env:
+        PG_CONNECTION_STRING: postgres
+        PG_CONNECTION_USER: postgres
+        PG_CONNECTION_PASSWORD: postgres
+        PG_CONNECTION_DB_NAME: postgres
+    - name: Run tests
+      run: yarn ci-test
+      env:
+        API_KEY: development-key
+        GOOGLE_SSO_CLIENT_ID: test
+        AWS_ACCESS_KEY_ID: test
+        AWS_SECRET_ACCESS_KEY: test
+        AWS_REGION: us-east-1
+        GCM_PUSH_SQS_URL: none
+        PG_CONNECTION_STRING: postgres
+        PG_CONNECTION_USER: postgres
+        PG_CONNECTION_PASSWORD: postgres
+        PG_CONNECTION_DB_NAME: postgres
