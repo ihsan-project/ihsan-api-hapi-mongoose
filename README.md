@@ -49,7 +49,7 @@ You can also call routes directly by,
 - Run a route with: `npx hpal run debug:curl settings`
 ### Docker
 
-Running `npm start docker` will run the following:
+Running `yarn docker` will run the following:
 - `docker-compose build` - Builds the image with the configuration in docker-compose
 - `docker-compose up` - Runs the containers defined in docker-compose
 
