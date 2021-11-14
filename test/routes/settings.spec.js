@@ -38,7 +38,7 @@ describe('Settings', () => {
         });
 
         expect(settings.statusCode).to.equal(200);
-        expect(settings.result.constants.book_types.quran).to.equal(Constants.book_type.quran);
+        expect(settings.result.constants.book_type.quran).to.equal(Constants.book_type.quran);
     });
 
     it('with version.', async () => {
